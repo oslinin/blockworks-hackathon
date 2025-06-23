@@ -11,7 +11,7 @@ contract YesToken is ERC20, ERC20Burnable, Ownable {
         string memory symbol
     ) ERC20("YES Token", "YES") Ownable(msg.sender) {}
 
-    function mint(address to, uint256 amount) external onlyOwner {
+    function mint(address to, uint256 amount) public {
         _mint(to, amount);
     }
 }
