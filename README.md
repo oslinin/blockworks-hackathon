@@ -1,4 +1,4 @@
-# Sample Hardhat Project
+# Swipe Bets
 
 see excel for the math in the test folder
 
