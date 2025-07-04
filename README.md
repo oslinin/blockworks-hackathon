@@ -2,7 +2,7 @@
 
 YesNo makes on-chain prediction markets radically more accessible through a Tinder-style interface. Users swipe left or right to take a fixed-size binary bet (e.g., $0.10), or down to skip. Each bet mints two tokens—YES and NO—and uses a constant function market maker to enable seamless trading and price discovery. The entry fee is deposited into a liquidity pool and ultimately awarded to the winning side based on on-chain resolution, ensuring a trustless and transparently fair outcome.
 
-[ presentation](docs/safebet.pptx)
+[Presentation](https://github.com/oslinin/blockworks-hackathon/blob/main/docs/safebet.pptx)
 
 # Future
 
