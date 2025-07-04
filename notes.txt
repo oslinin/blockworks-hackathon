@@ -24,3 +24,11 @@ yarn hardhat deploy
 - withdrawButton
 - ETH Amount
 - Fund
+
+
+git remote -v
+git branch --show-current
+git checkout -b main
+git add .
+git commit -m "main repo"
+git push

@@ -1,37 +1,24 @@
-html:
-working metamask connection
-runs the smart contract in html-fund-me-fcc
+# Present
 
-prediction-market:
-rewrote the logic of CFMM to mint new tokens for bets.
+YesNo makes on-chain prediction markets radically more accessible through a Tinder-style interface. Users swipe left or right to take a fixed-size binary bet (e.g., $0.10), or down to skip. Each bet mints two tokens—YES and NO—and uses a constant function market maker to enable seamless trading and price discovery. The entry fee is deposited into a liquidity pool and ultimately awarded to the winning side based on on-chain resolution, ensuring a trustless and transparently fair outcome.
 
-html
-constants.js has contract address & abi
-index.html has
+[ presentation](docs/safebet.pptx)
 
-- connectButton
-- balanceButton
-- withdrawButton
-- ETH Amount
-- Fund
+# Future
 
-npm install --save-dev @openzeppelin/contracts
-npm install --save-dev @openzeppelin/contracts --legacy-peer-deps
-npm install --save-dev @openzeppelin/contracts --force
-yarn upgrade ethers
-yarn add hardhat
-yarn hardhat init
-yarn add ethers@latest
-yarn add --dev @nomiclabs/hardhat-ethers@3.0.2
-yarn add hardhat-deploy-ethers
-yarn add --dev @nomicfoundation/hardhat-ethers@^3.0.2
-yarn add --dev @nomiclabs/hardhat-waffle
-yarn
-yarn hardhat test
-yarn hardhat test --grep "FundMe"
-yarn hardhat test --grep "PredictionMarket"
-yarn hardhat test test/unit/FundMe.test.js
+While our initial focus is on ease of and engagement, our broader vision is to build a highly liquid market where users can efficiently trade their risk preferences with one another—an opportunity that is currently limited to sophisticated traders in traditional derivatives markets. By democratizing access and simplifying the experience, we hope to unlock a new class of on-chain primitives for expressing belief and managing risk.
 
-yarn init -y
-yarn hardhat node
-yarn hardhat deploy
+# Code
+
+## example:
+
+- smart contract: js-07-hardhat-fund-me
+- UI: html-fund-me-fcc
+  working metamask connection
+  runs the smart contract in html-fund-me-fcc
+
+## Prediction market:
+
+- smart contract: prediction-market (passes tests in hackathon - correct math.xlsx)
+- UI: prediction-market-html (in development)
+  rewrote the logic of CFMM to mint new tokens for bets.
