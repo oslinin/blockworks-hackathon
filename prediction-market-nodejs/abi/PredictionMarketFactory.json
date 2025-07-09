@@ -1,0 +1,153 @@
+{
+  "_format": "hh-sol-artifact-1",
+  "contractName": "PredictionMarketFactory",
+  "sourceName": "contracts/PredictionMarketFactory.sol",
+  "abi": [
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "marketAddress",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "enum PredictionMarket.Category",
+          "name": "category",
+          "type": "uint8"
+        },
+        {
+          "indexed": false,
+          "internalType": "string",
+          "name": "question",
+          "type": "string"
+        }
+      ],
+      "name": "MarketCreated",
+      "type": "event"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "name": "allMarkets",
+      "outputs": [
+        {
+          "internalType": "contract PredictionMarket",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_usdcAddress",
+          "type": "address"
+        },
+        {
+          "internalType": "string",
+          "name": "_question",
+          "type": "string"
+        },
+        {
+          "internalType": "enum PredictionMarket.Category",
+          "name": "_category",
+          "type": "uint8"
+        }
+      ],
+      "name": "createMarket",
+      "outputs": [
+        {
+          "internalType": "contract PredictionMarket",
+          "name": "newMarket",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "getAllBets",
+      "outputs": [
+        {
+          "internalType": "address[]",
+          "name": "",
+          "type": "address[]"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "getAllMarkets",
+      "outputs": [
+        {
+          "internalType": "contract PredictionMarket[]",
+          "name": "",
+          "type": "address[]"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "enum PredictionMarket.Category",
+          "name": "_category",
+          "type": "uint8"
+        }
+      ],
+      "name": "getMarketsByCategory",
+      "outputs": [
+        {
+          "internalType": "contract PredictionMarket[]",
+          "name": "",
+          "type": "address[]"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "enum PredictionMarket.Category",
+          "name": "",
+          "type": "uint8"
+        },
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "name": "marketsByCategory",
+      "outputs": [
+        {
+          "internalType": "contract PredictionMarket",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ],
+  "bytecode": "0x6080604052348015600f57600080fd5b506159bf8061001f6000396000f3fe608060405234801561001057600080fd5b50600436106100625760003560e01c806352d84d1e14610067578063700eae7314610097578063b0772d0b146100b5578063b54d632a146100d3578063ee24fcd514610103578063fc5ee7de14610133575b600080fd5b610081600480360381019061007c919061062d565b610163565b60405161008e91906106d9565b60405180910390f35b61009f6101a2565b6040516100ac91906107c4565b60405180910390f35b6100bd6102a7565b6040516100ca9190610893565b60405180910390f35b6100ed60048036038101906100e891906108da565b610335565b6040516100fa9190610893565b60405180910390f35b61011d60048036038101906101189190610a79565b6103f9565b60405161012a91906106d9565b60405180910390f35b61014d60048036038101906101489190610ae8565b610588565b60405161015a91906106d9565b60405180910390f35b6001818154811061017357600080fd5b906000526020600020016000915054906101000a900473ffffffffffffffffffffffffffffffffffffffff1681565b6060600060018054905067ffffffffffffffff8111156101c5576101c461094e565b5b6040519080825280602002602001820160405280156101f35781602001602082028036833780820191505090505b50905060005b60018054905081101561029f576001818154811061021a57610219610b28565b5b9060005260206000200160009054906101000a900473ffffffffffffffffffffffffffffffffffffffff1682828151811061025857610257610b28565b5b602002602001019073ffffffffffffffffffffffffffffffffffffffff16908173ffffffffffffffffffffffffffffffffffffffff168152505080806001019150506101f9565b508091505090565b6060600180548060200260200160405190810160405280929190818152602001828054801561032b57602002820191906000526020600020905b8160009054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200190600101908083116102e1575b5050505050905090565b606060008083600281111561034d5761034c610b57565b5b600281111561035f5761035e610b57565b5b81526020019081526020016000208054806020026020016040519081016040528092919081815260200182805480156103ed57602002820191906000526020600020905b8160009054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff1... [truncated]
+  "deployedBytecode": "0x608060405234801561001057600080fd5b50600436106100625760003560e01c806352d84d1e14610067578063700eae7314610097578063b0772d0b146100b5578063b54d632a146100d3578063ee24fcd514610103578063fc5ee7de14610133575b600080fd5b610081600480360381019061007c919061062d565b610163565b60405161008e91906106d9565b60405180910390f35b61009f6101a2565b6040516100ac91906107c4565b60405180910390f35b6100bd6102a7565b6040516100ca9190610893565b60405180910390f35b6100ed60048036038101906100e891906108da565b610335565b6040516100fa9190610893565b60405180910390f35b61011d60048036038101906101189190610a79565b6103f9565b60405161012a91906106d9565b60405180910390f35b61014d60048036038101906101489190610ae8565b610588565b60405161015a91906106d9565b60405180910390f35b6001818154811061017357600080fd5b906000526020600020016000915054906101000a900473ffffffffffffffffffffffffffffffffffffffff1681565b6060600060018054905067ffffffffffffffff8111156101c5576101c461094e565b5b6040519080825280602002602001820160405280156101f35781602001602082028036833780820191505090505b50905060005b60018054905081101561029f576001818154811061021a57610219610b28565b5b9060005260206000200160009054906101000a900473ffffffffffffffffffffffffffffffffffffffff1682828151811061025857610257610b28565b5b602002602001019073ffffffffffffffffffffffffffffffffffffffff16908173ffffffffffffffffffffffffffffffffffffffff168152505080806001019150506101f9565b508091505090565b6060600180548060200260200160405190810160405280929190818152602001828054801561032b57602002820191906000526020600020905b8160009054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200190600101908083116102e1575b5050505050905090565b606060008083600281111561034d5761034c610b57565b5b600281111561035f5761035e610b57565b5b81526020019081526020016000208054806020026020016040519081016040528092919081815260200182805480156103ed57602002820191906000526020600020905b8160009054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff1... [truncated]
+  "linkReferences": {},
+  "deployedLinkReferences": {}
+}
