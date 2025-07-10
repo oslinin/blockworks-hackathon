@@ -1,6 +1,6 @@
 {
   "name": "prediction-market",
-  "packageManager": "yarn@4.9.1",
+  "packageManager": "yarn@1.22.22",
   "devDependencies": {
     "@nomicfoundation/hardhat-chai-matchers": "^2.0.0",
     "@nomicfoundation/hardhat-ethers": "^3.0.0",
