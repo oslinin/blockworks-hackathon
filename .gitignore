@@ -4,7 +4,7 @@ node_modules
 prompt*
 gemini.md
 /gemini
-
+*.lock*
 # Hardhat files
 /cache
 /artifacts

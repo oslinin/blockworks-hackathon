@@ -10,9 +10,9 @@ While our initial focus is on ease of and engagement, our broader vision is to b
 
 # Code
 
-
 ## Prediction market:
 
 - smart contract: prediction-market (passes tests in hackathon - correct math.xlsx)
-- UI: prediction-market-nodejs
-  rewrote the logic of CFMM to mint new tokens for bets.
+  - lauch with yarn hardhat node
+- frontend: prediction-market-nodejs
+  - launch with yarn dev
