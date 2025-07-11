@@ -12,7 +12,7 @@ While our initial focus is on ease of and engagement, our broader vision is to b
 
 ## Prediction market:
 
-- smart contract: prediction-market (passes tests in hackathon - correct math.xlsx)
-  - lauch with yarn hardhat node
-- frontend: prediction-market-nodejs
-  - launch with yarn dev
+- prediction-market
+  - lauch localhost web3 backend with: yarn hardhat node
+- prediction-market-nodejs
+  - launch localhost from a different terminal with: yarn dev
