@@ -2,260 +2,115 @@ const { expect } = require("chai");
 const { ethers } = require("hardhat");
 
 describe("PredictionMarket", function () {
-    let PredictionMarket;
-    let usdc;
-    let owner;
-    let alice;
-    let bob;
-    let initialLiquidity = ethers.parseUnits("500", 6); // 500 USDC
-    const CFMM_K = 250000 * 1e12;
+    let owner, alice, oracle;
+    let usdc, yesToken, noToken;
+    let market, factory;
 
     beforeEach(async function () {
-        [owner, alice, bob] = await ethers.getSigners();
+        [owner, alice, oracle] = await ethers.getSigners();
 
-        // Deploy a mock USDC token
-        const MockUSDC = await ethers.getContractFactory("MintableERC20");
-        usdc = await MockUSDC.deploy("Mock USDC", "USDC");
+        // Deploy USDC
+        const MintableERC20 = await ethers.getContractFactory("MintableERC20");
+        usdc = await MintableERC20.deploy("USD Coin", "USDC");
         await usdc.waitForDeployment();
 
-        // Mint some USDC for owner and alice
-        await usdc.mint(owner.address, ethers.parseUnits("10000", 6));
+        // Deploy Factory
+        const PredictionMarketFactory = await ethers.getContractFactory("PredictionMarketFactory");
+        factory = await PredictionMarketFactory.deploy();
+        await factory.waitForDeployment();
+
+        // The owner creates a market
+        const marketAddress = await factory.connect(owner).createMarket.staticCall(
+            "Will ETH reach $5000 by end of year?",
+            2, // CRYPTO
+            oracle.address,
+            await usdc.getAddress(),
+            "Yes Token", "YES", "No Token", "NO"
+        );
+
+        await factory.createMarket(
+            "Will ETH reach $5000 by end of year?",
+            2, // CRYPTO
+            oracle.address,
+            await usdc.getAddress(),
+            "Yes Token", "YES", "No Token", "NO"
+        );
+
+        // Attach to the created contracts
+        market = await ethers.getContractAt("PredictionMarket", marketAddress);
+        const yesTokenAddress = await market.yesToken();
+        const noTokenAddress = await market.noToken();
+        yesToken = await ethers.getContractAt("MintableERC20", yesTokenAddress);
+        noToken = await ethers.getContractAt("MintableERC20", noTokenAddress);
+
+        // Mint USDC for Alice and approve the market
         await usdc.mint(alice.address, ethers.parseUnits("10000", 6));
-        await usdc.mint(bob.address, ethers.parseUnits("10000", 6));
-
-        // Deploy PredictionMarket
-        PredictionMarket = await ethers.getContractFactory("PredictionMarket");
-        // Pass the owner.address as the initialOwner
-        predictionMarket = await PredictionMarket.deploy(usdc.target, "Will BTC hit $100k by 2025?", 2, owner.address); // Category 2 for Crypto
-        await predictionMarket.waitForDeployment();
-
-        // Approve USDC for the prediction market contract
-        await usdc.connect(owner).approve(predictionMarket.target, initialLiquidity);
-        await usdc.connect(alice).approve(predictionMarket.target, ethers.parseUnits("1000", 6));
-        await usdc.connect(bob).approve(predictionMarket.target, ethers.parseUnits("1000", 6));
-
-        // Initialize the market
-        await predictionMarket.connect(owner).initializeMarket(initialLiquidity);
+        await usdc.connect(alice).approve(await market.getAddress(), ethers.parseUnits("10000", 6));
     });
 
-    describe("Initialization", function () {
-        it("should set the correct USDC address and question", async function () {
-            expect(await predictionMarket.USDC()).to.equal(usdc.target);
-            expect(await predictionMarket.name()).to.equal("Will BTC hit $100k by 2025?");
-        });
-
-        it("should initialize pools with correct liquidity", async function () {
-            expect(await predictionMarket.yesPool()).to.equal(initialLiquidity);
-            expect(await predictionMarket.noPool()).to.equal(initialLiquidity);
-        });
-
-        it("should set the market category", async function () {
-            expect(await predictionMarket.marketCategory()).to.equal(2); // Crypto
-        });
-
-        it("should set resolved to false", async function () {
-            expect(await predictionMarket.resolved()).to.be.false;
-        });
+    it("should have correct initial state", async function() {
+        const marketAddress = await market.getAddress();
+        expect(await yesToken.balanceOf(marketAddress)).to.equal(ethers.parseUnits("500", 18));
+        expect(await noToken.balanceOf(marketAddress)).to.equal(ethers.parseUnits("500", 18));
+        const probability = await market.getProbability();
+        expect(Number(ethers.formatUnits(probability, 18))).to.be.closeTo(50, 0.01);
     });
 
-    describe("Betting", function () {
-        it("Alice bets 100 USDC on Yes", async function () {
-            const usdcAmount = ethers.parseUnits("100", 6);
-            const initialAliceUSDCBalance = await usdc.balanceOf(alice.address);
+    it("should handle bets correctly according to the spec", async function () {
+        const marketAddress = await market.getAddress();
 
-            await predictionMarket.connect(alice).placeBet(usdcAmount, true); // Bet on Yes
+        // Test 1: Alice bets 100 USDC on "yes"
+        await market.connect(alice).bet(ethers.parseUnits("100", 6), true);
 
-            // Check Alice's USDC balance
-            expect(await usdc.balanceOf(alice.address)).to.equal(initialAliceUSDCBalance - usdcAmount);
+        let noBalance = await noToken.balanceOf(marketAddress);
+        let yesBalance = await yesToken.balanceOf(marketAddress);
+        let aliceYesBalance = await yesToken.balanceOf(alice.address);
 
-            // Check Alice's Yes token balance
-            const yesToken = await ethers.getContractAt("MintableERC20", await predictionMarket.yesToken());
-            expect(await yesToken.balanceOf(alice.address)).to.equal(usdcAmount);
+        expect(noBalance).to.equal(ethers.parseUnits("600", 18));
+        expect(yesBalance).to.be.closeTo(ethers.parseUnits("416.666666666666666667", 18), ethers.parseUnits("0.0001", 18));
+        expect(aliceYesBalance).to.be.closeTo(ethers.parseUnits("183.333333333333333333", 18), ethers.parseUnits("0.0001", 18));
 
-            // Check pool balances after bet
-            // Initial: yesPool = 500, noPool = 500, k = 250000
-            // Alice bets 100 USDC on Yes.
-            // User receives 100 Yes tokens.
-            // yesPool increases by 100 to 600.
-            // noPool decreases to maintain k: newNoPool = 250000 / 600 = 416.666666...
-            // noTokensToBurn = 500 - 416.666666... = 83.333333...
+        // Test 2: Alice bets another 100 USDC on "yes"
+        await market.connect(alice).bet(ethers.parseUnits("100", 6), true);
 
-            expect(await predictionMarket.yesPool()).to.equal(ethers.parseUnits("600", 6));
-            // Using a tolerance for floating point comparison
-            const expectedNoPool = ethers.parseUnits("416.666666", 6);
-            const actualNoPool = await predictionMarket.noPool();
-            expect(actualNoPool).to.be.closeTo(expectedNoPool, ethers.parseUnits("0.000001", 6));
+        noBalance = await noToken.balanceOf(marketAddress);
+        yesBalance = await yesToken.balanceOf(marketAddress);
+        aliceYesBalance = await yesToken.balanceOf(alice.address);
 
-            // Check probability after first bet
-            // yesPool = 600, noPool = 416.666666
-            // totalPool = 1016.666666
-            // yesProbability = (600 / 1016.666666) * 10000 = 5901.639...
-            const [yesProb, noProb] = await predictionMarket.getProbability();
-            expect(yesProb).to.be.closeTo(5902, 1); // Allowing for small rounding differences
-            expect(noProb).to.be.closeTo(4098, 1);
-        });
+        expect(noBalance).to.equal(ethers.parseUnits("700", 18));
+        expect(yesBalance).to.be.closeTo(ethers.parseUnits("357.142857142857142857", 18), ethers.parseUnits("0.0001", 18));
+        expect(aliceYesBalance).to.be.closeTo(ethers.parseUnits("342.857142857142857143", 18), ethers.parseUnits("0.0001", 18));
+        
+        expect(await yesToken.totalSupply()).to.be.closeTo(ethers.parseUnits("700", 18), ethers.parseUnits("0.0001", 18));
+        expect(await noToken.totalSupply()).to.equal(ethers.parseUnits("700", 18));
 
-        it("Alice places another bet on Yes", async function () {
-            // First bet
-            await predictionMarket.connect(alice).placeBet(ethers.parseUnits("100", 6), true);
+        // Test 3: Alice bets 1 USDC on "yes"
+        const aliceYesBefore = await yesToken.balanceOf(alice.address);
+        await market.connect(alice).bet(ethers.parseUnits("1", 6), true);
+        const aliceYesAfter = await yesToken.balanceOf(alice.address);
+        const yesTokensReceived = aliceYesAfter - aliceYesBefore;
 
-            // Second bet: Alice bets 100 USDC on Yes again
-            const usdcAmount = ethers.parseUnits("100", 6);
-            const initialAliceUSDCBalance = await usdc.balanceOf(alice.address);
-            const initialAliceYesTokenBalance = await (await ethers.getContractAt("ERC20", await predictionMarket.yesToken())).balanceOf(alice.address);
-
-            await predictionMarket.connect(alice).placeBet(usdcAmount, true);
-
-            // Check Alice's USDC balance
-            expect(await usdc.balanceOf(alice.address)).to.equal(initialAliceUSDCBalance - usdcAmount);
-
-            // Check Alice's Yes token balance
-            const yesToken = await ethers.getContractAt("MintableERC20", await predictionMarket.yesToken());
-            expect(await yesToken.balanceOf(alice.address)).to.equal(initialAliceYesTokenBalance + usdcAmount);
-
-            // Check pool balances after second bet
-            // Before second bet: yesPool = 600, noPool = 416.666666
-            // Alice bets 100 USDC on Yes.
-            // User receives 100 Yes tokens.
-            // yesPool increases by 100 to 700.
-            // noPool decreases to maintain k: newNoPool = 250000 / 700 = 357.142857...
-            // noTokensToBurn = 416.666666 - 357.142857 = 59.523809...
-
-            expect(await predictionMarket.yesPool()).to.equal(ethers.parseUnits("700", 6));
-            const expectedNoPool = ethers.parseUnits("357.142857", 6);
-            const actualNoPool = await predictionMarket.noPool();
-            expect(actualNoPool).to.be.closeTo(expectedNoPool, ethers.parseUnits("0.000001", 6));
-
-            // Check probability after second bet
-            // yesPool = 700, noPool = 357.142857
-            // totalPool = 1057.142857
-            // yesProbability = (700 / 1057.142857) * 10000 = 6621.95...
-            const [yesProb, noProb] = await predictionMarket.getProbability();
-            expect(yesProb).to.be.closeTo(6622, 1);
-            expect(noProb).to.be.closeTo(3378, 1);
-        });
-
-        it("should allow betting on No", async function () {
-            const usdcAmount = ethers.parseUnits("100", 6);
-            const initialAliceUSDCBalance = await usdc.balanceOf(alice.address);
-
-            await predictionMarket.connect(alice).placeBet(usdcAmount, false); // Bet on No
-
-            // Check Alice's USDC balance
-            expect(await usdc.balanceOf(alice.address)).to.equal(initialAliceUSDCBalance - usdcAmount);
-
-            // Check Alice's No token balance
-            const noToken = await ethers.getContractAt("MintableERC20", await predictionMarket.noToken());
-            expect(await noToken.balanceOf(alice.address)).to.equal(usdcAmount);
-
-            // Check pool balances after bet
-            // Initial: yesPool = 500, noPool = 500, k = 250000
-            // Alice bets 100 USDC on No.
-            // User receives 100 No tokens.
-            // noPool increases by 100 to 600.
-            // yesPool decreases to maintain k: newYesPool = 250000 / 600 = 416.666666...
-            // yesTokensToBurn = 500 - 416.666666... = 83.333333...
-
-            expect(await predictionMarket.noPool()).to.equal(ethers.parseUnits("600", 6));
-            const expectedYesPool = ethers.parseUnits("416.666666", 6);
-            const actualYesPool = await predictionMarket.yesPool();
-            expect(actualYesPool).to.be.closeTo(expectedYesPool, ethers.parseUnits("0.000001", 6));
-
-            // Check probability after bet
-            const [yesProb, noProb] = await predictionMarket.getProbability();
-            expect(yesProb).to.be.closeTo(4098, 1);
-            expect(noProb).to.be.closeTo(5902, 1);
-        });
-
-        it("should emit a BetPlaced event", async function () {
-            const usdcAmount = ethers.parseUnits("50", 6);
-            await expect(predictionMarket.connect(alice).placeBet(usdcAmount, true))
-                .to.emit(predictionMarket, "BetPlaced")
-                .withArgs(alice.address, usdcAmount, 0, 2); // 2 for Crypto category
-        });
+        // 1 (minted) + (357.142857 - 250000/701) = 1 + 0.509... = 1.509...
+        expect(yesTokensReceived).to.be.closeTo(ethers.parseUnits("1.509477216218612629", 18), ethers.parseUnits("0.0001", 18));
     });
 
-    describe("Probability Calculation", function () {
-        it("should return 0.5 probability initially", async function () {
-            const [yesProb, noProb] = await predictionMarket.getProbability();
-            expect(yesProb).to.equal(5000);
-            expect(noProb).to.equal(5000);
-        });
+    it("should calculate the correct probability after a bet", async function () {
+        // Probability starts at 50%
+        let probability = await market.getProbability();
+        expect(Number(ethers.formatUnits(probability, 18))).to.be.closeTo(50, 0.01);
 
-        it("should reflect probability after a Yes bet", async function () {
-            await predictionMarket.connect(alice).placeBet(ethers.parseUnits("100", 6), true);
-            const [yesProb, noProb] = await predictionMarket.getProbability();
-            expect(yesProb).to.be.closeTo(5902, 1);
-            expect(noProb).to.be.closeTo(4098, 1);
-        });
+        // Alice places a bet on "yes" with 100 USDC
+        await market.connect(alice).bet(ethers.parseUnits("100", 6), true);
 
-        it("should reflect probability after a No bet", async function () {
-            await predictionMarket.connect(alice).placeBet(ethers.parseUnits("100", 6), false);
-            const [yesProb, noProb] = await predictionMarket.getProbability();
-            expect(yesProb).to.be.closeTo(4098, 1);
-            expect(noProb).to.be.closeTo(5902, 1);
-        });
+        // After the bet, the pool has ~416.67 yes and 600 no
+        // Probability of yes is 600 / (416.66667 + 600) = 0.5901...
+        probability = await market.getProbability();
+        expect(Number(ethers.formatUnits(probability, 18))).to.be.closeTo(59.01, 0.01);
     });
 
-    describe("Resolution and Claiming", function () {
-        it("should allow owner to resolve the market", async function () {
-            await expect(predictionMarket.connect(owner).resolve(1))
-                .to.emit(predictionMarket, "MarketResolved")
-                .withArgs(1);
-            expect(await predictionMarket.resolved()).to.be.true;
-            expect(await predictionMarket.winningOutcome()).to.equal(1);
-        });
-
-        it("should not allow non-owner to resolve the market", async function () {
-            await expect(predictionMarket.connect(alice).resolve(1)).to.be.revertedWithCustomError(predictionMarket, "OwnableUnauthorizedAccount");
-        });
-
-        it("should allow users to claim winnings for Yes outcome", async function () {
-            const usdcAmount = ethers.parseUnits("100", 6);
-            await predictionMarket.connect(alice).placeBet(usdcAmount, true); // Alice bets on Yes
-
-            await predictionMarket.connect(owner).resolve(1); // Yes wins
-
-            const initialAliceUSDCBalance = await usdc.balanceOf(alice.address);
-            const yesToken = await ethers.getContractAt("MintableERC20", await predictionMarket.yesToken());
-            const aliceYesTokens = await yesToken.balanceOf(alice.address);
-
-            await predictionMarket.connect(alice).claimWinnings();
-
-            expect(await usdc.balanceOf(alice.address)).to.equal(initialAliceUSDCBalance + aliceYesTokens);
-            expect(await yesToken.balanceOf(alice.address)).to.equal(0);
-        });
-
-        it("should allow users to claim winnings for No outcome", async function () {
-            const usdcAmount = ethers.parseUnits("100", 6);
-            await predictionMarket.connect(alice).placeBet(usdcAmount, false); // Alice bets on No
-
-            await predictionMarket.connect(owner).resolve(0); // No wins
-
-            const initialAliceUSDCBalance = await usdc.balanceOf(alice.address);
-            const noToken = await ethers.getContractAt("MintableERC20", await predictionMarket.noToken());
-            const aliceNoTokens = await noToken.balanceOf(alice.address);
-
-            await predictionMarket.connect(alice).claimWinnings();
-
-            expect(await usdc.balanceOf(alice.address)).to.equal(initialAliceUSDCBalance + aliceNoTokens);
-            expect(await noToken.balanceOf(alice.address)).to.equal(0);
-        });
-
-        it("should not allow claiming before resolution", async function () {
-            const usdcAmount = ethers.parseUnits("100", 6);
-            await predictionMarket.connect(alice).placeBet(usdcAmount, true);
-
-            await expect(predictionMarket.connect(alice).claimWinnings()).to.be.revertedWith("Market not yet resolved");
-        });
-
-        it("should not allow claiming if no winning tokens", async function () {
-            const usdcAmount = ethers.parseUnits("100", 6);
-            await predictionMarket.connect(alice).placeBet(usdcAmount, true); // Alice bets on Yes
-
-            await predictionMarket.connect(owner).resolve(0); // No wins
-
-            await expect(predictionMarket.connect(alice).claimWinnings()).to.be.revertedWith("No winning tokens to claim");
-        });
+    it("should resolve the market", async function () {
+        await market.connect(oracle).resolve(true);
+        expect(await market.resolved()).to.be.true;
+        expect(await market.outcome()).to.be.true;
     });
 });

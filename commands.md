@@ -41,6 +41,8 @@ ignition/
 # gemini
 
 npm install -g @google/gemini-cli
+gemini chat --session=my-persistent-session
+gemini chat --session=my-persistent-session --yolo
 
 ## shell.cloud.google.com
 
@@ -61,6 +63,7 @@ https://medium.com/better-programming/everything-you-need-to-know-about-fullstac
 cd prediction-market
 yarn add hardhat
 yarn hardhat init
+yarn add prettier
 yarn add --dev @nomicfoundation/hardhat-toolbox @nomicfoundation/hardhat-ignition @nomicfoundation/hardhat-ignition-ethers @nomicfoundation/hardhat-network-helpers @nomicfoundation/hardhat-chai-matchers @nomicfoundation/hardhat-ethers @nomicfoundation/hardhat-verify chai@4 ethers hardhat-gas-reporter solidity-coverage @typechain/hardhat typechain @typechain/ethers-v6
 npm install --save-dev "@nomicfoundation/hardhat-ignition-ethers@^0.15.0" "@types/mocha@>=9.1.0" "ts-node@>=8.0.0" "typescript@>=4.5.0"
 
@@ -73,7 +76,6 @@ yarn hardhat run scripts/deployFactory.js --network localhost
 
 ```bash
 cd frontend-proj
-yarn create
-next-app .
+yarn create next-app .
 yarn dev
 ```

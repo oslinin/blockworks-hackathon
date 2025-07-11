@@ -1,18 +1,18 @@
-const { GoogleGenerativeAI } = require("@google/generative-ai");
+const axios = require('axios');
 
-// Access your API key as an environment variable (see "Set up your API key" above)
-const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
+const getPrediction = async (category) => {
+    const apiKey = process.env.GEMINI_API_KEY;
+    const model = "gemini-1.5-flash-latest";
+    const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`;
 
-async function generateBet(category = "", llm = "gemini") {
-    const model = genAI.getGenerativeModel({ model: "gemini-pro" });
-
-    let prompt = `You are a prediction market assistant. Given the category I give you (sports, election or crypto):
+    const prompt = `You are a prediction market assistant. Given the category I give you (${category}):
 
 Then, randomly select a real upcoming event in that category from a public source such as:
 
 - Sports: ESPN, Olympics, FIFA, UFC
 - Elections: Ballotpedia, FiveThirtyEight, or other global/local elections
 - Crypto: CoinGecko, Ethereum.org, Bitcoin halving, SEC ETF decisions
+- TV:
 
 use information sourced from an actual announcement or reliable source.
 
@@ -21,7 +21,7 @@ Based on the selected event, generate a prediction market bet as a JSON object w
 {
 "question": "Will [EVENT] happen on or before [DATE]?",
 "type": "binary",
-"tags": ["category"],
+"tags": ["${category}"],
 "resolution_source": "[source or URL]",
 "deadline": "[YYYY-MM-DD]",
 "creator": "auto-gen"
@@ -34,32 +34,25 @@ Requirements:
 - The resolution_source must be real or realistically plausible.
 - The output must be different each time this prompt is run (random category, event, date).
 - Output only the JSON. No explanation or commentary.
-  `;
+`;
 
-    if (category) {
-        prompt += `\nFocus on the '${category}' category.`;
+    const data = {
+        contents: [{
+            parts: [{
+                text: prompt
+            }]
+        }]
+    };
+
+    const response = await axios.post(url, data);
+    let text = response.data.candidates[0].content.parts[0].text;
+    
+    const match = text.match(/```json\n([\s\S]*)\n```/);
+    if (match) {
+        text = match[1];
     }
+    
+    return JSON.parse(text);
+};
 
-    // The prompt specifies using ChatGPT, Claude, or Gemini. Since we are using Gemini, we'll just use the default model.
-    // If the prompt implied switching LLMs, we would need to integrate with those APIs.
-
-    try {
-        const result = await model.generateContent(prompt);
-        const response = await result.response;
-        const text = response.text();
-
-        // Attempt to parse the JSON from the response
-        const jsonMatch = text.match(/```json\n([\s\S]*?)\n```/);
-        if (jsonMatch && jsonMatch[1]) {
-            return JSON.parse(jsonMatch[1]);
-        } else {
-            // If no JSON block, try to parse the whole text as JSON
-            return JSON.parse(text);
-        }
-    } catch (error) {
-        console.error("Error generating bet:", error);
-        return null;
-    }
-}
-
-module.exports = { generateBet };
+module.exports = { getPrediction };

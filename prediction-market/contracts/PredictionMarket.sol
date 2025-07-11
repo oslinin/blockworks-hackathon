@@ -2,120 +2,121 @@
 pragma solidity ^0.8.20;
 
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
-import "./MintableERC20.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
+import "prb-math/contracts/PRBMathUD60x18.sol";
+import "./MintableERC20.sol";
 
-contract PredictionMarket is ERC20, Ownable {
-    enum Category { Sports, Elections, Crypto }
+contract PredictionMarket is Ownable {
+    using PRBMathUD60x18 for uint256;
 
-    ERC20 public immutable USDC;
+    enum Category { ELECTION, SPORTS, CRYPTO, TV }
+
+    ERC20 public immutable usdcToken;
     MintableERC20 public immutable yesToken;
     MintableERC20 public immutable noToken;
 
-    uint256 public constant CFMM_K = 250000 * 1e12; // Constant factor for CFMM (x * y = k), scaled for 6 decimals
+    uint256 public constant K = 250000 * 1e18; // Constant product (500 * 500)
 
-    uint256 public yesPool;
-    uint256 public noPool;
-
-    Category public marketCategory;
+    Category public category;
+    string public question;
+    address public oracle;
     bool public resolved;
-    uint256 public winningOutcome; // 0 for No, 1 for Yes
+    bool public outcome;
 
-    event BetPlaced(address indexed user, uint256 yesAmount, uint256 noAmount, Category category);
-    event MarketResolved(uint256 outcome);
+    event Bet(address indexed user, uint256 amount, bool onYes);
+    event Resolved(bool outcome);
 
     constructor(
-        address _usdcAddress,
         string memory _question,
         Category _category,
-        address initialOwner
-    ) ERC20(_question, "PM") Ownable(initialOwner) {
-        USDC = ERC20(_usdcAddress);
-        yesToken = new MintableERC20(string.concat(_question, " Yes"), "YES");
-        noToken = new MintableERC20(string.concat(_question, " No"), "NO");
-        marketCategory = _category;
-        resolved = false;
+        address _oracle,
+        address _usdcToken,
+        address _yesToken,
+        address _noToken
+    ) Ownable(msg.sender) {
+        question = _question;
+        category = _category;
+        oracle = _oracle;
+        usdcToken = ERC20(_usdcToken);
+        yesToken = MintableERC20(_yesToken);
+        noToken = MintableERC20(_noToken);
     }
 
-    function initializeMarket(uint256 initialLiquidityUSDC) public onlyOwner {
-        require(yesPool == 0 && noPool == 0, "Market already initialized");
-        require(USDC.transferFrom(msg.sender, address(this), initialLiquidityUSDC), "USDC transfer failed");
-
-        // Mint initial Yes and No tokens for liquidity
-        uint256 initialYesTokens = initialLiquidityUSDC;
-        uint256 initialNoTokens = initialLiquidityUSDC;
-
-        yesToken.mint(address(this), initialYesTokens);
-        noToken.mint(address(this), initialNoTokens);
-
-        yesPool = initialYesTokens;
-        noPool = initialNoTokens;
+    function initialize() public {
+        // Mint initial liquidity to this contract
+        uint256 initialLiquidity = 500 * 10**18; // 500 of each token
+        yesToken.mint(address(this), initialLiquidity);
+        noToken.mint(address(this), initialLiquidity);
     }
 
-    function placeBet(uint256 usdcAmount, bool betOnYes) public {
-        require(!resolved, "Market already resolved");
-        require(USDC.transferFrom(msg.sender, address(this), usdcAmount), "USDC transfer failed");
-
-        uint256 tokensMinted = usdcAmount;
-        uint256 noTokensToBurn;
-        uint256 yesTokensToBurn;
-
-        if (betOnYes) {
-            yesToken.mint(msg.sender, tokensMinted);
-
-            uint256 newYesPool = yesPool + tokensMinted;
-            uint256 newNoPool = CFMM_K / newYesPool;
-            noTokensToBurn = noPool - newNoPool;
-
-            require(noTokensToBurn <= noPool, "Insufficient no tokens in pool to burn");
-            noToken.burn(address(this), noTokensToBurn);
-            noPool = newNoPool;
-            yesPool = newYesPool;
-
-        } else { // betOnNo
-            noToken.mint(msg.sender, tokensMinted);
-
-            uint256 newNoPool = noPool + tokensMinted;
-            uint256 newYesPool = CFMM_K / newNoPool;
-            yesTokensToBurn = yesPool - newYesPool;
-
-            require(yesTokensToBurn <= yesPool, "Insufficient yes tokens in pool to burn");
-            yesToken.burn(address(this), yesTokensToBurn);
-            yesPool = newYesPool;
-            noPool = newNoPool;
+    function getProbability() public view returns (uint256) {
+        uint256 yesBalance = yesToken.balanceOf(address(this));
+        uint256 noBalance = noToken.balanceOf(address(this));
+        if (yesBalance == 0 || noBalance == 0) {
+            return 50 * 1e18; // 50%
         }
-        emit BetPlaced(msg.sender, betOnYes ? tokensMinted : 0, betOnYes ? 0 : tokensMinted, marketCategory);
+        // Returns the price of the "yes" token, which reflects its probability.
+        return (noBalance.mul(100 * 1e18)).div(yesBalance + noBalance);
     }
 
-    function getProbability() public view returns (uint256 yesProbability, uint256 noProbability) {
-        if (yesPool == 0 && noPool == 0) {
-            return (5000, 5000); // 0.5 probability, scaled by 10000 for precision
+    function bet(uint256 amount, bool onYes) public {
+        require(!resolved, "Market is already resolved");
+        require(amount > 0, "Amount must be greater than 0");
+
+        usdcToken.transferFrom(msg.sender, address(this), amount);
+        uint256 scaledAmount = amount * 10**12;
+
+        if (onYes) {
+            // Mint new tokens
+            yesToken.mint(msg.sender, scaledAmount);
+            noToken.mint(address(this), scaledAmount); // Mint no tokens to the pool
+
+            // Swap
+            uint256 yesPoolBalance = yesToken.balanceOf(address(this));
+            uint256 noPoolBalance = noToken.balanceOf(address(this));
+            uint256 newYesPoolBalance = K.div(noPoolBalance);
+            uint256 yesTokensToSend = yesPoolBalance - newYesPoolBalance;
+
+            yesToken.transfer(msg.sender, yesTokensToSend);
+        } else {
+            // Mint new tokens
+            noToken.mint(msg.sender, scaledAmount);
+            yesToken.mint(address(this), scaledAmount); // Mint yes tokens to the pool
+
+            // Swap
+            uint256 yesPoolBalance = yesToken.balanceOf(address(this));
+            uint256 noPoolBalance = noToken.balanceOf(address(this));
+            uint256 newNoPoolBalance = K.div(yesPoolBalance);
+            uint256 noTokensToSend = noPoolBalance - newNoPoolBalance;
+
+            noToken.transfer(msg.sender, noTokensToSend);
         }
-        uint256 totalPool = yesPool + noPool;
-        yesProbability = (yesPool * 10000) / totalPool;
-        noProbability = (noPool * 10000) / totalPool;
-    }
 
-    function resolve(uint256 outcome) public onlyOwner {
-        require(!resolved, "Market already resolved");
-        require(outcome == 0 || outcome == 1, "Invalid outcome (0 for No, 1 for Yes)");
+        emit Bet(msg.sender, amount, onYes);
+    }
+    
+
+    function resolve(bool _outcome) public {
+        require(msg.sender == oracle, "Only oracle can resolve");
+        require(!resolved, "Market is already resolved");
+
         resolved = true;
-        winningOutcome = outcome;
-        emit MarketResolved(outcome);
+        outcome = _outcome;
+        emit Resolved(_outcome);
     }
 
-    function claimWinnings() public {
-        require(resolved, "Market not yet resolved");
-        if (winningOutcome == 1) { // Yes wins
-            uint256 yesTokens = yesToken.balanceOf(msg.sender);
-            require(yesTokens > 0, "No winning tokens to claim");
-            yesToken.burn(msg.sender, yesTokens);
-            USDC.transfer(msg.sender, yesTokens); // 1 Yes token = 1 USDC
-        } else { // No wins
-            uint256 noTokens = noToken.balanceOf(msg.sender);
-            require(noTokens > 0, "No winning tokens to claim");
-            noToken.burn(msg.sender, noTokens);
-            USDC.transfer(msg.sender, noTokens); // 1 No token = 1 USDC
+    function claim() public {
+        require(resolved, "Market is not resolved yet");
+
+        if (outcome) {
+            uint256 yesBalance = yesToken.balanceOf(msg.sender);
+            yesToken.transferFrom(msg.sender, address(this), yesBalance);
+            usdcToken.transfer(msg.sender, yesBalance / (10**12));
+        } else {
+            uint256 noBalance = noToken.balanceOf(msg.sender);
+            noToken.transferFrom(msg.sender, address(this), noBalance);
+            usdcToken.transfer(msg.sender, noBalance / (10**12));
         }
     }
 }
+
