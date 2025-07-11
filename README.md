@@ -10,12 +10,6 @@ While our initial focus is on ease of and engagement, our broader vision is to b
 
 # Code
 
-## example:
-
-- smart contract: js-07-hardhat-fund-me
-- UI: html-fund-me-fcc
-  working metamask connection
-  runs the smart contract in html-fund-me-fcc
 
 ## Prediction market:
 

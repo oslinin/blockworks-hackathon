@@ -41,9 +41,11 @@ ignition/
 # gemini
 
 npm install -g @google/gemini-cli
+gemini --yolo
+gemini --yolo --session=my-persistent-session
 gemini chat --session=my-persistent-session
 gemini chat --session=my-persistent-session --yolo
-
+implements prompts.md
 ## shell.cloud.google.com
 
 npx https://github.com/google-gemini/gemini-cli
