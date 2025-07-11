@@ -12,7 +12,11 @@ While our initial focus is on ease of and engagement, our broader vision is to b
 
 ## Prediction market:
 
-- prediction-market
-  - lauch localhost web3 backend with: yarn hardhat node
-- prediction-market-nodejs
-  - launch localhost from a different terminal with: yarn dev
+- prediction-market: lauch localhost web3 backend with:
+  ```bash
+  yarn hardhat node
+  ```
+- prediction-market-nodejs: launch localhost from a different terminal with:
+  ```bash
+  yarn dev
+  ```
