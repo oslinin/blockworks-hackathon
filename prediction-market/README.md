@@ -1,48 +1,64 @@
-# Backend
+# Prediction Market Smart Contracts
 
-The solidity smart contract hardhat code should be in folder "prediction-market"
+This project contains the Solidity smart contracts for a prediction market.
 
-## Running the Hardhat Node and Deploying Contracts
+It uses [Hardhat](https://hardhat.org/) for development and testing.
 
-To run a local Hardhat development node, open a terminal in the `prediction-market` directory and execute:
+## Getting Started
 
-```bash
-npx hardhat node
-```
+1.  Install dependencies:
+    ```bash
+    yarn install
+    ```
 
-Once the node is running, open a **new** terminal in the same directory to deploy the contracts:
+## Usage
 
-```bash
-npx hardhat run scripts/deployFactory.js --network localhost
-```
+*   Run tests:
+    ```bash
+    yarn hardhat test
+    ```
 
-## Smart Contracts
+*   Start a local Hardhat node:
+    ```bash
+    yarn hardhat node
+    ```
 
-### PredictionMarket.sol
+## Contracts
 
-the smart contract PredictionMarket.sol should use a CFMM to price tokens Yes and No. When the user makes a bet, a Yes and No token is minted. He keeps the one he bets on and sells the other into the liquidity pool of the PredictionMarket.
+### `MintableERC20.sol`
 
-#### test.predictionmarket.js
+A standard ERC20 token with an added `mint` function, allowing the contract owner to create new tokens.
 
-The test script for PredictionMarket.sol
-Yes token pays 1 USDC (in sepolia or ethereum mainnet, or base or avalanche testnets or mainnets) if yes happens and 0 otherwise; no token pays the complement. 500 of each are minted for 500 USDC and deposited in an LP. constant factor is 250000. Alice can place a bet on yes by sending the CFMM 100 USDC; the CFMM will mint 100 yes token and 100 no token and deposit the no token in the pool, and remove 83.333 = constant factor / 600 no token from the pool, and send it and the 100 yes token to alice. Alice now has 183.3333 yes token. She can place another bet and receive 159.52 = 250000/7000 + her prior balance. She can then deposit 1 usdc to get 2.5 yes token. Please provide the smart contracts and tests that have the above. This math should be tested in test/test.predictionmarket.js.
+**Functions:**
+- `mint(address to, uint256 amount)`: Creates `amount` new tokens and assigns them to the `to` address. Only callable by the owner.
 
-The contract should have function getProbability a yes and no probability, reflecting the current price. For example, For example, probabilities start at .5, because the tokens are minted in equal amounts. after the first bet in the test script, the pool had 416.66667 yes and 600 no, so the probability is .59 for yes. This probability should also be tested in test/test.predictionmarket.js.
+### `PredictionMarket.sol`
 
-Please make sure there is a resolve function in the contract and in the test, that resolves the prediction from the oracle. There should also be a category enum for each pool: sports, elections or crypto.
+The core contract for a single prediction market. It manages the automated market maker (AMM), allows users to bet, and handles the resolution and claiming of funds.
 
-### PredictionMarketFactory.sol
+**Public Variables:**
+- `usdcToken`: The ERC20 token used for betting (e.g., USDC).
+- `yesToken`: The ERC20 token representing a "YES" outcome.
+- `noToken`: The ERC20 token representing a "NO" outcome.
+- `K`: The constant product for the AMM.
+- `category`: The market's category (e.g., ELECTION, SPORTS).
+- `question`: The question the market is predicting.
+- `oracle`: The address responsible for resolving the market.
+- `resolved`: A boolean indicating if the market has been resolved.
+- `outcome`: The final outcome of the market (true for YES, false for NO).
 
-There should also be a contract that keeps track of all the prediction markets that have been generated, and allows new users to bet in existing markets. It should be called PredictionMarketFactory, and it should have public functions to view liquidity pools and their category enum. It should have a public function to return all existing pools in a given category, e.g. all sports pools.
+**Functions:**
+- `initialize()`: Mints the initial liquidity for the AMM.
+- `getProbability()`: Returns the current probability of a "YES" outcome, based on the token balances in the AMM.
+- `bet(uint256 amount, bool onYes)`: Allows a user to bet `amount` of USDC on a "YES" or "NO" outcome.
+- `resolve(bool _outcome)`: Resolves the market with a final outcome. Only callable by the oracle.
+- `claim()`: Allows users to claim their winnings after the market has been resolved.
 
-Events should be generated when an address creates a bet (mints the yes no tokens and deposits one of them in the pool.) These events should have the bet's category because they will be used to figure out address's preferences below.
+### `PredictionMarketFactory.sol`
 
-It should have a view function for all outstanding bets, with category and address that bet on it, called getAllBets. it will be used below to offer outstanding bets to new addresses.
+A factory contract for creating new `PredictionMarket` instances.
 
-#### test/testPredictionMarketFactory.js
-
-It should be tested in test/testPredictionMarketFactory.js.
-
-#### deploy PredictionMarketFactory
-
-Please include deploy script for PredictionMarketFactory for testing. In prod it will be deployed once, like uniswap factory, and individual pools and conditional tokens will be generated based on user selections.
+**Functions:**
+- `createMarket(...)`: Deploys and initializes a new `PredictionMarket` contract with the specified parameters.
+- `getAllMarkets()`: Returns an array of all created `PredictionMarket` contract addresses.
+- `getMarketsByCategory(PredictionMarket.Category _category)`: Returns an array of all markets within a specific category.

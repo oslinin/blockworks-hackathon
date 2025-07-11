@@ -1,6 +1,24 @@
-html:
-working metamask connection
-runs the smart contract in html-fund-me-fcc
+# Present
 
-prediction-market:
-rewrote the logic of CFMM to mint new tokens for bets.
+YesNo makes on-chain prediction markets radically more accessible through a Tinder-style interface. Users swipe left or right to take a fixed-size binary bet (e.g., $0.10), or down to skip. Each bet mints two tokens—YES and NO—and uses a constant function market maker to enable seamless trading and price discovery. The entry fee is deposited into a liquidity pool and ultimately awarded to the winning side based on on-chain resolution, ensuring a trustless and transparently fair outcome.
+
+[Presentation](https://github.com/oslinin/blockworks-hackathon/blob/main/docs/safebet.pptx)
+
+# Future
+
+While our initial focus is on ease of and engagement, our broader vision is to build a highly liquid market where users can efficiently trade their risk preferences with one another—an opportunity that is currently limited to sophisticated traders in traditional derivatives markets. By democratizing access and simplifying the experience, we hope to unlock a new class of on-chain primitives for expressing belief and managing risk.
+
+# Code
+
+## example:
+
+- smart contract: js-07-hardhat-fund-me
+- UI: html-fund-me-fcc
+  working metamask connection
+  runs the smart contract in html-fund-me-fcc
+
+## Prediction market:
+
+- smart contract: prediction-market (passes tests in hackathon - correct math.xlsx)
+- UI: prediction-market-nodejs
+  rewrote the logic of CFMM to mint new tokens for bets.

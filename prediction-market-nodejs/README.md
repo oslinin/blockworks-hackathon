@@ -1,32 +1,45 @@
-# Frontend
+# Prediction Market Frontend
 
-Also create a Node.js front end for the contract in folder "prediction-market-nodejs".
+This is a Next.js frontend for interacting with the Prediction Market smart contracts. It allows users to connect their wallets, view prediction markets, place bets, and see their betting history.
 
-## Running the Frontend
+## Getting Started
 
-To run the frontend application, navigate to the `prediction-market-nodejs` directory and execute:
+1.  **Install dependencies:**
+    ```bash
+    yarn install
+    ```
 
+2.  **Run the development server:**
+    ```bash
+    yarn dev
+    ```
+    The application will be available at `http://localhost:3000`.
+
+## Features
+
+*   **Wallet Connection:** Connect to the application using a web3 wallet.
+*   **Market Display:** View a list of available prediction markets, including the question, category, and current probabilities.
+*   **Betting:** Place bets on market outcomes using USDC.
+*   **Prediction Agent:** When all existing markets have been voted on, a prediction agent can be used to generate new market ideas.
+*   **User Score:** The application can calculate a "user score" based on betting history to suggest relevant markets.
+
+## Key Components
+
+*   **`pages/`**: Contains the main pages of the application.
+    *   `index.js`: The main landing page.
+    *   `test*.js`: Various pages for testing specific functionality, like connecting to a wallet, interacting with the USDC contract, and placing bets.
+*   **`components/`**: Contains reusable React components.
+    *   `MarketDisplay.js`: The main component for displaying and interacting with a single prediction market.
+    *   `ConnectButton.js`: A button for connecting a web3 wallet.
+*   **`abi/`**: Contains the ABI (Application Binary Interface) JSON files for the smart contracts, which are necessary for the frontend to interact with them.
+*   **`prediction-agent/`**: Contains the logic for the prediction agent, which can generate new market questions using a large language model.
+*   **`utils/`**: Contains utility functions, such as `UserScore.js` for calculating a user's score.
+
+## Prediction Agent
+
+The prediction agent, located in the `prediction-agent/` directory, can be used to generate new prediction market questions. It uses a large language model (like Google's Gemini) to create questions based on real-world events.
+
+To test the agent, run:
 ```bash
-yarn install
-yarn dev
+yarn test:agent
 ```
-
-This will start the development server, and you can access the application in your browser, usually at `http://localhost:3000`.
-
-## copy ABI and contract address
-
-To copy the PredictionMarketFactory.sol ABI and contract address into the frontend's constants.js file, run:
-
-```bash
-node copyABI.js
-```
-
-To verify that the contract can be instantiated by the front end, run the test:
-
-```bash
-mocha test/testABI.js
-```
-
-## prediction-agent
-
-create a folder in the frontend folder called prediction-agent that calls chatGPT, claude or Gemini with the prompt: "please create an agent that gives rediction market bets from Real-World Events\nyou can Use feeds like:\n🔹 News APIs: GNews, NewsAPI.org, or Google Alerts (via RSS)\n🔹 Calendars: Cal.com, Event Registry, Wikipedia Current Events\n🔹 Structured Feeds:\nSports: ESPN, RapidAPI Sports API\nElections: Ballotpedia, FiveThirtyEight\nCrypto: CoinGecko API, DefiLlama\nrandomly generate a bet in the following format, called yesnoformat:\n{\n"question": "Will the Bitcoin halving occur before April 15, 2028?",\n"type": "binary",\n"category": ["crypto", "Bitcoin", "halving"],\n"resolution_source": "https://www.blockchain.com/explorer",\n"deadline": "2028-04-14T23:59:00Z",\n"creator": "auto-gen"\n}.\n\nThe same prompt will be called with each call to the agent. A call can have a category: sports, elections, or crypto, and an LLM: ChatGPT, claude or gemini.\n\n## UserScore\n\nThe frontend should read the categories of the bets for the address connected to web3 from the events log. IThe frequencies of categories selected for betting, i.e. not skipped by the user should be saved in user_input_vector and used to determine UserScore above, i.e. the relative frequences of categories sent to prediction-agent for bets. Create a test/userscore.js script to read the bets the user has created and generate the frequencies vector.\n\n## index.js\nIt should have a connect button for Web3 using thirdweb-dev/react or something similar.\n\nThe frontend should provide a suggested wager in yesnoformat. These bets should be obtained as follows:\n\n- first, run allbets = PredictionMarketFactory.getAllBets and UserScore, and sample from allbets according to the category frequencies found in UserScore. Filter out bets that the address has already participated in.\n- Once all bets from allbets have been shown to the user, obtain new bets from prediction-agent. For example, if prediction-agent offers a bet on trump or hillary in 2016, with a choice of trump or hillary or pass expressed as three buttons on the bottom. if the user chooses trump, a bet of 1 dollar is placed in the prediction market. Immediately afterwards, another wager is requrest from prediction-agent and offered to the user, e.g. yankees/redsox and the options are expressed as buttons on the bottom with default value.\n\nThe choice of LLM should be in a dropdown on the bottom (Gemini default); the category should be probabilistically chosed based in probabilities in the user_input_vector UserScore described below.\n\nTHe relative size of the buttons should reflect the probabilities calculated in getProbability.\n\nthe front end should only show tinder style bets, that have been generated by prediction-market-nodejs. It should not let the user pick category or LLM.\n\nFinally, there is a button called History, where all outstanding bets are listed underneath the mouse, when the button is pressed.
