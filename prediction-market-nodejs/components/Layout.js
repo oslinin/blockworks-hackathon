@@ -24,6 +24,11 @@ export default function Layout({ children }) {
     }
   };
 
+  const disconnectWallet = () => {
+    setAccount(null);
+    setProvider(null);
+  };
+
   return (
     <div style={{ display: 'flex' }}>
       <nav style={{ width: '200px', borderRight: '1px solid #ccc', padding: '20px' }}>
@@ -31,6 +36,7 @@ export default function Layout({ children }) {
         {account ? (
           <div>
             <p>Connected: {account.substring(0, 6)}...{account.substring(account.length - 4)}</p>
+            <button onClick={disconnectWallet} style={{ backgroundColor: '#eee', padding: '10px', border: '1px solid #ccc', borderRadius: '5px', marginBottom: '10px' }}>Deactivate</button>
           </div>
         ) : (
           <button onClick={connectWallet} style={{ backgroundColor: '#eee', padding: '10px', border: '1px solid #ccc', borderRadius: '5px', marginBottom: '10px' }}>Connect Wallet</button>
