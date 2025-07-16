@@ -7,6 +7,7 @@ This is a Next.js frontend for interacting with the Prediction Market smart cont
 1.  **Install dependencies:**
     ```bash
     yarn install
+    yarn add next react react-dom
     ```
 
 2.  **Run the development server:**
