@@ -26,12 +26,12 @@ export default function Test4ContractNWay({ account, provider }) {
                 await approveTx.wait();
 
                 const tx = await factoryContract.createMarket(
-                    "Who will win the 2024 US Election?",
+                    "Who will win the 2025 NYC Mayoral Election?",
                     0, // ELECTION
                     account, // Oracle
                     USDC_ADDRESS,
-                    ["Biden", "Trump", "Other"],
-                    ["BIDEN", "TRUMP", "OTHER"],
+                    ["Eric Adams", "Zohran Mamdani", "Andrew Cuomo", "Curtis Sliwa", "Jim Walden"],
+                    ["ADAMS", "MAMDANI", "CUOMO", "SLIWA", "WALDEN"],
                     ethers.parseUnits("100", 6) // Initial liquidity
                 );
                 const receipt = await tx.wait();

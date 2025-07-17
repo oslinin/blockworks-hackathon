@@ -101,34 +101,6 @@ A factory contract for creating new `PredictionMarketNWay` instances.
 - `getAllMarkets()`: Returns an array of all created `PredictionMarketNWay` contract addresses.
 - `getMarketsByCategory(...)`: Returns an array of all N-way markets within a specific category.
 
-### `PredictionMarketNWay.sol`
-
-A contract for a prediction market with multiple possible outcomes (N-way).
-
-**Public Variables:**
-- `usdcToken`: The ERC20 token used for betting.
-- `outcomeTokens`: An array of ERC20 tokens, each representing a possible outcome.
-- `category`: The market's category.
-- `question`: The question the market is predicting.
-- `oracle`: The address responsible for resolving the market.
-- `resolved`: A boolean indicating if the market has been resolved.
-- `winningOutcome`: The index of the winning outcome.
-
-**Functions:**
-- `getProbabilities()`: Returns an array of probabilities for each outcome.
-- `bet(uint256 amount, uint256 outcomeIndex)`: Allows a user to bet `amount` of USDC on a specific outcome.
-- `resolve(uint256 _winningOutcome)`: Resolves the market with a final outcome. Only callable by the oracle.
-- `claim()`: Allows users to claim their winnings after the market has been resolved.
-
-### `PredictionMarketFactoryNWay.sol`
-
-A factory contract for creating new `PredictionMarketNWay` instances.
-
-**Functions:**
-- `createMarket(...)`: Deploys and initializes a new `PredictionMarketNWay` contract.
-- `getAllMarkets()`: Returns an array of all created `PredictionMarketNWay` contract addresses.
-- `getMarketsByCategory(...)`: Returns an array of all N-way markets within a specific category.
-
 ## Testing
 
 The project includes a comprehensive test suite to ensure the correctness of the smart contracts.
