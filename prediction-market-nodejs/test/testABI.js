@@ -14,7 +14,7 @@ async function testABI() {
         const factoryAddress = "0x5FbDB2315678afecb367f032d93F642f64180aa3"; // Example address, replace with actual
 
         // Connect to a local Hardhat network (or any other network)
-        const provider = new ethers.providers.JsonRpcProvider("http://127.0.0.1:8545/");
+        const provider = new ethers.JsonRpcProvider("http://127.0.0.1:8545/");
 
         // Create a contract instance
         const factoryContract = new ethers.Contract(factoryAddress, factoryAbi, provider);

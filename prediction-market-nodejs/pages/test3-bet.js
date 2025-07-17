@@ -28,8 +28,8 @@ export default function Test3Bet({ account, provider }) {
     const placeBet = async (onYes) => {
         if (account && provider && marketAddress) {
             const betAmount = "1"; // 1 USDC
-            const betAmountInWei = ethers.utils.parseUnits(betAmount, 6);
-            const signer = provider.getSigner();
+            const betAmountInWei = ethers.parseUnits(betAmount, 6);
+            const signer = await provider.getSigner();
             const marketContract = new ethers.Contract(marketAddress, MARKET_ABI, signer);
             const usdcContract = new ethers.Contract(USDC_ADDRESS, ERC20_ABI, signer);
 
@@ -52,7 +52,7 @@ export default function Test3Bet({ account, provider }) {
         if (account && provider) {
             const usdcContract = new ethers.Contract(USDC_ADDRESS, ERC20_ABI, provider);
             const usdcBal = await usdcContract.balanceOf(account);
-            setUsdcBalance(ethers.utils.formatUnits(usdcBal, 6));
+            setUsdcBalance(ethers.formatUnits(usdcBal, 6));
 
             if (marketAddress) {
                 const marketContract = new ethers.Contract(marketAddress, MARKET_ABI, provider);
@@ -63,18 +63,18 @@ export default function Test3Bet({ account, provider }) {
 
                 const yesTokenContract = new ethers.Contract(yesTokenAddr, ERC20_ABI, provider);
                 const yesBal = await yesTokenContract.balanceOf(account);
-                setYesTokenBalance(ethers.utils.formatUnits(yesBal, 18));
+                setYesTokenBalance(ethers.formatUnits(yesBal, 18));
 
                 const noTokenContract = new ethers.Contract(noTokenAddr, ERC20_ABI, provider);
                 const noBal = await noTokenContract.balanceOf(account);
-                setNoTokenBalance(ethers.utils.formatUnits(noBal, 18));
+                setNoTokenBalance(ethers.formatUnits(noBal, 18));
 
                 const yesProbabilityBN = await marketContract.getProbability();
-                const oneHundred = ethers.utils.parseUnits("100", 18);
-                const noProbabilityBN = oneHundred.sub(yesProbabilityBN);
+                const oneHundred = ethers.parseUnits("100", 18);
+                const noProbabilityBN = oneHundred - yesProbabilityBN;
 
-                setYesProbability(ethers.utils.formatUnits(yesProbabilityBN, 18));
-                setNoProbability(ethers.utils.formatUnits(noProbabilityBN, 18));
+                setYesProbability(ethers.formatUnits(yesProbabilityBN, 18));
+                setNoProbability(ethers.formatUnits(noProbabilityBN, 18));
             }
         }
     };

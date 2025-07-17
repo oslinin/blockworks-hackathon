@@ -51,7 +51,7 @@ export default function MarketDisplay({ userScore, setUserScore }) {
 
               const yesBalance = await yesTokenContract.balanceOf(address);
               const noBalance = await noTokenContract.balanceOf(address);
-              if (yesBalance > 0 || noBalance > 0) {
+              if (yesBalance > 0n || noBalance > 0n) {
                 hasParticipated = true;
               }
             }

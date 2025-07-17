@@ -10,11 +10,11 @@ export default function Layout({ children }) {
   const connectWallet = async () => {
     if (window.ethereum) {
       try {
-        const web3Provider = new ethers.providers.Web3Provider(window.ethereum);
+        const web3Provider = new ethers.BrowserProvider(window.ethereum);
         setProvider(web3Provider);
         await web3Provider.send("eth_requestAccounts", []);
-        const signer = web3Provider.getSigner();
-        const address = await signer.getAddress();
+        const signer = await web3Provider.getSigner();
+        const address = signer.address;
         setAccount(address);
       } catch (error) {
         console.error("Error connecting to MetaMask", error);

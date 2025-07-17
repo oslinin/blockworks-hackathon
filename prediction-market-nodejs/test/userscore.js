@@ -11,7 +11,7 @@ describe("UserScore", function () {
         // For the purpose of this test, we will simulate this.
 
         // 1. Setup provider and user address
-        const provider = new ethers.providers.JsonRpcProvider("http://127.0.0.1:8545");
+        const provider = new ethers.JsonRpcProvider("http://127.0.0.1:8545");
         const userAddress = "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266"; // Hardhat account 0
 
         // 2. We can't easily place bets here, so we will assume the function works

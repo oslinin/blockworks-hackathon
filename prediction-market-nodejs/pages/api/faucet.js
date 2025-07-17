@@ -24,12 +24,12 @@ export default async function handler(req, res) {
         }
 
         // Connect to the local node as the deployer
-        const provider = new ethers.providers.JsonRpcProvider(PROVIDER_URL);
+        const provider = new ethers.JsonRpcProvider(PROVIDER_URL);
         const deployerWallet = new ethers.Wallet(DEPLOYER_PRIVATE_KEY, provider);
         const usdcContract = new ethers.Contract(USDC_CONTRACT_ADDRESS, USDC_ABI, deployerWallet);
 
         // Mint 100 USDC to the user's address
-        const amount = ethers.utils.parseUnits("100", 6); // 100 USDC with 6 decimals
+        const amount = ethers.parseUnits("100", 6); // 100 USDC with 6 decimals
         const tx = await usdcContract.mint(address, amount);
         await tx.wait();
 

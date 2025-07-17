@@ -16,13 +16,13 @@ export default function Test2Contract({ account, provider }) {
 
     const deployMarket = async () => {
         if (account && provider) {
-            const signer = provider.getSigner();
+            const signer = await provider.getSigner();
             const factoryContract = new ethers.Contract(FACTORY_ADDRESS, FACTORY_ABI, signer);
             const usdcContract = new ethers.Contract(USDC_ADDRESS, USDC_ABI, signer);
 
             try {
                 // Approve the factory to spend USDC
-                const approveTx = await usdcContract.approve(FACTORY_ADDRESS, ethers.utils.parseUnits("500", 6));
+                const approveTx = await usdcContract.approve(FACTORY_ADDRESS, ethers.parseUnits("500", 6));
                 await approveTx.wait();
 
                 const tx = await factoryContract.createMarket(
@@ -36,9 +36,17 @@ export default function Test2Contract({ account, provider }) {
                     "NO"
                 );
                 const receipt = await tx.wait();
-                const marketCreatedEvent = receipt.events.find(event => event.event === 'MarketCreated');
+                const marketCreatedEvent = receipt.logs.find(log => {
+                    try {
+                        const parsedLog = factoryContract.interface.parseLog(log);
+                        return parsedLog.name === 'MarketCreated';
+                    } catch (error) {
+                        return false;
+                    }
+                });
                 if (marketCreatedEvent) {
-                    const deployedAddress = marketCreatedEvent.args.marketAddress;
+                    const parsedLog = factoryContract.interface.parseLog(marketCreatedEvent);
+                    const deployedAddress = parsedLog.args.marketAddress;
                     setMarketAddress(deployedAddress);
                     setIsMarketDeployed(true);
                 }
@@ -53,7 +61,7 @@ export default function Test2Contract({ account, provider }) {
             const getUsdcBalance = async () => {
                 const usdcContract = new ethers.Contract(USDC_ADDRESS, USDC_ABI, provider);
                 const balance = await usdcContract.balanceOf(account);
-                setUsdcBalance(ethers.utils.formatUnits(balance, 6));
+                setUsdcBalance(ethers.formatUnits(balance, 6));
             };
 
             const findMarket = async () => {

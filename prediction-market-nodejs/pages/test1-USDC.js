@@ -17,7 +17,7 @@ export default function Test1USDC({ account, provider }) {
         if (account && provider) {
             const usdcContract = new ethers.Contract(USDC_ADDRESS, USDC_ABI, provider);
             const balance = await usdcContract.balanceOf(account);
-            setUsdcBalance(ethers.utils.formatUnits(balance, 6));
+            setUsdcBalance(ethers.formatUnits(balance, 6));
         }
     };
 
@@ -57,7 +57,7 @@ export default function Test1USDC({ account, provider }) {
         if (provider) {
             const checkNetwork = async () => {
                 const network = await provider.getNetwork();
-                setIsLocalhost(network.chainId === 31337);
+                setIsLocalhost(network.chainId === 31337n);
             };
             checkNetwork();
         }
