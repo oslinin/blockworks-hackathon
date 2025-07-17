@@ -7,6 +7,8 @@ module.exports = async ({ deployments }) => {
 
         const PredictionMarket = await deployments.get("PredictionMarket");
         const PredictionMarketFactory = await deployments.get("PredictionMarketFactory");
+        const PredictionMarketNWay = await deployments.get("PredictionMarketNWay");
+        const PredictionMarketFactoryNWay = await deployments.get("PredictionMarketFactoryNWay");
 
         const frontendAbiDir = path.resolve(__dirname, "../../prediction-market-nodejs/abi");
 
@@ -24,9 +26,21 @@ module.exports = async ({ deployments }) => {
             JSON.stringify(PredictionMarketFactory.abi, null, 2)
         );
 
+        fs.writeFileSync(
+            path.join(frontendAbiDir, "PredictionMarketNWay.json"),
+            JSON.stringify(PredictionMarketNWay.abi, null, 2)
+        );
+
+        fs.writeFileSync(
+            path.join(frontendAbiDir, "PredictionMarketFactoryNWay.json"),
+            JSON.stringify(PredictionMarketFactoryNWay.abi, null, 2)
+        );
+
         const contractAddresses = {
             PredictionMarket: PredictionMarket.address,
             PredictionMarketFactory: PredictionMarketFactory.address,
+            PredictionMarketNWay: PredictionMarketNWay.address,
+            PredictionMarketFactoryNWay: PredictionMarketFactoryNWay.address,
         };
 
         fs.writeFileSync(

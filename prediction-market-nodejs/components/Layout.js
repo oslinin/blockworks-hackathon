@@ -54,6 +54,12 @@ export default function Layout({ children }) {
           <li>
             <Link href="/test3-bet">Place Bet</Link>
           </li>
+          <li>
+            <Link href="/test4-contractNway">Deploy N-Way Market</Link>
+          </li>
+          <li>
+            <Link href="/test5-bet">Place N-Way Bet</Link>
+          </li>
         </ul>
       </nav>
       <main style={{ flex: 1, padding: '20px' }}>

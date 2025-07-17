@@ -13,7 +13,7 @@ describe("PredictionMarketNWay", function () {
 
         // Deploy USDC
         const MintableERC20 = await ethers.getContractFactory("MintableERC20");
-        usdc = await MintableERC20.deploy("USD Coin", "USDC", 6);
+        usdc = await MintableERC20.deploy("USD Coin", "USDC");
         await usdc.waitForDeployment();
 
         // Deploy PredictionMarketNWay

@@ -29,6 +29,8 @@ This is a Next.js frontend for interacting with the Prediction Market smart cont
 *   **`pages/`**: Contains the main pages of the application.
     *   `index.js`: The main landing page.
     *   `test*.js`: Various pages for testing specific functionality, like connecting to a wallet, interacting with the USDC contract, and placing bets.
+    *   `test4-contractNway.js`: A test page for deploying an N-Way prediction market.
+    *   `test5-bet.js`: A test page for placing bets on an N-Way prediction market.
 *   **`components/`**: Contains reusable React components.
     *   `MarketDisplay.js`: The main component for displaying and interacting with a single prediction market.
     *   `ConnectButton.js`: A button for connecting a web3 wallet.
