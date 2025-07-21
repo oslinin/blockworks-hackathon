@@ -81,3 +81,9 @@ cd frontend-proj
 yarn create next-app .
 yarn dev
 ```
+
+# python
+python -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+

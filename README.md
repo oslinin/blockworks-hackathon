@@ -20,3 +20,9 @@ While our initial focus is on ease of and engagement, our broader vision is to b
   ```bash
   yarn dev
   ```
+- prediction-market-nodejs/prediction-agent-py: launch the prediction agent with:
+  ```bash
+  source venv/bin/activate
+  adk api_server
+  ```
+  You will need to have a `GEMINI_API_KEY` environment variable set. You can get one from [Google AI Studio](https://aistudio.google.com/app/apikey).
