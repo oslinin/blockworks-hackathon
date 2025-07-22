@@ -20,9 +20,26 @@ While our initial focus is on ease of and engagement, our broader vision is to b
   ```bash
   yarn dev
   ```
-- prediction-market-nodejs/prediction-agent-py: launch the prediction agent with:
+- prediction-market-nodejs/prediction-agent-py: launch the prediction agent.
+
+  First, set up the environment:
   ```bash
-  source venv/bin/activate
-  adk api_server
+  cd prediction-market-nodejs
+  python3 -m venv .venv
+  source .venv/bin/activate
+  pip install -r requirements.txt
+  mv .env.local .env
   ```
-  You will need to have a `GEMINI_API_KEY` environment variable set. You can get one from [Google AI Studio](https://aistudio.google.com/app/apikey).
+
+  You can either run the agent directly, which will run one time and exit:
+  ```bash
+  cd prediction-agent-py
+  python3 main.py
+  ```
+
+  Alternatively, you can run the agent as a service:
+  ```bash
+  cd prediction-agent-py
+  adk run prediction_agent
+  ```
+  You will need to have a `GEMINI_API_KEY` environment variable set in your `.env` file. You can get one from [Google AI Studio](https://aistudio.google.com/app/apikey).

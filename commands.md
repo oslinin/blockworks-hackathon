@@ -84,6 +84,6 @@ yarn dev
 
 # python
 python -m venv .venv
-source .venv/bin/activate
+source ~/Documents/training/.venv/bin/activate
 pip install -r requirements.txt
 

@@ -1,53 +1,60 @@
 from google.adk.agents import Agent
+from google.adk.tools import google_search
 
 root_agent = Agent(
     name="prediction_agent",
-    # https://ai.google.dev/gemini-api/docs/models
     model="gemini-2.0-flash",
     description="Prediction market agent",
     instruction="""
-    You are a prediction market assistant.  Every time I say go:
+    You are a prediction market assistant. Your single most important rule is to generate events with a deadline in the future.
+    Today's date is {today}. Any "deadline" you generate MUST be after this date.
 
-Randomly choose one of the following categories: sports, elections, or crypto.
+    You will:
+    1. Find a real, upcoming event for the provided category {category} and identify a reliable `resolution_source` URL for it.
+    2. Generate a single JSON object representing a prediction market bet for that event.
 
-Then, randomly select a real upcoming event in that category from a public source such as:
+    The "deadline" in the JSON object MUST be a date in the future, after {today}.
 
-- Sports: ESPN, Olympics, FIFA, UFC
-- Elections: Ballotpedia, FiveThirtyEight, or other global/local elections
-- Crypto: CoinGecko, Ethereum.org, Bitcoin halving, SEC ETF decisions
+    JSON structure for binary markets:
+    {
+      "question": "Will [EVENT] happen on or before [DATE]?",
+      "type": "binary",
+      "outcomes": [
+        {"name": "Yes"},
+        {"name": "No"}
+      ],
+      "tags": ["category"],
+      "resolution_source": "[source or URL]",
+      "deadline": "[YYYY-MM-DD]",
+      "creator": "auto-gen",
+      "categories": {categories},
+      "category": {category}
+    }
 
-use  information sourced from an actual announcement or reliable source.  
+    JSON structure for categorical markets:
+    {
+      "question": "Who will win the [EVENT]?",
+      "type": "categorical",
+      "outcomes": [
+        {"name": "Outcome 1"},
+        {"name": "Outcome 2"},
+        {"name": "Outcome 3"}
+      ],
+      "tags": ["category"],
+      "resolution_source": "[source or URL]",
+      "deadline": "[YYYY-MM-DD]",
+      "creator": "auto-gen",
+      "categories": {categories},
+      "category": {category}
 
-Based on the selected event, generate a prediction market bet as a JSON object. The market can be binary or categorical.
+    }
 
-For binary markets, the JSON should have this structure:
-{
-  "question": "Will [EVENT] happen on or before [DATE]?",
-  "type": "binary",
-  "outcomes": ["Yes", "No"],
-  "tags": ["category"],
-  "resolution_source": "[source or URL]",
-  "deadline": "[YYYY-MM-DD]",
-  "creator": "auto-gen"
-}
-
-For categorical markets, the JSON should have this structure:
-{
-  "question": "Who will win the [EVENT]?",
-  "type": "categorical",
-  "outcomes": ["Outcome 1", "Outcome 2", "Outcome 3"],
-  "tags": ["category"],
-  "resolution_source": "[source or URL]",
-  "deadline": "[YYYY-MM-DD]",
-  "creator": "auto-gen"
-}
-
-Requirements:
-- Make sure the event is real and date-bounded.  Make sure it is in the future and it is real. If the event is tied to a specific known date (e.g. an election, product launch, sports event), ensure the year and month are not incorrectly placed in the future or past.
-- For binary questions, the question must be clearly answerable with YES or NO, or with a finite number of possible answer, less than 10.
-- For categorical questions, the question should be a who/what/which question with a list of possible outcomes.
-- The resolution_source must be real or realistically plausible.
-- The output must be different each time this prompt is run (random category, event, date).
-- Output only the JSON. No explanation or commentary.
+    CRITICAL REQUIREMENTS:
+    - The "deadline" MUST be after today's date: {today}.
+    - The event must be real and verifiable.
+    - The question must be clear and unambiguous.
+    - Output only the JSON object. Do not include any other text, explanations, or markdown formatting like ```json.
     """,
+    tools=[google_search]
+
 )

@@ -1,9 +1,8 @@
 import { useState } from 'react';
 
-// Hardcoded address for testing, similar to main.py
 const TEST_ADDRESS = "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266";
 
-export default function Test6Agent() {
+export default function Test7AgentVertex() {
     const [bet, setBet] = useState(null);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
@@ -13,7 +12,13 @@ export default function Test6Agent() {
         setError(null);
         setBet(null);
         try {
-            const response = await fetch(`/api/generate-bet?address=${TEST_ADDRESS}`);
+            const response = await fetch('/api/generate-bet-vertex', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ userId: TEST_ADDRESS }),
+            });
 
             if (!response.ok) {
                 const err = await response.json();
@@ -24,7 +29,7 @@ export default function Test6Agent() {
             setBet(data);
         } catch (e) {
             setError(e.message);
-            console.error("Error fetching prediction", e);
+            console.error("Error fetching prediction from Vertex AI", e);
         } finally {
             setLoading(false);
         }
@@ -32,16 +37,15 @@ export default function Test6Agent() {
 
     return (
         <div style={{ fontFamily: 'Arial, sans-serif', padding: '20px' }}>
-            <h1>Test 6: Get Prediction from Agent</h1>
+            <h1>Test 7: Get Prediction from Agent on Vertex AI</h1>
             <p>
-                This page fetches a prediction from the Python ADK agent by calling a Next.js API route.
-                The API route runs the agent via the <code>adk</code> command line tool.
+                This page fetches a prediction from the Python agent running on Vertex AI.
             </p>
             <p>
                 Using address: <strong>{TEST_ADDRESS}</strong>
             </p>
             <button onClick={getPrediction} disabled={loading} style={{ backgroundColor: '#4CAF50', color: 'white', padding: '12px 20px', border: 'none', borderRadius: '4px', cursor: 'pointer', fontSize: '16px' }}>
-                {loading ? 'Generating...' : 'Generate Prediction'}
+                {loading ? 'Generating...' : 'Generate Prediction from Vertex AI'}
             </button>
             
             {error && <p style={{ color: 'red', marginTop: '20px' }}><strong>Error:</strong> {error}</p>}
