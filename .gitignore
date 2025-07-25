@@ -23,7 +23,7 @@ ignition/deployments/chain-31337
 artifacts/
 cache/
 .cache/
-deployments/
+#deployments/
 typechain-types/
 ignition/
 .npm/

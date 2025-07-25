@@ -10,6 +10,28 @@ While our initial focus is on ease of and engagement, our broader vision is to b
 
 # Code
 
+## Deployment to Sepolia
+
+To deploy the contracts to the Sepolia testnet, run the following command:
+
+```bash
+cd prediction-market
+yarn hardhat deploy --network sepolia
+```
+
+This will deploy the contracts and copy the ABI and contract addresses to the frontend.
+
+### Sepolia Deployments
+
+You can get test USDC from the [Circle faucet](https://faucet.circle.com/).
+
+The following contracts have been deployed to the Sepolia testnet:
+
+*   **PredictionMarket:** [`0xD4636d7CC71bDd3e01a3AF9A65C110046a3FE06E`](https://sepolia.etherscan.io/address/0xD4636d7CC71bDd3e01a3AF9A65C110046a3FE06E)
+*   **PredictionMarketFactory:** [`0x14BF6D8f65b9e4b11919C3E9D4aC53C7b6bE21f0`](https://sepolia.etherscan.io/address/0x14BF6D8f65b9e4b11919C3E9D4aC53C7b6bE21f0)
+*   **PredictionMarketFactoryNWay:** [`0x909F71Fc1B1cdb6Bf90d0ffF3C11Fd1aA4Ef98d6`](https://sepolia.etherscan.io/address/0x909F71Fc1B1cdb6Bf90d0ffF3C11Fd1aA4Ef98d6)
+*   **PredictionMarketNWay:** [`0xCa90fA9E2Ca9B1113f6811A6832e082c3DD2C906`](https://sepolia.etherscan.io/address/0xCa90fA9E2Ca9B1113f6811A6832e082c3DD2C906)
+
 ## Prediction market:
 
 - prediction-market: lauch localhost web3 backend with:

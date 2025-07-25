@@ -131,3 +131,42 @@ This file tests the `PredictionMarketNWay.sol` contract. It covers:
 This file tests the `PredictionMarketFactoryNWay.sol` contract. It covers:
 - **Market Creation:** Ensures that the factory can create new `PredictionMarketNWay` instances.
 - **Market Categorization:** Verifies that the `getMarketsByCategory` function correctly returns N-way markets based on their category.
+
+## Deployment
+
+To deploy the contracts, you can use the `deploy` scripts in the `deploy/` directory.
+
+### Localhost
+
+To deploy to a local network, run:
+```bash
+yarn hardhat deploy --network localhost
+```
+
+### Sepolia Testnet
+
+To deploy to the Sepolia testnet, run:
+```bash
+yarn hardhat deploy --network sepolia
+```
+
+### Sepolia Deployments
+
+You can get test USDC from the [Circle faucet](https://faucet.circle.com/).
+
+The following contracts have been deployed to the Sepolia testnet:
+
+*   **PredictionMarket:** [`0xD4636d7CC71bDd3e01a3AF9A65C110046a3FE06E`](https://sepolia.etherscan.io/address/0xD4636d7CC71bDd3e01a3AF9A65C110046a3FE06E)
+*   **PredictionMarketFactory:** [`0x14BF6D8f65b9e4b11919C3E9D4aC53C7b6bE21f0`](https://sepolia.etherscan.io/address/0x14BF6D8f65b9e4b11919C3E9D4aC53C7b6bE21f0)
+*   **PredictionMarketFactoryNWay:** [`0x909F71Fc1B1cdb6Bf90d0ffF3C11Fd1aA4Ef98d6`](https://sepolia.etherscan.io/address/0x909F71Fc1B1cdb6Bf90d0ffF3C11Fd1aA4Ef98d6)
+*   **PredictionMarketNWay:** [`0xCa90fA9E2Ca9B1113f6811A6832e082c3DD2C906`](https://sepolia.etherscan.io/address/0xCa90fA9E2Ca9B1113f6811A6832e082c3DD2C906)
+
+To deploy to a live network (e.g., mainnet or a testnet), you will need to configure the network in `hardhat.config.js` and provide an account with sufficient funds.
+
+## Copying ABI to Frontend
+
+After deploying the contracts, you need to copy the ABI (Application Binary Interface) and contract addresses to the frontend application. This can be done automatically by running the `04-copy-to-frontend.js` script:
+```bash
+yarn hardhat deploy --network localhost
+```
+This script will copy the necessary files to the `prediction-market-nodejs/abi/` directory.
