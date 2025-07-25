@@ -2,11 +2,11 @@
   "_format": "hh-sol-cache-2",
   "files": {
     "/home/oleg/Documents/blockworks-hackathon/prediction-market/contracts/MintableERC20.sol": {
-      "lastModificationDate": 1752685574090,
+      "lastModificationDate": 1752731691385,
       "contentHash": "33ee08882c7e68fa41b2ce4bf30b1aa5",
       "sourceName": "contracts/MintableERC20.sol",
       "solcConfig": {
-        "version": "0.8.20",
+        "version": "0.8.24",
         "settings": {
           "evmVersion": "paris",
           "optimizer": {
@@ -48,11 +48,11 @@
       ]
     },
     "/home/oleg/Documents/blockworks-hackathon/prediction-market/node_modules/@openzeppelin/contracts/access/Ownable.sol": {
-      "lastModificationDate": 1752685806301,
+      "lastModificationDate": 1753419442987,
       "contentHash": "d3c790edc9ccf808a17c5a6cd13614fd",
       "sourceName": "@openzeppelin/contracts/access/Ownable.sol",
       "solcConfig": {
-        "version": "0.8.20",
+        "version": "0.8.24",
         "settings": {
           "evmVersion": "paris",
           "optimizer": {
@@ -93,11 +93,11 @@
       ]
     },
     "/home/oleg/Documents/blockworks-hackathon/prediction-market/node_modules/@openzeppelin/contracts/token/ERC20/ERC20.sol": {
-      "lastModificationDate": 1752685889777,
-      "contentHash": "57d79df281f57bbb1b09214c7914f877",
+      "lastModificationDate": 1753419450562,
+      "contentHash": "59dfce11284f2636db261df9b6a18f81",
       "sourceName": "@openzeppelin/contracts/token/ERC20/ERC20.sol",
       "solcConfig": {
-        "version": "0.8.20",
+        "version": "0.8.24",
         "settings": {
           "evmVersion": "paris",
           "optimizer": {
@@ -141,11 +141,11 @@
       ]
     },
     "/home/oleg/Documents/blockworks-hackathon/prediction-market/node_modules/@openzeppelin/contracts/utils/Context.sol": {
-      "lastModificationDate": 1752685806568,
+      "lastModificationDate": 1753419443049,
       "contentHash": "67bfbc07588eb8683b3fd8f6f909563e",
       "sourceName": "@openzeppelin/contracts/utils/Context.sol",
       "solcConfig": {
-        "version": "0.8.20",
+        "version": "0.8.24",
         "settings": {
           "evmVersion": "paris",
           "optimizer": {
@@ -184,11 +184,11 @@
       ]
     },
     "/home/oleg/Documents/blockworks-hackathon/prediction-market/node_modules/@openzeppelin/contracts/interfaces/draft-IERC6093.sol": {
-      "lastModificationDate": 1752685806540,
-      "contentHash": "267d92fe4de67b1bdb3302c08f387dbf",
+      "lastModificationDate": 1753419443034,
+      "contentHash": "5041977bbe908de2e6ed0270447f79ad",
       "sourceName": "@openzeppelin/contracts/interfaces/draft-IERC6093.sol",
       "solcConfig": {
-        "version": "0.8.20",
+        "version": "0.8.24",
         "settings": {
           "evmVersion": "paris",
           "optimizer": {
@@ -220,7 +220,7 @@
       },
       "imports": [],
       "versionPragmas": [
-        "^0.8.20"
+        ">=0.8.4"
       ],
       "artifacts": [
         "IERC1155Errors",
@@ -229,11 +229,11 @@
       ]
     },
     "/home/oleg/Documents/blockworks-hackathon/prediction-market/node_modules/@openzeppelin/contracts/token/ERC20/IERC20.sol": {
-      "lastModificationDate": 1752685889709,
-      "contentHash": "8f19f64d2adadf448840908bbaf431c8",
+      "lastModificationDate": 1753419450563,
+      "contentHash": "9261adf6457863de3e9892f51317ec89",
       "sourceName": "@openzeppelin/contracts/token/ERC20/IERC20.sol",
       "solcConfig": {
-        "version": "0.8.20",
+        "version": "0.8.24",
         "settings": {
           "evmVersion": "paris",
           "optimizer": {
@@ -265,18 +265,18 @@
       },
       "imports": [],
       "versionPragmas": [
-        "^0.8.20"
+        ">=0.4.16"
       ],
       "artifacts": [
         "IERC20"
       ]
     },
     "/home/oleg/Documents/blockworks-hackathon/prediction-market/node_modules/@openzeppelin/contracts/token/ERC20/extensions/IERC20Metadata.sol": {
-      "lastModificationDate": 1752685916033,
-      "contentHash": "794db3115001aa372c79326fcfd44b1f",
+      "lastModificationDate": 1753419453236,
+      "contentHash": "513778b30d2750f5d2b9b19bbcf748a5",
       "sourceName": "@openzeppelin/contracts/token/ERC20/extensions/IERC20Metadata.sol",
       "solcConfig": {
-        "version": "0.8.20",
+        "version": "0.8.24",
         "settings": {
           "evmVersion": "paris",
           "optimizer": {
@@ -310,18 +310,18 @@
         "../IERC20.sol"
       ],
       "versionPragmas": [
-        "^0.8.20"
+        ">=0.6.2"
       ],
       "artifacts": [
         "IERC20Metadata"
       ]
     },
     "/home/oleg/Documents/blockworks-hackathon/prediction-market/contracts/PredictionMarketFactory.sol": {
-      "lastModificationDate": 1752685574090,
+      "lastModificationDate": 1752731691387,
       "contentHash": "f56d319dc6049cbef6e8dbeb4dd15833",
       "sourceName": "contracts/PredictionMarketFactory.sol",
       "solcConfig": {
-        "version": "0.8.20",
+        "version": "0.8.24",
         "settings": {
           "evmVersion": "paris",
           "optimizer": {
@@ -363,11 +363,11 @@
       ]
     },
     "/home/oleg/Documents/blockworks-hackathon/prediction-market/contracts/PredictionMarket.sol": {
-      "lastModificationDate": 1752685574090,
+      "lastModificationDate": 1752731691385,
       "contentHash": "ff520cd94902861b43b635e2a9d97e6b",
       "sourceName": "contracts/PredictionMarket.sol",
       "solcConfig": {
-        "version": "0.8.20",
+        "version": "0.8.24",
         "settings": {
           "evmVersion": "paris",
           "optimizer": {
@@ -411,11 +411,11 @@
       ]
     },
     "/home/oleg/Documents/blockworks-hackathon/prediction-market/node_modules/prb-math/contracts/PRBMathUD60x18.sol": {
-      "lastModificationDate": 1752685883415,
+      "lastModificationDate": 1753419449638,
       "contentHash": "ea06e5964d6db368921b74c21e01999b",
       "sourceName": "prb-math/contracts/PRBMathUD60x18.sol",
       "solcConfig": {
-        "version": "0.8.20",
+        "version": "0.8.24",
         "settings": {
           "evmVersion": "paris",
           "optimizer": {
@@ -456,11 +456,11 @@
       ]
     },
     "/home/oleg/Documents/blockworks-hackathon/prediction-market/node_modules/prb-math/contracts/PRBMath.sol": {
-      "lastModificationDate": 1752685883432,
+      "lastModificationDate": 1753419449635,
       "contentHash": "e5a2346290b1f420ef28ce51340cf55e",
       "sourceName": "prb-math/contracts/PRBMath.sol",
       "solcConfig": {
-        "version": "0.8.20",
+        "version": "0.8.24",
         "settings": {
           "evmVersion": "paris",
           "optimizer": {
@@ -503,7 +503,7 @@
       "contentHash": "72fd502c3c9afaf8fc8931ad206f6ed0",
       "sourceName": "contracts/PredictionMarketNWay.sol",
       "solcConfig": {
-        "version": "0.8.20",
+        "version": "0.8.24",
         "settings": {
           "evmVersion": "paris",
           "optimizer": {
@@ -550,7 +550,7 @@
       "contentHash": "78c25524281d443041089b182667fb53",
       "sourceName": "contracts/PredictionMarketFactoryNWay.sol",
       "solcConfig": {
-        "version": "0.8.20",
+        "version": "0.8.24",
         "settings": {
           "evmVersion": "paris",
           "optimizer": {
