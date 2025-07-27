@@ -33,6 +33,7 @@
     "deploy:localhost": "hh deploy --network localhost",
     "deploy:sepolia": "hh deploy --network sepolia",
     "test": "hh test",
+    "test": "hh test --network hardhat",
     "test:unit": "hh test tests/unit",
     "test:staging": "hh test tests/staging"
   }
