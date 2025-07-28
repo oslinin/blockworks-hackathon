@@ -1,13 +1,13 @@
 import { useState, useEffect } from 'react';
 import { ethers } from 'ethers';
+import PredictionMarketFactory from '../abi/PredictionMarketFactory.json';
+import MintableERC20 from '../abi/MintableERC20.json';
+import contractAddresses from '../abi/contract-addresses.json';
 
-const USDC_ADDRESS = "0x5FbDB2315678afecb367f032d93F642f64180aa3"; // Local USDC
-const FACTORY_ADDRESS = "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512"; // Local Factory
-const FACTORY_ABI = [{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"user","type":"address"},{"indexed":true,"internalType":"address","name":"marketAddress","type":"address"},{"indexed":false,"internalType":"uint256","name":"amount","type":"uint256"},{"indexed":false,"internalType":"bool","name":"onYes","type":"bool"}],"name":"BetPlaced","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"marketAddress","type":"address"},{"indexed":false,"internalType":"string","name":"question","type":"string"},{"indexed":false,"internalType":"enum PredictionMarket.Category","name":"category","type":"uint8"}],"name":"MarketCreated","type":"event"},{"inputs":[{"internalType":"string","name":"_question","type":"string"},{"internalType":"enum PredictionMarket.Category","name":"_category","type":"uint8"},{"internalType":"address","name":"_oracle","type":"address"},{"internalType":"address","name":"_usdcToken","type":"address"},{"internalType":"string","name":"_yesTokenName","type":"string"},{"internalType":"string","name":"_yesTokenSymbol","type":"string"},{"internalType":"string","name":"_noTokenName","type":"string"},{"internalType":"string","name":"_noTokenSymbol","type":"string"}],"name":"createMarket","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"getAllMarkets","outputs":[{"internalType":"contract PredictionMarket[]","name":"","type":"address[]"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"enum PredictionMarket.Category","name":"_category","type":"uint8"}],"name":"getMarketsByCategory","outputs":[{"internalType":"contract PredictionMarket[]","name":"","type":"address[]"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"","type":"uint256"}],"name":"predictionMarkets","outputs":[{"internalType":"contract PredictionMarket","name":"","type":"address"}],"stateMutability":"view","type":"function"}];
-const USDC_ABI = [
-    "function balanceOf(address owner) view returns (uint256)",
-    "function approve(address spender, uint256 amount) returns (bool)",
-];
+const USDC_ADDRESS = contractAddresses.MintableERC20;
+const FACTORY_ADDRESS = contractAddresses.PredictionMarketFactory;
+const FACTORY_ABI = PredictionMarketFactory;
+const USDC_ABI = MintableERC20;
 
 export default function Test2Contract({ account, provider }) {
     const [usdcBalance, setUsdcBalance] = useState(null);

@@ -9,6 +9,7 @@ module.exports = async ({ deployments }) => {
         const PredictionMarketFactory = await deployments.get("PredictionMarketFactory");
         const PredictionMarketNWay = await deployments.get("PredictionMarketNWay");
         const PredictionMarketFactoryNWay = await deployments.get("PredictionMarketFactoryNWay");
+        const MintableERC20 = await deployments.get("MintableERC20");
 
         const frontendAbiDir = path.resolve(__dirname, "../../prediction-market-nodejs/abi");
 
@@ -36,11 +37,17 @@ module.exports = async ({ deployments }) => {
             JSON.stringify(PredictionMarketFactoryNWay.abi, null, 2)
         );
 
+        fs.writeFileSync(
+            path.join(frontendAbiDir, "MintableERC20.json"),
+            JSON.stringify(MintableERC20.abi, null, 2)
+        );
+
         const contractAddresses = {
             PredictionMarket: PredictionMarket.address,
             PredictionMarketFactory: PredictionMarketFactory.address,
             PredictionMarketNWay: PredictionMarketNWay.address,
             PredictionMarketFactoryNWay: PredictionMarketFactoryNWay.address,
+            MintableERC20: MintableERC20.address,
         };
 
         fs.writeFileSync(

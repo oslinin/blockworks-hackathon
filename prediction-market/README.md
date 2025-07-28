@@ -72,8 +72,7 @@ This document provides an overview of the prediction market smart contracts, the
 │   └── mint-usdc.js
 ├── test
 │   ├── staging
-│   │   ├── test.predictionmarket.staging.js
-│   │   └── test.usdc.interaction.js
+│   │   │   └── test.usdc.interaction.js
 │   └── unit
 │       ├── test.predictionmarket.js
 │       ├── testPredictionMarketFactory.js
@@ -97,10 +96,6 @@ This document provides an overview of the prediction market smart contracts, the
 
 ### Staging Tests
 
-*   **`test/staging/test.predictionmarket.staging.js`**:
-    *   Tests the interaction with a live USDC contract on a forked mainnet.
-    *   It impersonates a USDC whale to fund a test account.
-    *   It checks if a user can successfully place a bet using real USDC.
 *   **`test/staging/test.usdc.interaction.js`**:
     *   These tests run on a forked mainnet.
     *   It tests the full flow of creating a market, making a bet, and checking the probability changes.

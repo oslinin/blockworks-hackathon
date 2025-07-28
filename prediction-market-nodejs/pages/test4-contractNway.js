@@ -1,13 +1,13 @@
 import { useState, useEffect } from 'react';
 import { ethers } from 'ethers';
+import PredictionMarketFactoryNWay from '../abi/PredictionMarketFactoryNWay.json';
+import MintableERC20 from '../abi/MintableERC20.json';
+import contractAddresses from '../abi/contract-addresses.json';
 
-const USDC_ADDRESS = "0x5FbDB2315678afecb367f032d93F642f64180aa3"; // Local USDC
-const FACTORY_ADDRESS = "0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0"; // Local N-Way Factory
-const FACTORY_ABI = [{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"marketAddress","type":"address"},{"indexed":false,"internalType":"string","name":"question","type":"string"},{"indexed":false,"internalType":"enum PredictionMarketNWay.Category","name":"category","type":"uint8"}],"name":"MarketCreated","type":"event"},{"inputs":[{"internalType":"string","name":"_question","type":"string"},{"internalType":"enum PredictionMarketNWay.Category","name":"_category","type":"uint8"},{"internalType":"address","name":"_oracle","type":"address"},{"internalType":"address","name":"_usdcToken","type":"address"},{"internalType":"string[]","name":"_outcomeNames","type":"string[]"},{"internalType":"string[]","name":"_outcomeSymbols","type":"string[]"},{"internalType":"uint256","name":"_initialLiquidity","type":"uint256"}],"name":"createMarket","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"getAllMarkets","outputs":[{"internalType":"address[]","name":"","type":"address[]"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"enum PredictionMarketNWay.Category","name":"_category","type":"uint8"}],"name":"getMarketsByCategory","outputs":[{"internalType":"address[]","name":"","type":"address[]"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"","type":"uint256"}],"name":"markets","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"enum PredictionMarketNWay.Category","name":"","type":"uint8"},{"internalType":"uint256","name":"","type":"uint256"}],"name":"marketsByCategory","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"}];
-const USDC_ABI = [
-    "function balanceOf(address owner) view returns (uint256)",
-    "function approve(address spender, uint256 amount) returns (bool)",
-];
+const USDC_ADDRESS = contractAddresses.MintableERC20;
+const FACTORY_ADDRESS = contractAddresses.PredictionMarketFactoryNWay;
+const FACTORY_ABI = PredictionMarketFactoryNWay;
+const USDC_ABI = MintableERC20;
 
 export default function Test4ContractNWay({ account, provider }) {
     const [usdcBalance, setUsdcBalance] = useState(null);

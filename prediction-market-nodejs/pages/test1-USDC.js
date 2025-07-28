@@ -1,11 +1,10 @@
 import { useState, useEffect } from 'react';
 import { ethers } from 'ethers';
+import MintableERC20 from '../abi/MintableERC20.json';
+import contractAddresses from '../abi/contract-addresses.json';
 
-const USDC_ADDRESS = "0x5FbDB2315678afecb367f032d93F642f64180aa3"; // Local USDC
-const USDC_ABI = [
-    "function balanceOf(address owner) view returns (uint256)",
-    "function mint(address to, uint256 amount)",
-];
+const USDC_ADDRESS = contractAddresses.MintableERC20;
+const USDC_ABI = MintableERC20;
 
 export default function Test1USDC({ account, provider }) {
     const [usdcBalance, setUsdcBalance] = useState(null);

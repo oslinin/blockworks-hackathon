@@ -4,13 +4,12 @@ const { networkConfig, developmentChains } = require("../../helper-hardhat-confi
 
 console.log(`Running on network: ${network.name}`);
 
-!developmentChains.includes(network.name)
+developmentChains.includes(network.name)
     ? describe("PredictionMarket Staging Tests", function () {
           let owner, alice, oracle;
           let usdc, yesToken, noToken;
           let market, factory;
           const usdcAddress = "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48"; // Mainnet USDC
-          const factoryAddress = "0x6115e406dBE91D89068B904C3076B649b17a453d"; // From localhost deployment
 
           beforeEach(async function () {
               [owner, alice, oracle] = await ethers.getSigners();
@@ -31,8 +30,10 @@ console.log(`Running on network: ${network.name}`);
                 params: [ethWhaleAddress],
               });
 
-              // Get the deployed factory
-              factory = await ethers.getContractAt("PredictionMarketFactory", factoryAddress);
+              // Deploy a new factory
+              const PredictionMarketFactory = await ethers.getContractFactory("PredictionMarketFactory");
+              factory = await PredictionMarketFactory.deploy();
+              await factory.waitForDeployment();
 
               // The owner creates a market
               const marketAddress = await factory

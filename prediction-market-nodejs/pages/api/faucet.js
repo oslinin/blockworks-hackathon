@@ -1,16 +1,9 @@
 import { ethers } from 'ethers';
+import MintableERC20 from '../../abi/MintableERC20.json';
+import contractAddresses from '../../abi/contract-addresses.json';
 
-// --- IMPORTANT ---
-// This is for local development only.
-// The private key is from a default, zero-value Hardhat account.
-// DO NOT use this key or this pattern in a production environment.
-const DEPLOYER_PRIVATE_KEY = "0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80";
-const USDC_CONTRACT_ADDRESS = "0x5FbDB2315678afecb367f032d93F642f64180aa3"; // Adjust if your address changes
-const PROVIDER_URL = "http://127.0.0.1:8545"; // Local Hardhat node
-
-const USDC_ABI = [
-    "function mint(address to, uint256 amount)",
-];
+const usdcTokenAddress = contractAddresses.MintableERC20;
+const usdcTokenAbi = MintableERC20;
 
 export default async function handler(req, res) {
     if (req.method !== 'POST') {

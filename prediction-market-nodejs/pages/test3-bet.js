@@ -2,16 +2,14 @@ import { useState, useEffect } from 'react';
 import { ethers } from 'ethers';
 import MarketABI from '../abi/PredictionMarket.json';
 import FactoryABI from '../abi/PredictionMarketFactory.json';
+import MintableERC20 from '../abi/MintableERC20.json';
+import contractAddresses from '../abi/contract-addresses.json';
 
-const USDC_ADDRESS = "0x5FbDB2315678afecb367f032d93F642f64180aa3"; // Local USDC
-const FACTORY_ADDRESS = "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512"; // Local Factory
+const USDC_ADDRESS = contractAddresses.MintableERC20;
+const FACTORY_ADDRESS = contractAddresses.PredictionMarketFactory;
 const MARKET_ABI = MarketABI;
 const FACTORY_ABI = FactoryABI;
-const ERC20_ABI = [
-    "function balanceOf(address owner) view returns (uint256)",
-    "function approve(address spender, uint256 amount) returns (bool)",
-    "function mint(address to, uint256 amount)",
-];
+const ERC20_ABI = MintableERC20;
 
 export default function Test3Bet({ account, provider }) {
     const [usdcBalance, setUsdcBalance] = useState(null);
