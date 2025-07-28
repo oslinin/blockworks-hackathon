@@ -1,12 +1,11 @@
 import { useState, useEffect } from 'react';
 import { ethers } from 'ethers';
-import MarketABI from '../abi/PredictionMarket.json';
-import FactoryABI from '../abi/PredictionMarketFactory.json';
+import { getAddresses } from '../lib/addresses';
+import PredictionMarket from '../abi/PredictionMarket.json';
+import PredictionMarketFactory from '../abi/PredictionMarketFactory.json';
 
-const USDC_ADDRESS = "0x5FbDB2315678afecb367f032d93F642f64180aa3"; // Local USDC
-const FACTORY_ADDRESS = "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512"; // Local Factory
-const MARKET_ABI = MarketABI;
-const FACTORY_ABI = FactoryABI;
+const MARKET_ABI = PredictionMarket;
+const FACTORY_ABI = PredictionMarketFactory;
 const ERC20_ABI = [
     "function balanceOf(address owner) view returns (uint256)",
     "function approve(address spender, uint256 amount) returns (bool)",
@@ -20,10 +19,20 @@ export default function Test3Bet({ account, provider }) {
     const [noTokenAddress, setNoTokenAddress] = useState(null);
     const [yesTokenBalance, setYesTokenBalance] = useState(null);
     const [noTokenBalance, setNoTokenBalance] = useState(null);
-    const [isLocalhost, setIsLocalhost] = useState(false);
+    const [addresses, setAddresses] = useState(getAddresses("localhost"));
 
     const [yesProbability, setYesProbability] = useState(null);
     const [noProbability, setNoProbability] = useState(null);
+
+    useEffect(() => {
+        const setNetworkAddresses = async () => {
+            if (provider) {
+                const network = await provider.getNetwork();
+                setAddresses(getAddresses(network.name));
+            }
+        };
+        setNetworkAddresses();
+    }, [provider]);
 
     const placeBet = async (onYes) => {
         if (account && provider && marketAddress) {
@@ -31,7 +40,7 @@ export default function Test3Bet({ account, provider }) {
             const betAmountInWei = ethers.parseUnits(betAmount, 6);
             const signer = await provider.getSigner();
             const marketContract = new ethers.Contract(marketAddress, MARKET_ABI, signer);
-            const usdcContract = new ethers.Contract(USDC_ADDRESS, ERC20_ABI, signer);
+            const usdcContract = new ethers.Contract(addresses.USDC_ADDRESS, ERC20_ABI, signer);
 
             try {
                 // Approve the market to spend USDC
@@ -50,7 +59,7 @@ export default function Test3Bet({ account, provider }) {
 
     const updateBalances = async () => {
         if (account && provider) {
-            const usdcContract = new ethers.Contract(USDC_ADDRESS, ERC20_ABI, provider);
+            const usdcContract = new ethers.Contract(addresses.USDC_ADDRESS, ERC20_ABI, provider);
             const usdcBal = await usdcContract.balanceOf(account);
             setUsdcBalance(ethers.formatUnits(usdcBal, 6));
 
@@ -80,16 +89,9 @@ export default function Test3Bet({ account, provider }) {
     };
 
     useEffect(() => {
-        if (provider) {
-            const checkNetwork = async () => {
-                const network = await provider.getNetwork();
-                setIsLocalhost(network.chainId === 31337);
-            };
-            checkNetwork();
-        }
         if (account && provider) {
             const findMarket = async () => {
-                const factoryContract = new ethers.Contract(FACTORY_ADDRESS, FACTORY_ABI, provider);
+                const factoryContract = new ethers.Contract(addresses.FACTORY_ADDRESS, FACTORY_ABI, provider);
                 const markets = await factoryContract.getAllMarkets();
                 if (markets.length > 0) {
                     setMarketAddress(markets[0]);
@@ -97,7 +99,7 @@ export default function Test3Bet({ account, provider }) {
             };
             findMarket();
         }
-    }, [account, provider]);
+    }, [account, provider, addresses]);
 
     useEffect(() => {
         if (marketAddress) {
