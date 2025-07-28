@@ -8,6 +8,7 @@ gemini.md
 # Hardhat files
 /cache
 /artifacts
+yarn.lock
 
 # TypeChain files
 /typechain
