@@ -23,6 +23,8 @@ This project contains the Solidity smart contracts for a prediction market, buil
     *   `MintableERC20.sol`: A standard ERC20 token with a minting function.
 *   **`deploy/`**: Contains scripts for deploying the contracts.
 *   **`test/`**: Contains the test suite for the smart contracts.
+*   **`utils/`**: Contains utility scripts.
+*   **`scripts/`**: Contains scripts for interacting with the contracts.
 *   **`hardhat.config.js`**: The configuration file for Hardhat.
 
 ## Commands
