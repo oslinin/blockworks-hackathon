@@ -1,17 +1,21 @@
 const { network } = require("hardhat");
 
-module.exports = async ({ getNamedAccounts, deployments }) => {
-    const { deploy } = deployments;
+module.exports = async ({ getNamedAccounts, deployments, network }) => {
+    const { deploy, log } = deployments;
     const { deployer } = await getNamedAccounts();
-    const chainId = network.config.chainId;
 
-    if (chainId == 31337) {
-        await deploy("MintableERC20", {
-            from: deployer,
-            args: ["USD Coin", "USDC"],
-            log: true,
-        });
+    if (network.name === "sepolia") {
+        log("Skipping deployment of MintableERC20 on Sepolia");
+        return;
     }
+
+    log("Deploying MintableERC20...");
+    const usdc = await deploy("MintableERC20", {
+        from: deployer,
+        args: ["USD Coin", "USDC"],
+        log: true,
+    });
+    log(`MintableERC20 deployed at ${usdc.address}`);
 };
 
 module.exports.tags = ["all", "usdc"];

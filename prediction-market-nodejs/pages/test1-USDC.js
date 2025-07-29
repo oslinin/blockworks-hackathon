@@ -1,21 +1,31 @@
 import { useState, useEffect } from 'react';
 import { ethers } from 'ethers';
-
-const USDC_ADDRESS = "0x5FbDB2315678afecb367f032d93F642f64180aa3"; // Local USDC
-const USDC_ABI = [
-    "function balanceOf(address owner) view returns (uint256)",
-    "function mint(address to, uint256 amount)",
-];
+import { useNetwork } from '../context/NetworkContext';
 
 export default function Test1USDC({ account, provider }) {
+    const { network } = useNetwork();
+    const [usdcAddress, setUsdcAddress] = useState(null);
+    const [usdcAbi, setUsdcAbi] = useState(null);
     const [usdcBalance, setUsdcBalance] = useState(null);
     const [isLocalhost, setIsLocalhost] = useState(false);
-
+    const [nonce, setNonce] = useState(0);
     const [minting, setMinting] = useState(false);
 
+    useEffect(() => {
+        const loadContractData = async () => {
+            if (network) {
+                const addresses = await import(`../abi/${network}/contract-addresses.json`);
+                const abi = await import(`../abi/${network}/MintableERC20.json`);
+                setUsdcAddress(addresses.MintableERC20);
+                setUsdcAbi(abi.default);
+            }
+        };
+        loadContractData();
+    }, [network]);
+
     const updateBalance = async () => {
-        if (account && provider) {
-            const usdcContract = new ethers.Contract(USDC_ADDRESS, USDC_ABI, provider);
+        if (account && provider && usdcAddress && usdcAbi) {
+            const usdcContract = new ethers.Contract(usdcAddress, usdcAbi, provider);
             const balance = await usdcContract.balanceOf(account);
             setUsdcBalance(ethers.formatUnits(balance, 6));
         }
@@ -30,7 +40,7 @@ export default function Test1USDC({ account, provider }) {
                     headers: {
                         'Content-Type': 'application/json',
                     },
-                    body: JSON.stringify({ address: account }),
+                    body: JSON.stringify({ address: account, network: network }),
                 });
 
                 const data = await response.json();
@@ -39,11 +49,9 @@ export default function Test1USDC({ account, provider }) {
                     throw new Error(data.message || "Something went wrong with the faucet.");
                 }
 
-                // Wait for the transaction to be mined
                 await provider.waitForTransaction(data.txHash);
-
-                // Update balance
                 await updateBalance();
+                setNonce(n => n + 1);
 
             } catch (error) {
                 console.error("Error using faucet:", error);
@@ -56,15 +64,15 @@ export default function Test1USDC({ account, provider }) {
     useEffect(() => {
         if (provider) {
             const checkNetwork = async () => {
-                const network = await provider.getNetwork();
-                setIsLocalhost(network.chainId === 31337n);
+                const net = await provider.getNetwork();
+                setIsLocalhost(net.chainId === 31337n);
             };
             checkNetwork();
         }
         if (account && provider) {
             updateBalance();
         }
-    }, [account, provider]);
+    }, [account, provider, nonce, usdcAddress, usdcAbi]);
 
     return (
         <div>
@@ -72,7 +80,7 @@ export default function Test1USDC({ account, provider }) {
             {account ? (
                 <div>
                     <p>Connected account: {account}</p>
-                    <p>USDC Contract Address: {USDC_ADDRESS}</p>
+                    <p>USDC Contract Address: {usdcAddress}</p>
                     <p>USDC Balance: {usdcBalance}</p>
                     {isLocalhost && (
                         <div>
@@ -80,6 +88,16 @@ export default function Test1USDC({ account, provider }) {
                                 {minting ? 'Minting...' : 'Mint 100 USDC'}
                             </button>
                             <p style={{ fontSize: '0.8em', color: '#666' }}>(Only available on localhost)</p>
+                        </div>
+                    )}
+                    {network === 'sepolia' && (
+                        <div>
+                            <h3>Sepolia Faucets</h3>
+                            <ul>
+                                <li><a href="https://faucet.circle.com/" target="_blank" rel="noopener noreferrer">Circle USDC Faucet</a></li>
+                                <li><a href="https://faucetlink.to/sepolia" target="_blank" rel="noopener noreferrer">Sepolia ETH Faucet 1</a></li>
+                                <li><a href="https://docs.metamask.io/developer-tools/faucet/" target="_blank" rel="noopener noreferrer">Sepolia ETH Faucet 2</a></li>
+                            </ul>
                         </div>
                     )}
                 </div>

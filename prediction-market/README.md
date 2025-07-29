@@ -134,7 +134,7 @@ This file tests the `PredictionMarketFactoryNWay.sol` contract. It covers:
 
 ## Deployment
 
-To deploy the contracts, you can use the `deploy` scripts in the `deploy/` directory.
+To deploy the contracts, you can use the `deploy` scripts in the `deploy/` directory. The deployment process also handles copying the contract ABIs and addresses to the frontend application.
 
 ### Localhost
 
@@ -142,31 +142,16 @@ To deploy to a local network, run:
 ```bash
 yarn hardhat deploy --network localhost
 ```
+This will deploy the contracts and write the ABI and address files to the `prediction-market-nodejs/abi/localhost/` directory.
 
 ### Sepolia Testnet
 
-To deploy to the Sepolia testnet, run:
+To deploy to the Sepolia testnet, ensure you have an `INFURA_API_KEY` and a `SEPOLIA_PRIVATE_KEY` set in your `.env` file. Then, run:
 ```bash
 yarn hardhat deploy --network sepolia
 ```
-
-### Sepolia Deployments
-
-You can get test USDC from the [Circle faucet](https://faucet.circle.com/).
-
-The following contracts have been deployed to the Sepolia testnet:
-
-*   **PredictionMarket:** [`0xD4636d7CC71bDd3e01a3AF9A65C110046a3FE06E`](https://sepolia.etherscan.io/address/0xD4636d7CC71bDd3e01a3AF9A65C110046a3FE06E)
-*   **PredictionMarketFactory:** [`0x14BF6D8f65b9e4b11919C3E9D4aC53C7b6bE21f0`](https://sepolia.etherscan.io/address/0x14BF6D8f65b9e4b11919C3E9D4aC53C7b6bE21f0)
-*   **PredictionMarketFactoryNWay:** [`0x909F71Fc1B1cdb6Bf90d0ffF3C11Fd1aA4Ef98d6`](https://sepolia.etherscan.io/address/0x909F71Fc1B1cdb6Bf90d0ffF3C11Fd1aA4Ef98d6)
-*   **PredictionMarketNWay:** [`0xCa90fA9E2Ca9B1113f6811A6832e082c3DD2C906`](https://sepolia.etherscan.io/address/0xCa90fA9E2Ca9B1113f6811A6832e082c3DD2C906)
-
-To deploy to a live network (e.g., mainnet or a testnet), you will need to configure the network in `hardhat.config.js` and provide an account with sufficient funds.
+This will deploy the contracts and write the ABI and address files to the `prediction-market-nodejs/abi/sepolia/` directory.
 
 ## Copying ABI to Frontend
 
-After deploying the contracts, you need to copy the ABI (Application Binary Interface) and contract addresses to the frontend application. This can be done automatically by running the `04-copy-to-frontend.js` script:
-```bash
-yarn hardhat deploy --network localhost
-```
-This script will copy the necessary files to the `prediction-market-nodejs/abi/` directory.
+The `04-copy-to-frontend.js` deploy script automatically copies the necessary ABI and address files to the frontend for the specified network. When you run `yarn hardhat deploy --network <network_name>`, the script creates a corresponding `<network_name>` directory inside `prediction-market-nodejs/abi/` and populates it with the contract data. This allows the frontend to dynamically load the correct contract information based on the selected network.

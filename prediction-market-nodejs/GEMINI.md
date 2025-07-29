@@ -6,12 +6,14 @@ This document provides an overview of the Next.js frontend for the prediction ma
 
 This is a Next.js application that provides a user interface for interacting with the prediction market smart contracts.
 
-## Key Technologies
+## Network-Specific Contract Handling
 
-*   **Next.js**: The React framework for building the user interface.
-*   **React**: The JavaScript library for building user interfaces.
-*   **Ethers.js**: A library for interacting with the Ethereum blockchain and smart contracts.
-*   **Tailwind CSS**: A utility-first CSS framework for styling the application.
+The application is designed to work with both `localhost` and `sepolia` networks. It dynamically loads the appropriate contract addresses and ABIs based on the network selected in the navbar dropdown.
+
+-   **On `localhost`**: The application interacts with a `MintableERC20` contract, which allows for easy testing and development.
+-   **On `sepolia`**: The application uses the official USDC contract. The backend deployment scripts provide the frontend with the correct address and a standard ERC20 ABI.
+
+This setup ensures a seamless experience for both local development and testnet interaction.
 
 ## Project Structure
 

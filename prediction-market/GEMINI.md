@@ -6,12 +6,9 @@ This document provides an overview of the prediction market smart contracts, the
 
 This project contains the Solidity smart contracts for a prediction market, built using Hardhat.
 
-## Key Technologies
+## USDC Contract
 
-*   **Solidity**: The language used for writing the smart contracts.
-*   **Hardhat**: The development environment for compiling, testing, and deploying the contracts.
-*   **OpenZeppelin Contracts**: Used for standard and secure contract implementations (e.g., ERC20).
-*   **PRBMath**: A library for advanced fixed-point math operations.
+For development and testing on `localhost`, a `MintableERC20.sol` contract is used. This allows for easy minting of test tokens. When deploying to the `sepolia` testnet, the deployment scripts automatically switch to the official USDC contract address and use a standard ERC20 ABI, which is then provided to the frontend. This ensures that the application uses the real USDC on testnet while maintaining a flexible and easy-to-use setup for local development.
 
 ## Project Structure
 

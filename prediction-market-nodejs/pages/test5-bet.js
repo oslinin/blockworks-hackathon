@@ -1,35 +1,43 @@
 import { useState, useEffect } from 'react';
 import { ethers } from 'ethers';
-import MarketABI from '../abi/PredictionMarketNWay.json';
-import FactoryABI from '../abi/PredictionMarketFactoryNWay.json';
-
-const USDC_ADDRESS = "0x5FbDB2315678afecb367f032d93F642f64180aa3"; // Local USDC
-const FACTORY_ADDRESS = "0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0"; // Local N-Way Factory
-const MARKET_ABI = MarketABI;
-const FACTORY_ABI = [{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"marketAddress","type":"address"},{"indexed":false,"internalType":"string","name":"question","type":"string"},{"indexed":false,"internalType":"enum PredictionMarketNWay.Category","name":"category","type":"uint8"}],"name":"MarketCreated","type":"event"},{"inputs":[{"internalType":"string","name":"_question","type":"string"},{"internalType":"enum PredictionMarketNWay.Category","name":"_category","type":"uint8"},{"internalType":"address","name":"_oracle","type":"address"},{"internalType":"address","name":"_usdcToken","type":"address"},{"internalType":"string[]","name":"_outcomeNames","type":"string[]"},{"internalType":"string[]","name":"_outcomeSymbols","type":"string[]"},{"internalType":"uint256","name":"_initialLiquidity","type":"uint256"}],"name":"createMarket","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"getAllMarkets","outputs":[{"internalType":"address[]","name":"","type":"address[]"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"enum PredictionMarketNWay.Category","name":"_category","type":"uint8"}],"name":"getMarketsByCategory","outputs":[{"internalType":"address[]","name":"","type":"address[]"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"","type":"uint256"}],"name":"markets","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"enum PredictionMarketNWay.Category","name":"","type":"uint8"},{"internalType":"uint256","name":"","type":"uint256"}],"name":"marketsByCategory","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"}];
-const ERC20_ABI = [
-    "function balanceOf(address owner) view returns (uint256)",
-    "function approve(address spender, uint256 amount) returns (bool)",
-    "function mint(address to, uint256 amount)",
-    "function symbol() view returns (string)",
-];
+import { useNetwork } from '../context/NetworkContext';
 
 export default function Test5Bet({ account, provider }) {
+    const { network } = useNetwork();
+    const [addresses, setAddresses] = useState(null);
+    const [marketAbi, setMarketAbi] = useState(null);
+    const [factoryAbi, setFactoryAbi] = useState(null);
+    const [erc20Abi, setErc20Abi] = useState(null);
     const [usdcBalance, setUsdcBalance] = useState(null);
     const [marketAddress, setMarketAddress] = useState(null);
     const [outcomeTokens, setOutcomeTokens] = useState([]);
     const [probabilities, setProbabilities] = useState([]);
 
+    useEffect(() => {
+        const loadContractData = async () => {
+            if (network) {
+                const addrs = await import(`../abi/${network}/contract-addresses.json`);
+                const market = await import(`../abi/${network}/PredictionMarketNWay.json`);
+                const factory = await import(`../abi/${network}/PredictionMarketFactoryNWay.json`);
+                const erc20 = await import(`../abi/${network}/MintableERC20.json`);
+                setAddresses(addrs.default);
+                setMarketAbi(market.default);
+                setFactoryAbi(factory.default);
+                setErc20Abi(erc20.default);
+            }
+        };
+        loadContractData();
+    }, [network]);
+
     const placeBet = async (outcomeIndex) => {
-        if (account && provider && marketAddress) {
+        if (account && provider && marketAddress && addresses && erc20Abi) {
             const betAmount = "1"; // 1 USDC
             const betAmountInWei = ethers.parseUnits(betAmount, 6);
             const signer = await provider.getSigner();
-            const marketContract = new ethers.Contract(marketAddress, MARKET_ABI, signer);
-            const usdcContract = new ethers.Contract(USDC_ADDRESS, ERC20_ABI, signer);
+            const marketContract = new ethers.Contract(marketAddress, marketAbi, signer);
+            const usdcContract = new ethers.Contract(addresses.MintableERC20, erc20Abi, signer);
 
             try {
-                // Approve the market to spend USDC
                 const approveUsdcTx = await usdcContract.approve(marketAddress, betAmountInWei);
                 await approveUsdcTx.wait();
 
@@ -44,21 +52,20 @@ export default function Test5Bet({ account, provider }) {
     };
 
     const updateBalances = async () => {
-        if (account && provider) {
-            const usdcContract = new ethers.Contract(USDC_ADDRESS, ERC20_ABI, provider);
+        if (account && provider && addresses && erc20Abi && marketAddress) {
+            const usdcContract = new ethers.Contract(addresses.MintableERC20, erc20Abi, provider);
             const usdcBal = await usdcContract.balanceOf(account);
             setUsdcBalance(ethers.formatUnits(usdcBal, 6));
 
             if (marketAddress) {
-                const marketContract = new ethers.Contract(marketAddress, MARKET_ABI, provider);
+                const marketContract = new ethers.Contract(marketAddress, marketAbi, provider);
                 const probs = await marketContract.getProbabilities();
                 setProbabilities(probs.map(p => ethers.formatUnits(p, 18)));
 
                 const tokenAddresses = [];
-                const tokenBalances = [];
                 for (let i = 0; i < probs.length; i++) {
                     const tokenAddr = await marketContract.outcomeTokens(i);
-                    const tokenContract = new ethers.Contract(tokenAddr, ERC20_ABI, provider);
+                    const tokenContract = new ethers.Contract(tokenAddr, erc20Abi, provider);
                     const tokenBal = await tokenContract.balanceOf(account);
                     const symbol = await tokenContract.symbol();
                     tokenAddresses.push({ address: tokenAddr, balance: ethers.formatUnits(tokenBal, 18), symbol: symbol });
@@ -69,9 +76,9 @@ export default function Test5Bet({ account, provider }) {
     };
 
     useEffect(() => {
-        if (account && provider) {
+        if (account && provider && addresses && factoryAbi) {
             const findMarket = async () => {
-                const factoryContract = new ethers.Contract(FACTORY_ADDRESS, FACTORY_ABI, provider);
+                const factoryContract = new ethers.Contract(addresses.PredictionMarketFactoryNWay, factoryAbi, provider);
                 const markets = await factoryContract.getAllMarkets();
                 if (markets.length > 0) {
                     setMarketAddress(markets[markets.length - 1]); // Use the latest market
@@ -79,7 +86,7 @@ export default function Test5Bet({ account, provider }) {
             };
             findMarket();
         }
-    }, [account, provider]);
+    }, [account, provider, addresses, factoryAbi]);
 
     useEffect(() => {
         if (marketAddress) {

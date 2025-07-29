@@ -1,45 +1,47 @@
 import { useState, useEffect } from 'react';
 import { ethers } from 'ethers';
-import { getAddresses } from '../lib/addresses';
-
-const FACTORY_ABI = [{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"user","type":"address"},{"indexed":true,"internalType":"address","name":"marketAddress","type":"address"},{"indexed":false,"internalType":"uint256","name":"amount","type":"uint256"},{"indexed":false,"internalType":"bool","name":"onYes","type":"bool"}],"name":"BetPlaced","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"marketAddress","type":"address"},{"indexed":false,"internalType":"string","name":"question","type":"string"},{"indexed":false,"internalType":"enum PredictionMarket.Category","name":"category","type":"uint8"}],"name":"MarketCreated","type":"event"},{"inputs":[{"internalType":"string","name":"_question","type":"string"},{"internalType":"enum PredictionMarket.Category","name":"_category","type":"uint8"},{"internalType":"address","name":"_oracle","type":"address"},{"internalType":"address","name":"_usdcToken","type":"address"},{"internalType":"string","name":"_yesTokenName","type":"string"},{"internalType":"string","name":"_yesTokenSymbol","type":"string"},{"internalType":"string","name":"_noTokenName","type":"string"},{"internalType":"string","name":"_noTokenSymbol","type":"string"}],"name":"createMarket","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"getAllMarkets","outputs":[{"internalType":"contract PredictionMarket[]","name":"","type":"address[]"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"enum PredictionMarket.Category","name":"_category","type":"uint8"}],"name":"getMarketsByCategory","outputs":[{"internalType":"contract PredictionMarket[]","name":"","type":"address[]"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"","type":"uint256"}],"name":"predictionMarkets","outputs":[{"internalType":"contract PredictionMarket","name":"","type":"address"}],"stateMutability":"view","type":"function"}];
-const USDC_ABI = [
-    "function balanceOf(address owner) view returns (uint256)",
-    "function approve(address spender, uint256 amount) returns (bool)",
-];
+import { useNetwork } from '../context/NetworkContext';
 
 export default function Test2Contract({ account, provider }) {
+    const { network } = useNetwork();
+    const [addresses, setAddresses] = useState(null);
+    const [factoryAbi, setFactoryAbi] = useState(null);
+    const [usdcAbi, setUsdcAbi] = useState(null);
     const [usdcBalance, setUsdcBalance] = useState(null);
     const [marketAddress, setMarketAddress] = useState(null);
     const [isMarketDeployed, setIsMarketDeployed] = useState(false);
-    const [addresses, setAddresses] = useState(getAddresses("localhost"));
 
     useEffect(() => {
-        const setNetworkAddresses = async () => {
-            if (provider) {
-                const network = await provider.getNetwork();
-                setAddresses(getAddresses(network.name));
+        const loadContractData = async () => {
+            if (network) {
+                const addrs = await import(`../abi/${network}/contract-addresses.json`);
+                const factory = await import(`../abi/${network}/PredictionMarketFactory.json`);
+                const usdc = await import(`../abi/${network}/MintableERC20.json`);
+                setAddresses(addrs.default);
+                setFactoryAbi(factory.default);
+                setUsdcAbi(usdc.default);
             }
         };
-        setNetworkAddresses();
-    }, [provider]);
+        loadContractData();
+    }, [network]);
 
     const deployMarket = async () => {
-        if (account && provider) {
+        if (account && provider && addresses && factoryAbi && usdcAbi) {
             const signer = await provider.getSigner();
-            const factoryContract = new ethers.Contract(addresses.FACTORY_ADDRESS, FACTORY_ABI, signer);
-            const usdcContract = new ethers.Contract(addresses.USDC_ADDRESS, USDC_ABI, signer);
+            const factoryContract = new ethers.Contract(addresses.PredictionMarketFactory, factoryAbi, signer);
+            const usdcContract = new ethers.Contract(addresses.MintableERC20, usdcAbi, signer);
 
+            const approveAmount = network === 'sepolia' ? ethers.parseUnits("1", 6) : ethers.parseUnits("500", 6);
             try {
                 // Approve the factory to spend USDC
-                const approveTx = await usdcContract.approve(addresses.FACTORY_ADDRESS, ethers.parseUnits("500", 6));
+                const approveTx = await usdcContract.approve(addresses.PredictionMarketFactory, approveAmount);
                 await approveTx.wait();
 
                 const tx = await factoryContract.createMarket(
                     "Trump vs Biden 2020",
                     0, // ELECTION
                     account, // Oracle
-                    addresses.USDC_ADDRESS,
+                    addresses.MintableERC20,
                     "Yes Token",
                     "YES",
                     "No Token",
@@ -67,18 +69,16 @@ export default function Test2Contract({ account, provider }) {
     };
 
     useEffect(() => {
-        if (account && provider) {
+        if (account && provider && addresses && usdcAbi) {
             const getUsdcBalance = async () => {
-                const usdcContract = new ethers.Contract(addresses.USDC_ADDRESS, USDC_ABI, provider);
+                const usdcContract = new ethers.Contract(addresses.MintableERC20, usdcAbi, provider);
                 const balance = await usdcContract.balanceOf(account);
                 setUsdcBalance(ethers.formatUnits(balance, 6));
             };
 
             const findMarket = async () => {
-                const factoryContract = new ethers.Contract(addresses.FACTORY_ADDRESS, FACTORY_ABI, provider);
+                const factoryContract = new ethers.Contract(addresses.PredictionMarketFactory, factoryAbi, provider);
                 const markets = await factoryContract.getAllMarkets();
-                // This is a simplified check. A real app would need a more robust way
-                // to identify a specific market.
                 if (markets.length > 0) {
                     setMarketAddress(markets[0]);
                     setIsMarketDeployed(true);
@@ -88,7 +88,7 @@ export default function Test2Contract({ account, provider }) {
             getUsdcBalance();
             findMarket();
         }
-    }, [account, provider, addresses]);
+    }, [account, provider, addresses, factoryAbi, usdcAbi]);
 
     return (
         <div>
