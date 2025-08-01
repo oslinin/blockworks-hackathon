@@ -1,7 +1,7 @@
 {
-  "PredictionMarket": "0xD4636d7CC71bDd3e01a3AF9A65C110046a3FE06E",
-  "PredictionMarketFactory": "0x14BF6D8f65b9e4b11919C3E9D4aC53C7b6bE21f0",
-  "PredictionMarketNWay": "0xCa90fA9E2Ca9B1113f6811A6832e082c3DD2C906",
-  "PredictionMarketFactoryNWay": "0x909F71Fc1B1cdb6Bf90d0ffF3C11Fd1aA4Ef98d6",
+  "PredictionMarket": "0x9aB83086c41e23cd3B2f2620C3d3A5Cdb3671936",
+  "PredictionMarketFactory": "0x9602C4D10A761F6090594c35eE9f44E4ffd96292",
+  "PredictionMarketNWay": "0x4e1127B77Ae728AF1e150a052692bd38a7b22c72",
+  "PredictionMarketFactoryNWay": "0x267C9073291eCd60B6b9A575A5f46F51F8aD645F",
   "MintableERC20": "0x1c7D4B196Cb0C7B01d743Fbc6116a902379C7238"
 }

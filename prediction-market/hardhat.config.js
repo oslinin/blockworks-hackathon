@@ -14,17 +14,17 @@ require("dotenv").config();
 const MAINNET_RPC_URL =
     process.env.MAINNET_RPC_URL ||
     process.env.ALCHEMY_MAINNET_RPC_URL ||
-    "https://eth-mainnet.alchemyapi.io/v2/your-api-key"
+    "https://eth-mainnet.alchemyapi.io/v2/ZnCEzSyp9ichJgoz7NJH0ZKkr9mspFQM"
 const SEPOLIA_RPC_URL =
-    process.env.SEPOLIA_RPC_URL || "https://eth-sepolia.g.alchemy.com/v2/YOUR-API-KEY"
+    process.env.SEPOLIA_RPC_URL || "https://eth-sepolia.g.alchemy.com/v2/ZnCEzSyp9ichJgoz7NJH0ZKkr9mspFQM"
 const POLYGON_MAINNET_RPC_URL =
-    process.env.POLYGON_MAINNET_RPC_URL || "https://polygon-mainnet.alchemyapi.io/v2/your-api-key"
-const PRIVATE_KEY = process.env.PRIVATE_KEY || "0x"
+    process.env.POLYGON_MAINNET_RPC_URL || "https://eth-sepolia.g.alchemy.com/v2/ZnCEzSyp9ichJgoz7NJH0ZKkr9mspFQM"
+const PRIVATE_KEY = process.env.PRIVATE_KEY || "0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80"
 // optional
-const MNEMONIC = process.env.MNEMONIC || "your mnemonic"
+const MNEMONIC = process.env.MNEMONIC || "0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80"
 
 // Your API key for Etherscan, obtain one at https://etherscan.io/
-const ETHERSCAN_API_KEY = process.env.ETHERSCAN_API_KEY || "Your etherscan API key"
+const ETHERSCAN_API_KEY = process.env.ETHERSCAN_API_KEY || "M6A22IGYF2JXDPVUKJN44S2RZA7IEAFP7N"
 const POLYGONSCAN_API_KEY = process.env.POLYGONSCAN_API_KEY || "Your polygonscan API key"
 const REPORT_GAS = process.env.REPORT_GAS || false
 

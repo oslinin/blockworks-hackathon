@@ -96,6 +96,11 @@
         "internalType": "string",
         "name": "_noTokenSymbol",
         "type": "string"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_initialLiquidity",
+        "type": "uint256"
       }
     ],
     "name": "createMarket",
