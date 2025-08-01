@@ -7,7 +7,7 @@
     "PredictionMarketFactoryFixedModel": "0x31De30e2621D5AECd951F2661e2D03CDA27e2e83",
     "PredictionMarketFixedModel": "0xE3e7A4B35574Ce4b9Bc661cD93e8804Da548932a",
     "PredictionMarketFactoryNWayFixedModel": "0xdb88CFC18875e3eD6797de31dfAae31F942231F2",
-    "PredictionMarketNWayFixedModel": "0xE1165C689C0c3e9642cA7606F5287e708d846206",
+    "PredictionMarketNWayFixedModel": "0xE1165C689C3e9642cA7606F5287e708d846206",
     "USDC": "0xFEE2d383Ee292283eC43bdf0fa360296BE1e1149"
   },
   "sepolia": {

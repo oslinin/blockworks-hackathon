@@ -84,6 +84,16 @@ export default function Test1USDC() {
                     ) : (
                         <Button onClick={mintUsdc}>Mint 1000 USDC (Localhost only)</Button>
                     )}
+                    {network && network.chainId.toString() === '11155111' && (
+                        <div>
+                            <h3>Sepolia Faucets</h3>
+                            <ul>
+                                <li><a href="https://faucet.circle.com/" target="_blank" rel="noopener noreferrer">Circle USDC Faucet</a></li>
+                                <li><a href="https://faucetlink.to/sepolia" target="_blank" rel="noopener noreferrer">Sepolia ETH Faucet 1</a></li>
+                                <li><a href="https://docs.metamask.io/developer-tools/faucet/" target="_blank" rel="noopener noreferrer">Sepolia ETH Faucet 2</a></li>
+                            </ul>
+                        </div>
+                    )}
                 </div>
             ) : (
                 <p>Please connect your wallet.</p>

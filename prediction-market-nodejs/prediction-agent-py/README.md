@@ -1,6 +1,6 @@
-# Prediction Agent
+# YesNo Agent
 
-This directory contains a prediction market agent built with the Google Agent Development Kit (ADK).
+This directory contains a YesNo agent built with the Google Agent Development Kit (ADK).
 
 ## Setup
 

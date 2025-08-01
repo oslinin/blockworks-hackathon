@@ -45,7 +45,6 @@ export default function Test5Bet() {
             const usdcContract = new ethers.Contract(addresses.USDC, USDC_ABI, signer);
 
             try {
-                // Approve the market to spend USDC
                 const approveUsdcTx = await usdcContract.approve(marketAddress, betAmountInWei);
                 await approveUsdcTx.wait();
 
