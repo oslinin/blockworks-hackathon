@@ -9,15 +9,12 @@ gemini.md
 # Hardhat files
 /cache
 /artifacts
-<<<<<<< HEAD
 #*
-=======
 yarn.lock
 #helper*
 .#helper*
 
 .env~
->>>>>>> bc9187a3c59ce80f9536c83efc586581c7cdd460
 # TypeChain files
 /typechain
 /typechain-types

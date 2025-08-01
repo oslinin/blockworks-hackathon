@@ -1,23 +1,16 @@
-# Gemini - Prediction Market Backend
+# Gemini - YesNo Backend
 
-This document provides an overview of the prediction market smart contracts, the development environment, and key scripts.
+This document provides an overview of the YesNo smart contracts, the development environment, and key scripts.
 
 ## Project Overview
 
-This project contains the Solidity smart contracts for a prediction market, built using Hardhat. It supports two types of market models:
+This project contains the Solidity smart contracts for a YesNo market, built using Hardhat. It supports two types of market models:
 - **Automated Market Maker (AMM):** Uses a constant product formula to determine token prices and probabilities.
 - **Fixed-Model:** Uses a fixed-odds system where payouts are determined by the ratio of bets on each outcome.
 
 ## USDC Contract
 
-<<<<<<< HEAD
-*   **Solidity**: The language used for writing the smart contracts.
-*   **Hardhat**: The development environment for compiling, testing, and deploying the contracts.
-*   **OpenZeppelin Contracts**: Used for standard and secure contract implementations (e.g., ERC20).
-*   **PRBMath**: A library for advanced fixed-point math operations, used in the AMM model.
-=======
 For development and testing on `localhost`, a `MintableERC20.sol` contract is used. This allows for easy minting of test tokens. When deploying to the `sepolia` testnet, the deployment scripts automatically switch to the official USDC contract address and use a standard ERC20 ABI, which is then provided to the frontend. This ensures that the application uses the real USDC on testnet while maintaining a flexible and easy-to-use setup for local development.
->>>>>>> bc9187a3c59ce80f9536c83efc586581c7cdd460
 
 ## Project Structure
 

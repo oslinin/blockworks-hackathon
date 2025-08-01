@@ -32,17 +32,11 @@ module.exports = {
     defaultNetwork: "hardhat",
     networks: {
         hardhat: {
-<<<<<<< HEAD
-=======
             // // If you want to do some forking, uncomment this
             forking: {
               url: MAINNET_RPC_URL
             },
->>>>>>> bc9187a3c59ce80f9536c83efc586581c7cdd460
             chainId: 31337,
-            forking: {
-                url: MAINNET_RPC_URL,
-            },
         },
         localhost: {
             chainId: 31337,

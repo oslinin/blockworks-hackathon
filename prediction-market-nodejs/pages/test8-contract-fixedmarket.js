@@ -37,7 +37,7 @@ export default function Test8ContractFixedModel() {
             const factoryContract = new ethers.Contract(addresses.PredictionMarketFactoryFixedModel, FACTORY_ABI, signer);
 
             try {
-                const tx = await factoryContract.createFixedModelMarket(
+                const tx = await factoryContract.createMarket(
                     "Will the price of BTC be above $70,000 on Dec 31, 2024?",
                     2, // CRYPTO
                     account, // Oracle
