@@ -1,7 +1,24 @@
 {
-  "PredictionMarket": "0x1Ae0817d98a8A222235A2383422e1A1c03d73e3a",
-  "PredictionMarketFactory": "0xbdB493827007eE26c16F10F6EABad6E97D9ead7D",
-  "PredictionMarketNWay": "0xB167Cb0b51983858EEc1E1716dF18a59A1fe35B4",
-  "PredictionMarketFactoryNWay": "0xfde41A17EBfA662867DA7324C0Bf5810623Cb3F8",
-  "MintableERC20": "0xd3873FDF150b3fFFb447d3701DFD234DF452F367"
+  "localhost": {
+    "PredictionMarket": "0xC6c0E14c02C2dBd4f116230f01D03836620167B9",
+    "PredictionMarketFactory": "0xf0014CBe67b3aB638bdaA2e2Cb1B531935829E50",
+    "PredictionMarketNWay": "0x96e74d78A9EC0dB11C8c9fF2FD93bC98D8895B5A",
+    "PredictionMarketFactoryNWay": "0xD0725945859175dabd070855bC3F1c37a3aF605F",
+    "PredictionMarketFactoryFixedModel": "0x31De30e2621D5AECd951F2661e2D03CDA27e2e83",
+    "PredictionMarketFixedModel": "0xE3e7A4B35574Ce4b9Bc661cD93e8804Da548932a",
+    "PredictionMarketFactoryNWayFixedModel": "0xdb88CFC18875e3eD6797de31dfAae31F942231F2",
+    "PredictionMarketNWayFixedModel": "0xE1165C689C0c3e9642cA7606F5287e708d846206",
+    "USDC": "0xFEE2d383Ee292283eC43bdf0fa360296BE1e1149"
+  },
+  "sepolia": {
+    "PredictionMarket": "0x47968FF4877be3729Abc2899c4653366E70927F3",
+    "PredictionMarketFactory": "0x76ddB4cfc2C98f9cfb80F8a8BE606623754B81ec",
+    "PredictionMarketNWay": "0x08A8dB3d2645cec08DB5f77Fe9D239672d971EdD",
+    "PredictionMarketFactoryNWay": "0xd3C4280d300917DED210D810fb3E2d99A56A509a",
+    "PredictionMarketFactoryFixedModel": "0x9b61E083185b94DB262AA74F2A02dD527bE36186",
+    "PredictionMarketFixedModel": "0x7BDd3a6144d715f4Ac91e80E7Bf1183C50D2d880",
+    "PredictionMarketFactoryNWayFixedModel": "0x2B385e43C4c6faB628e0d6FF520cc620D1ea7Ba3",
+    "PredictionMarketNWayFixedModel": "0x3C130Dbe57DcEa0b0082424D7C1AfE1Df6De0397",
+    "USDC": "0x1c7D4B196Cb0C7B01d743Fbc6116a902379C7238"
+  }
 }

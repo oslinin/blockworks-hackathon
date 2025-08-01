@@ -46,7 +46,8 @@ developmentChains.includes(network.name)
                       "Yes Token",
                       "YES",
                       "No Token",
-                      "NO"
+                      "NO",
+                      ethers.parseUnits("500", 18)
                   );
 
               await factory.connect(owner).createMarket(
@@ -57,7 +58,8 @@ developmentChains.includes(network.name)
                   "Yes Token",
                   "YES",
                   "No Token",
-                  "NO"
+                  "NO",
+                  ethers.parseUnits("500", 18)
               );
 
               // Attach to the created contracts
@@ -109,7 +111,7 @@ developmentChains.includes(network.name)
                   ethers.parseUnits("0.0001", 18)
               );
               expect(aliceYesBalance).to.be.closeTo(
-                  ethers.parseUnits("183.333333333333333333", 18),
+                  ethers.parseUnits("83.333333333333333333", 18),
                   ethers.parseUnits("0.0001", 18)
               );
           });

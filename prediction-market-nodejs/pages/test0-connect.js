@@ -1,11 +1,18 @@
-export default function Test0Connect({ account }) {
+import { useWeb3 } from '../context/Web3Context';
+
+export default function Test0Connect() {
+    const { account, connectWallet, disconnectWallet } = useWeb3();
+
     return (
         <div>
-            <h1>Test 0: Connect to MetaMask</h1>
+            <h1>Test 0: Connect Wallet</h1>
             {account ? (
-                <p>Connected account: {account}</p>
+                <div>
+                    <p>Connected: {account}</p>
+                    <button onClick={disconnectWallet}>Disconnect</button>
+                </div>
             ) : (
-                <p>Please connect your wallet using the button in the sidebar.</p>
+                <button onClick={connectWallet}>Connect Wallet</button>
             )}
         </div>
     );

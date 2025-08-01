@@ -2,8 +2,13 @@ import { ethers } from 'ethers';
 import MintableERC20 from '../../abi/MintableERC20.json';
 import contractAddresses from '../../abi/contract-addresses.json';
 
-const usdcTokenAddress = contractAddresses.MintableERC20;
+const usdcTokenAddress = contractAddresses.localhost.USDC;
 const usdcTokenAbi = MintableERC20;
+
+const PROVIDER_URL = process.env.NEXT_PUBLIC_LOCALHOST_RPC_URL;
+const DEPLOYER_PRIVATE_KEY = process.env.DEPLOYER_PRIVATE_KEY;
+const USDC_CONTRACT_ADDRESS = usdcTokenAddress;
+const USDC_ABI = usdcTokenAbi;
 
 export default async function handler(req, res) {
     if (req.method !== 'POST') {
@@ -18,7 +23,8 @@ export default async function handler(req, res) {
 
         // Connect to the local node as the deployer
         const provider = new ethers.JsonRpcProvider(PROVIDER_URL);
-        const deployerWallet = new ethers.Wallet(DEPLOYER_PRIVATE_KEY, provider);
+        const privateKey = DEPLOYER_PRIVATE_KEY.startsWith('0x') ? DEPLOYER_PRIVATE_KEY : `0x${DEPLOYER_PRIVATE_KEY}`;
+        const deployerWallet = new ethers.Wallet(privateKey, provider);
         const usdcContract = new ethers.Contract(USDC_CONTRACT_ADDRESS, USDC_ABI, deployerWallet);
 
         // Mint 100 USDC to the user's address

@@ -17,7 +17,7 @@ This is a Next.js application that provides a user interface for interacting wit
 
 *   **`pages/`**: Contains the main pages of the application.
     *   `index.js`: The main landing page.
-    *   `test*.js`: Pages for testing specific functionalities.
+    *   `test*.js`: Pages for testing specific functionalities, including creating and betting on both AMM and fixed-model markets (binary and N-way).
 *   **`components/`**: Contains reusable React components.
     *   `MarketDisplay.js`: The main component for displaying and interacting with a prediction market.
     *   `ConnectButton.js`: A button for connecting a web3 wallet.

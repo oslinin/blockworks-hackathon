@@ -10,6 +10,31 @@ While our initial focus is on ease of and engagement, our broader vision is to b
 
 # Code
 
+## Local Development
+
+To run the project locally, you need to run the backend and frontend in separate terminals.
+
+**Backend:**
+
+```bash
+cd prediction-market
+yarn hardhat node
+```
+
+In a second terminal, deploy the contracts to the local network:
+
+```bash
+cd prediction-market
+yarn hardhat deploy --network localhost
+```
+
+**Frontend:**
+
+```bash
+cd prediction-market-nodejs
+yarn dev
+```
+
 ## Deployment to Sepolia
 
 To deploy the contracts to the Sepolia testnet, run the following command:
@@ -31,6 +56,7 @@ The following contracts have been deployed to the Sepolia testnet:
 *   **PredictionMarketFactory:** [`0x14BF6D8f65b9e4b11919C3E9D4aC53C7b6bE21f0`](https://sepolia.etherscan.io/address/0x14BF6D8f65b9e4b11919C3E9D4aC53C7b6bE21f0)
 *   **PredictionMarketFactoryNWay:** [`0x909F71Fc1B1cdb6Bf90d0ffF3C11Fd1aA4Ef98d6`](https://sepolia.etherscan.io/address/0x909F71Fc1B1cdb6Bf90d0ffF3C11Fd1aA4Ef98d6)
 *   **PredictionMarketNWay:** [`0xCa90fA9E2Ca9B1113f6811A6832e082c3DD2C906`](https://sepolia.etherscan.io/address/0xCa90fA9E2Ca9B1113f6811A6832e082c3DD2C906)
+*   **MintableERC20:** [`0x5b7F97285d450efB8A52EcEc9306C34E7313023E`](https://sepolia.etherscan.io/address/0x5b7F97285d450efB8A52EcEc9306C34E7313023E)
 
 ## Prediction market:
 

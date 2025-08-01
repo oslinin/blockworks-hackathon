@@ -15,7 +15,8 @@ contract PredictionMarket is Ownable {
     MintableERC20 public immutable yesToken;
     MintableERC20 public immutable noToken;
 
-    uint256 public constant K = 250000 * 1e18; // Constant product (500 * 500)
+    uint256 public K;
+    bool public initialized;
 
     Category public category;
     string public question;
@@ -25,6 +26,7 @@ contract PredictionMarket is Ownable {
 
     event Bet(address indexed user, uint256 amount, bool onYes);
     event Resolved(bool outcome);
+    event Initialized(uint256 k);
 
     constructor(
         string memory _question,
@@ -42,11 +44,16 @@ contract PredictionMarket is Ownable {
         noToken = MintableERC20(_noToken);
     }
 
-    function initialize() public {
+    function initialize(uint256 initialLiquidity) public {
+        require(!initialized, "Market has already been initialized");
+        // Scale USDC amount (6 decimals) to internal token precision (18 decimals)
+        uint256 scaledInitialLiquidity = initialLiquidity * 10**12;
         // Mint initial liquidity to this contract
-        uint256 initialLiquidity = 500 * 10**18; // 500 of each token
-        yesToken.mint(address(this), initialLiquidity);
-        noToken.mint(address(this), initialLiquidity);
+        yesToken.mint(address(this), scaledInitialLiquidity);
+        noToken.mint(address(this), scaledInitialLiquidity);
+        K = scaledInitialLiquidity.mul(scaledInitialLiquidity);
+        initialized = true;
+        emit Initialized(K);
     }
 
     function getProbability() public view returns (uint256) {
@@ -61,35 +68,36 @@ contract PredictionMarket is Ownable {
 
     function bet(uint256 amount, bool onYes) public {
         require(!resolved, "Market is already resolved");
+        require(initialized, "Market not initialized");
         require(amount > 0, "Amount must be greater than 0");
 
         usdcToken.transferFrom(msg.sender, address(this), amount);
+        // Scale USDC amount (6 decimals) to internal token precision (18 decimals)
         uint256 scaledAmount = amount * 10**12;
 
         if (onYes) {
-            // Mint new tokens
-            yesToken.mint(msg.sender, scaledAmount);
-            noToken.mint(address(this), scaledAmount); // Mint no tokens to the pool
-
-            // Swap
             uint256 yesPoolBalance = yesToken.balanceOf(address(this));
             uint256 noPoolBalance = noToken.balanceOf(address(this));
-            uint256 newYesPoolBalance = K.div(noPoolBalance);
+            
+            // Calculate how many "yes" tokens to send
+            uint256 newNoPoolBalance = noPoolBalance + scaledAmount;
+            uint256 newYesPoolBalance = K.div(newNoPoolBalance);
             uint256 yesTokensToSend = yesPoolBalance - newYesPoolBalance;
 
             yesToken.transfer(msg.sender, yesTokensToSend);
-        } else {
-            // Mint new tokens
-            noToken.mint(msg.sender, scaledAmount);
-            yesToken.mint(address(this), scaledAmount); // Mint yes tokens to the pool
+            noToken.mint(address(this), scaledAmount);
 
-            // Swap
+        } else {
             uint256 yesPoolBalance = yesToken.balanceOf(address(this));
             uint256 noPoolBalance = noToken.balanceOf(address(this));
-            uint256 newNoPoolBalance = K.div(yesPoolBalance);
+
+            // Calculate how many "no" tokens to send
+            uint256 newYesPoolBalance = yesPoolBalance + scaledAmount;
+            uint256 newNoPoolBalance = K.div(newYesPoolBalance);
             uint256 noTokensToSend = noPoolBalance - newNoPoolBalance;
 
             noToken.transfer(msg.sender, noTokensToSend);
+            yesToken.mint(address(this), scaledAmount);
         }
 
         emit Bet(msg.sender, amount, onYes);
@@ -111,12 +119,13 @@ contract PredictionMarket is Ownable {
         if (outcome) {
             uint256 yesBalance = yesToken.balanceOf(msg.sender);
             yesToken.transferFrom(msg.sender, address(this), yesBalance);
+            // Scale internal token amount (18 decimals) down to USDC precision (6 decimals)
             usdcToken.transfer(msg.sender, yesBalance / (10**12));
         } else {
             uint256 noBalance = noToken.balanceOf(msg.sender);
             noToken.transferFrom(msg.sender, address(this), noBalance);
+            // Scale internal token amount (18 decimals) down to USDC precision (6 decimals)
             usdcToken.transfer(msg.sender, noBalance / (10**12));
         }
     }
 }
-

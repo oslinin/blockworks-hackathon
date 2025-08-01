@@ -30,7 +30,8 @@ developmentChains.includes(network.name)
             "Yes Token",
             "YES",
             "No Token",
-            "NO"
+            "NO",
+            ethers.parseUnits("500", 18)
         )).to.emit(factory, "MarketCreated");
 
         const markets = await factory.getAllMarkets();
@@ -47,7 +48,8 @@ developmentChains.includes(network.name)
             "Yes Token",
             "YES",
             "No Token",
-            "NO"
+            "NO",
+            ethers.parseUnits("500", 18)
         );
 
         await factory.createMarket(
@@ -58,7 +60,8 @@ developmentChains.includes(network.name)
             "Yes Token 2",
             "YES2",
             "No Token 2",
-            "NO2"
+            "NO2",
+            ethers.parseUnits("500", 18)
         );
 
         const cryptoMarkets = await factory.getMarketsByCategory(2); // CRYPTO

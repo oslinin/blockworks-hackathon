@@ -18,7 +18,8 @@ contract PredictionMarketFactory {
         string memory _yesTokenName,
         string memory _yesTokenSymbol,
         string memory _noTokenName,
-        string memory _noTokenSymbol
+        string memory _noTokenSymbol,
+        uint256 _initialLiquidity
     ) public returns (address) {
         MintableERC20 yesToken = new MintableERC20(_yesTokenName, _yesTokenSymbol);
         MintableERC20 noToken = new MintableERC20(_noTokenName, _noTokenSymbol);
@@ -38,7 +39,7 @@ contract PredictionMarketFactory {
         noToken.transferOwnership(address(newMarket));
 
         // Initialize the market to mint liquidity.
-        newMarket.initialize();
+        newMarket.initialize(_initialLiquidity);
 
         // Transfer ownership of the market to the user who created it.
         newMarket.transferOwnership(msg.sender);

@@ -9,6 +9,7 @@
     "test:agent": "mocha prediction-agent/test/test.js"
   },
   "dependencies": {
+    "@google-cloud/aiplatform": "^5.1.0",
     "@google/generative-ai": "^0.24.1",
     "axios": "^1.10.0",
     "chai": "^5.2.1",

@@ -1,89 +1,92 @@
 import { useState, useEffect } from 'react';
 import { ethers } from 'ethers';
 import MintableERC20 from '../abi/MintableERC20.json';
+import OfficialUSDC from '../abi/OfficialUSDC.json';
 import contractAddresses from '../abi/contract-addresses.json';
+import { useWeb3 } from '../context/Web3Context';
+import Button from '../components/Button';
 
-const USDC_ADDRESS = contractAddresses.MintableERC20;
-const USDC_ABI = MintableERC20;
-
-export default function Test1USDC({ account, provider }) {
+export default function Test1USDC() {
+    const { account, provider, network } = useWeb3();
     const [usdcBalance, setUsdcBalance] = useState(null);
-    const [isLocalhost, setIsLocalhost] = useState(false);
+    const [usdcAddress, setUsdcAddress] = useState(null);
 
-    const [minting, setMinting] = useState(false);
+    const getAddresses = async () => {
+        if (provider) {
+            const net = await provider.getNetwork();
+            return net.chainId.toString() === '31337' ? contractAddresses.localhost : contractAddresses.sepolia;
+        }
+        return contractAddresses.localhost;
+    };
+
+    const getUsdcAbi = async () => {
+        if (provider) {
+            const net = await provider.getNetwork();
+            return net.chainId.toString() === '31337' ? MintableERC20 : OfficialUSDC;
+        }
+        return MintableERC20;
+    };
+
+    const mintUsdc = async () => {
+        if (account && provider) {
+            const addresses = await getAddresses();
+            const USDC_ABI = await getUsdcAbi();
+            const signer = await provider.getSigner();
+            const usdcContract = new ethers.Contract(addresses.USDC, USDC_ABI, signer);
+            try {
+                const tx = await usdcContract.mint(account, ethers.parseUnits("1000", 6));
+                await tx.wait();
+                updateBalance();
+            } catch (error) {
+                console.error("Error minting USDC", error);
+            }
+        }
+    };
 
     const updateBalance = async () => {
         if (account && provider) {
-            const usdcContract = new ethers.Contract(USDC_ADDRESS, USDC_ABI, provider);
+            const addresses = await getAddresses();
+            setUsdcAddress(addresses.USDC);
+            const USDC_ABI = await getUsdcAbi();
+            const usdcContract = new ethers.Contract(addresses.USDC, USDC_ABI, provider);
             const balance = await usdcContract.balanceOf(account);
             setUsdcBalance(ethers.formatUnits(balance, 6));
         }
     };
 
-    const handleMint = async () => {
-        if (account && provider) {
-            setMinting(true);
-            try {
-                const response = await fetch('/api/faucet', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({ address: account }),
-                });
-
-                const data = await response.json();
-
-                if (!response.ok) {
-                    throw new Error(data.message || "Something went wrong with the faucet.");
-                }
-
-                // Wait for the transaction to be mined
-                await provider.waitForTransaction(data.txHash);
-
-                // Update balance
-                await updateBalance();
-
-            } catch (error) {
-                console.error("Error using faucet:", error);
-            } finally {
-                setMinting(false);
-            }
-        }
-    };
-
     useEffect(() => {
-        if (provider) {
-            const checkNetwork = async () => {
-                const network = await provider.getNetwork();
-                setIsLocalhost(network.chainId === 31337n);
-            };
-            checkNetwork();
-        }
-        if (account && provider) {
-            updateBalance();
-        }
-    }, [account, provider]);
+        updateBalance();
+    }, [account, provider, network]);
 
     return (
         <div>
-            <h1>Test 1: Connect and Show USDC Balance</h1>
+            <h1>Test 1: USDC Balance</h1>
             {account ? (
                 <div>
-                    <p>Connected account: {account}</p>
-                    <p>USDC Contract Address: {USDC_ADDRESS}</p>
+                    <p>
+                        Connected account: {' '}
+                        {network && network.chainId.toString() === '11155111' ? (
+                            <a href={`https://sepolia.etherscan.io/address/${account}`} target="_blank" rel="noopener noreferrer" style={{ color: 'lightblue', textDecoration: 'underline' }}>
+                                {account}
+                            </a>
+                        ) : (
+                            account
+                        )}
+                    </p>
+                    <p>USDC Address: {usdcAddress}</p>
                     <p>USDC Balance: {usdcBalance}</p>
-                    {isLocalhost && (
+                    {network && network.chainId.toString() === '11155111' ? (
                         <div>
-                            <button onClick={handleMint} disabled={minting} style={{ backgroundColor: '#eee', padding: '10px', border: '1px solid #ccc', borderRadius: '5px' }}>
-                                {minting ? 'Minting...' : 'Mint 100 USDC'}
-                            </button>
-                            <p style={{ fontSize: '0.8em', color: '#666' }}>(Only available on localhost)</p>
+                            <a href="https://faucet.circle.com/" target="_blank" rel="noopener noreferrer" style={{ color: 'lightblue', textDecoration: 'underline' }}>
+                                Get Sepolia USDC from Faucet
+                            </a>
                         </div>
+                    ) : (
+                        <Button onClick={mintUsdc}>Mint 1000 USDC (Localhost only)</Button>
                     )}
                 </div>
             ) : (
-                <p>Please connect your wallet using the button in the sidebar.</p>
+                <p>Please connect your wallet.</p>
             )}
         </div>
     );

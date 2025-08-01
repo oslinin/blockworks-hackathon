@@ -21,21 +21,42 @@ developmentChains.includes(network.name)
         factory = await PredictionMarketFactory.deploy();
         await factory.waitForDeployment();
 
-        // The owner creates a market
+        // The owner creates a market. This is a common and elegant pattern for testing contract factories.
+        // It solves the problem of needing the new contract's address immediately after creation.
+        
+        // Why not just create the market and then get its address from the transaction receipt?
+        // While possible, that approach is more complex. It would require:
+        //   1. Executing the transaction: `const tx = await factory.createMarket(...)`
+        //   2. Waiting for the receipt: `const receipt = await tx.wait()`
+        //   3. Manually searching the transaction logs for the 'MarketCreated' event.
+        //   4. Parsing the event to extract the address from its arguments.
+        // This is verbose and less direct.
+
+        // The staticCall pattern is much cleaner:
+
+        // 1. Static Call (The "Dry Run"): 
+        // We use `staticCall` to simulate the transaction without actually sending it to the blockchain.
+        // It's a read-only operation that doesn't consume gas or change state.
+        // Its purpose here is to capture the return value of the function—the predicted address of the new market.
         const marketAddress = await factory.connect(owner).createMarket.staticCall(
             "Will ETH reach $5000 by end of year?",
             2, // CRYPTO
             oracle.address,
             await usdc.getAddress(),
-            "Yes Token", "YES", "No Token", "NO"
+            "Yes Token", "YES", "No Token", "NO",
+            ethers.parseUnits("500", 18)
         );
 
+        // 2. Actual Transaction (The "Real Deal"): 
+        // Now that we have the predicted address, we execute the real transaction.
+        // This pays the gas, changes the blockchain state, and deploys the contract at that known address.
         await factory.createMarket(
             "Will ETH reach $5000 by end of year?",
             2, // CRYPTO
             oracle.address,
             await usdc.getAddress(),
-            "Yes Token", "YES", "No Token", "NO"
+            "Yes Token", "YES", "No Token", "NO",
+            ethers.parseUnits("500", 18)
         );
 
         // Attach to the created contracts
@@ -58,7 +79,7 @@ developmentChains.includes(network.name)
         expect(Number(ethers.formatUnits(probability, 18))).to.be.closeTo(50, 0.01);
     });
 
-    it("should handle bets correctly according to the spec", async function () {
+    it("should handle bets correctly according to the new spec", async function () {
         const marketAddress = await market.getAddress();
 
         // Test 1: Alice bets 100 USDC on "yes"
@@ -67,10 +88,10 @@ developmentChains.includes(network.name)
         let noBalance = await noToken.balanceOf(marketAddress);
         let yesBalance = await yesToken.balanceOf(marketAddress);
         let aliceYesBalance = await yesToken.balanceOf(alice.address);
-
+        let tolerance = ethers.parseUnits("0.0001", 18)
         expect(noBalance).to.equal(ethers.parseUnits("600", 18));
-        expect(yesBalance).to.be.closeTo(ethers.parseUnits("416.666666666666666667", 18), ethers.parseUnits("0.0001", 18));
-        expect(aliceYesBalance).to.be.closeTo(ethers.parseUnits("183.333333333333333333", 18), ethers.parseUnits("0.0001", 18));
+        expect(yesBalance).to.be.closeTo(ethers.parseUnits("416.666666666666666667", 18),tolerance);
+        expect(aliceYesBalance).to.be.closeTo(ethers.parseUnits("83.333333333333333333", 18),tolerance);
 
         // Test 2: Alice bets another 100 USDC on "yes"
         await market.connect(alice).bet(ethers.parseUnits("100", 6), true);
@@ -80,10 +101,12 @@ developmentChains.includes(network.name)
         aliceYesBalance = await yesToken.balanceOf(alice.address);
 
         expect(noBalance).to.equal(ethers.parseUnits("700", 18));
-        expect(yesBalance).to.be.closeTo(ethers.parseUnits("357.142857142857142857", 18), ethers.parseUnits("0.0001", 18));
-        expect(aliceYesBalance).to.be.closeTo(ethers.parseUnits("342.857142857142857143", 18), ethers.parseUnits("0.0001", 18));
+        expect(yesBalance).to.be.closeTo(ethers.parseUnits("357.142857142857142857", 18),tolerance);
         
-        expect(await yesToken.totalSupply()).to.be.closeTo(ethers.parseUnits("700", 18), ethers.parseUnits("0.0001", 18));
+        const expectedAliceYes = ethers.toBigInt(ethers.parseUnits("83.333333333333333333", 18)) + ethers.toBigInt(ethers.parseUnits("59.52380952380952381", 18));
+        expect(aliceYesBalance).to.be.closeTo(expectedAliceYes,tolerance);
+        
+        expect(await yesToken.totalSupply()).to.equal(ethers.parseUnits("500", 18));
         expect(await noToken.totalSupply()).to.equal(ethers.parseUnits("700", 18));
 
         // Test 3: Alice bets 1 USDC on "yes"
@@ -92,8 +115,7 @@ developmentChains.includes(network.name)
         const aliceYesAfter = await yesToken.balanceOf(alice.address);
         const yesTokensReceived = aliceYesAfter - aliceYesBefore;
 
-        // 1 (minted) + (357.142857 - 250000/701) = 1 + 0.509... = 1.509...
-        expect(yesTokensReceived).to.be.closeTo(ethers.parseUnits("1.509477216218612629", 18), ethers.parseUnits("0.0001", 18));
+        expect(yesTokensReceived).to.be.closeTo(ethers.parseUnits("0.509477216218612629", 18), ethers.parseUnits("0.0001", 18));
     });
 
     it("should calculate the correct probability after a bet", async function () {
