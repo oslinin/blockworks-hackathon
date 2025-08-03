@@ -91,12 +91,16 @@ export default function Test3Bet() {
         }
     };
 
+    const [allMarkets, setAllMarkets] = useState([]);
+    const [currentMarketIndex, setCurrentMarketIndex] = useState(0);
+
     useEffect(() => {
         const fetchData = async () => {
             if (account && provider) {
                 const addresses = await getAddresses();
                 const factoryContract = new ethers.Contract(addresses.PredictionMarketFactory, FACTORY_ABI, provider);
                 const markets = await factoryContract.getAllMarkets();
+                setAllMarkets(markets);
                 if (markets.length > 0) {
                     setMarketAddress(markets[0]);
                 }
@@ -110,6 +114,22 @@ export default function Test3Bet() {
             updateBalances();
         }
     }, [marketAddress, account, provider]);
+
+    const goToNextMarket = () => {
+        if (currentMarketIndex < allMarkets.length - 1) {
+            const nextIndex = currentMarketIndex + 1;
+            setCurrentMarketIndex(nextIndex);
+            setMarketAddress(allMarkets[nextIndex]);
+        }
+    };
+
+    const goToPreviousMarket = () => {
+        if (currentMarketIndex > 0) {
+            const prevIndex = currentMarketIndex - 1;
+            setCurrentMarketIndex(prevIndex);
+            setMarketAddress(allMarkets[prevIndex]);
+        }
+    };
 
     return (
         <div>
@@ -129,7 +149,12 @@ export default function Test3Bet() {
                         <p>No Probability: {(100 - yesProbability).toFixed(2)}%</p>
                     </div>
                     <Button onClick={() => placeBet(true)} className="mr-2">Bet Yes (1 USDC)</Button>
-                    <Button onClick={() => placeBet(false)}>Bet No (1 USDC)</Button>
+                    <Button onClick={() => placeBet(false)} className="mr-2">Bet No (1 USDC)</Button>
+                    <Button onClick={goToNextMarket} className="mr-2">Skip</Button>
+                    <div style={{ marginTop: '10px' }}>
+                        <Button onClick={goToPreviousMarket} disabled={currentMarketIndex === 0} className="mr-2">Previous Market</Button>
+                        <Button onClick={goToNextMarket} disabled={currentMarketIndex === allMarkets.length - 1}>Next Market</Button>
+                    </div>
                 </div>
             ) : (
                 <p>Please connect your wallet using the button in the sidebar.</p>

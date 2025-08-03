@@ -92,12 +92,16 @@ export default function Test11BetFixedMarket() {
         }
     };
 
+    const [allMarkets, setAllMarkets] = useState([]);
+    const [currentMarketIndex, setCurrentMarketIndex] = useState(0);
+
     useEffect(() => {
         const fetchData = async () => {
             if (account && provider) {
                 const addresses = await getAddresses();
                 const factoryContract = new ethers.Contract(addresses.PredictionMarketFactoryNWayFixedModel, FACTORY_ABI, provider);
                 const markets = await factoryContract.getAllNWayFixedModelMarkets();
+                setAllMarkets(markets);
                 if (markets.length > 0) {
                     setMarketAddress(markets[0]);
                 }
@@ -112,6 +116,22 @@ export default function Test11BetFixedMarket() {
         }
     }, [marketAddress]);
 
+    const goToNextMarket = () => {
+        if (currentMarketIndex < allMarkets.length - 1) {
+            const nextIndex = currentMarketIndex + 1;
+            setCurrentMarketIndex(nextIndex);
+            setMarketAddress(allMarkets[nextIndex]);
+        }
+    };
+
+    const goToPreviousMarket = () => {
+        if (currentMarketIndex > 0) {
+            const prevIndex = currentMarketIndex - 1;
+            setCurrentMarketIndex(prevIndex);
+            setMarketAddress(allMarkets[prevIndex]);
+        }
+    };
+
     return (
         <div>
             <h1>Test 11: Place a Bet (N-Way Fixed-Model)</h1>
@@ -122,12 +142,16 @@ export default function Test11BetFixedMarket() {
                     <p>Market Address: {marketAddress}</p>
                     <br />
                     {OUTCOME_NAMES.map((name, index) => (
-                        <div key={index}>
+                        <div key={index} style={{ marginBottom: '10px' }}>
                             <p>Your Bets on {name}: {bets[index] || 0}</p>
                             <p>Probability: {probabilities[index] || 0}%</p>
                             <Button onClick={() => placeBet(index)} className="mr-2">Bet on {name} (1 USDC)</Button>
                         </div>
                     ))}
+                    <div style={{ marginTop: '10px' }}>
+                        <Button onClick={goToPreviousMarket} disabled={currentMarketIndex === 0} className="mr-2">Previous Market</Button>
+                        <Button onClick={goToNextMarket} disabled={currentMarketIndex === allMarkets.length - 1}>Next Market</Button>
+                    </div>
                 </div>
             ) : (
                 <p>Please connect your wallet using the button in the sidebar.</p>

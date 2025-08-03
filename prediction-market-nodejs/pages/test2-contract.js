@@ -31,13 +31,60 @@ export default function Test2Contract() {
         return MintableERC20;
     };
 
+    const [betQuestion, setBetQuestion] = useState('');
+    const [category, setCategory] = useState('Sports');
+    const [isGenerating, setIsGenerating] = useState(false);
+
+    const generateBet = async () => {
+        setIsGenerating(true);
+        try {
+            const response = await fetch('/api/run-agent-sequence', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ category }),
+            });
+
+            if (!response.ok) {
+                const errorData = await response.json();
+                throw new Error(errorData.error || 'API request failed');
+            }
+
+            const agentData = await response.json();
+            if (agentData.enhancement && agentData.enhancement.length > 0) {
+                setBetQuestion(agentData.enhancement[0].bet);
+            } else {
+                alert('The agent did not return any enhancement data.');
+            }
+        } catch (error) {
+            console.error('Error generating bet:', error);
+            alert('Failed to generate bet. Please try again.');
+        } finally {
+            setIsGenerating(false);
+        }
+    };
+
     const deployMarket = async () => {
-        if (account && provider) {
+        if (account && provider && betQuestion) {
             const addresses = await getAddresses();
             const USDC_ABI = await getUsdcAbi();
             const signer = await provider.getSigner();
             const factoryContract = new ethers.Contract(addresses.PredictionMarketFactory, FACTORY_ABI, signer);
             const usdcContract = new ethers.Contract(addresses.USDC, USDC_ABI, signer);
+
+            const categoryIndex = {
+                "Sports": 1,
+                "Crypto": 2,
+                "Politics": 0,
+                "Entertainment": 3,
+                "Misc": 4
+            };
+
+            const yesTokenName = `Yes on "${betQuestion}"`;
+            const noTokenName = `No on "${betQuestion}"`;
+            const yesTokenSymbol = "YES";
+            const noTokenSymbol = "NO";
 
             try {
                 const liquidityAmount = ethers.parseUnits(liquidity, 6);
@@ -45,14 +92,14 @@ export default function Test2Contract() {
                 await approveTx.wait();
 
                 const tx = await factoryContract.createMarket(
-                    "Trump vs Biden 2020",
-                    0, // ELECTION
+                    betQuestion,
+                    categoryIndex[category],
                     account, // Oracle
                     addresses.USDC,
-                    "Yes Token",
-                    "YES",
-                    "No Token",
-                    "NO",
+                    yesTokenName,
+                    yesTokenSymbol,
+                    noTokenName,
+                    noTokenSymbol,
                     liquidityAmount
                 );
                 const receipt = await tx.wait();
@@ -68,19 +115,25 @@ export default function Test2Contract() {
                     const parsedLog = factoryContract.interface.parseLog(marketCreatedEvent);
                     const deployedAddress = parsedLog.args.marketAddress;
                     setMarketAddress(deployedAddress);
-                    setIsMarketDeployed(true);
+                    setBetQuestion(''); // Clear the bet question
                 }
             } catch (error) {
                 console.error("Error deploying market", error);
             }
+        } else {
+            alert("Please generate a bet question first.");
         }
     };
+
+    const [isWhitelisted, setIsWhitelisted] = useState(false);
 
     useEffect(() => {
         const fetchData = async () => {
             if (account && provider) {
                 const addresses = await getAddresses();
                 const USDC_ABI = await getUsdcAbi();
+                const factoryContract = new ethers.Contract(addresses.PredictionMarketFactory, FACTORY_ABI, provider);
+
                 const getUsdcBalance = async () => {
                     const usdcContract = new ethers.Contract(addresses.USDC, USDC_ABI, provider);
                     const balance = await usdcContract.balanceOf(account);
@@ -88,7 +141,6 @@ export default function Test2Contract() {
                 };
 
                 const findMarket = async () => {
-                    const factoryContract = new ethers.Contract(addresses.PredictionMarketFactory, FACTORY_ABI, provider);
                     const markets = await factoryContract.getAllMarkets();
                     if (markets.length > 0) {
                         setMarketAddress(markets[0]);
@@ -96,8 +148,14 @@ export default function Test2Contract() {
                     }
                 };
 
+                const checkWhitelist = async () => {
+                    const whitelisted = await factoryContract.whitelist(account);
+                    setIsWhitelisted(whitelisted);
+                };
+
                 getUsdcBalance();
                 findMarket();
+                checkWhitelist();
             }
         };
         fetchData();
@@ -117,10 +175,29 @@ export default function Test2Contract() {
                             <input type="text" value={liquidity} onChange={(e) => setLiquidity(e.target.value)} style={{ marginLeft: '10px', width: '100px', border: '1px solid #ccc', padding: '5px', borderRadius: '5px' }} />
                         </label>
                     </div>
-                    <button onClick={deployMarket} disabled={isMarketDeployed} className="border border-gray-400 rounded p-2 mt-2">
-                        {isMarketDeployed ? "Market Deployed" : "Deploy Market"}
+                    <div style={{ marginTop: '10px' }}>
+                        <label>
+                            Category:
+                            <select value={category} onChange={(e) => setCategory(e.target.value)} style={{ marginLeft: '10px', border: '1px solid #ccc', padding: '5px', borderRadius: '5px' }}>
+                                <option value="Sports">Sports</option>
+                                <option value="Crypto">Crypto</option>
+                                <option value="Politics">Politics</option>
+                                <option value="Entertainment">Entertainment</option>
+                                <option value="Misc">Misc</option>
+                            </select>
+                        </label>
+                        <button onClick={generateBet} disabled={isGenerating} className="border border-gray-400 rounded p-2 mt-2" style={{ marginLeft: '10px' }}>
+                            {isGenerating ? "Generating..." : "Generate Bet"}
+                        </button>
+                    </div>
+                    <div style={{ marginTop: '10px' }}>
+                        <input type="text" value={betQuestion} readOnly style={{ width: '500px', border: '1px solid #ccc', padding: '5px', borderRadius: '5px' }} />
+                    </div>
+                    <button onClick={deployMarket} disabled={!isWhitelisted} className="border border-gray-400 rounded p-2 mt-2">
+                        Deploy Market
                     </button>
-                    {marketAddress && <p>Market Address: {marketAddress}</p>}
+                    {!isWhitelisted && <p style={{ color: 'red' }}>Only whitelisted addresses can create markets.</p>}
+                    {marketAddress && <p>New Market Address: {marketAddress}</p>}
                 </div>
             ) : (
                 <p>Please connect your wallet using the button in the sidebar.</p>

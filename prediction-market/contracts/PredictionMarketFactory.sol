@@ -1,14 +1,31 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
+import "@openzeppelin/contracts/access/Ownable.sol";
 import "./PredictionMarket.sol";
 import "./MintableERC20.sol";
 
-contract PredictionMarketFactory {
+contract PredictionMarketFactory is Ownable {
     PredictionMarket[] public predictionMarkets;
-    
+    mapping(address => bool) public whitelist;
+
     event MarketCreated(address indexed marketAddress, string question, PredictionMarket.Category category);
     event BetPlaced(address indexed user, address indexed marketAddress, uint256 amount, bool onYes);
+
+    modifier onlyWhitelisted() {
+        require(whitelist[msg.sender], "Not whitelisted");
+        _;
+    }
+
+    constructor() Ownable(msg.sender) {}
+
+    function addToWhitelist(address _address) public onlyOwner {
+        whitelist[_address] = true;
+    }
+
+    function removeFromWhitelist(address _address) public onlyOwner {
+        whitelist[_address] = false;
+    }
 
     function createMarket(
         string memory _question,
@@ -20,7 +37,7 @@ contract PredictionMarketFactory {
         string memory _noTokenName,
         string memory _noTokenSymbol,
         uint256 _initialLiquidity
-    ) public returns (address) {
+    ) public onlyWhitelisted returns (address) {
         MintableERC20 yesToken = new MintableERC20(_yesTokenName, _yesTokenSymbol);
         MintableERC20 noToken = new MintableERC20(_noTokenName, _noTokenSymbol);
 

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { ethers } from 'ethers';
 import { useWeb3 } from '../context/Web3Context';
+import { useMode } from '../context/ModeContext';
 import NetworkSwitcher from './NetworkSwitcher';
 import VersionSwitcher from './VersionSwitcher';
 import Button from './Button';
@@ -10,6 +11,7 @@ import contractAddresses from '../abi/contract-addresses.json';
 
 export default function Navbar() {
   const { account, provider, network, connectWallet, disconnectWallet } = useWeb3();
+  const { mode, setMode } = useMode();
   const [usdcBalance, setUsdcBalance] = useState(null);
 
   const getAddresses = async () => {
@@ -28,6 +30,8 @@ export default function Navbar() {
       return MintableERC20;
   };
 
+  const [isWhitelisted, setIsWhitelisted] = useState(false);
+
   useEffect(() => {
     const updateBalance = async () => {
         if (account && provider) {
@@ -38,7 +42,18 @@ export default function Navbar() {
             setUsdcBalance(ethers.formatUnits(balance, 6));
         }
     };
+
+    const checkWhitelist = async () => {
+        if (account && provider) {
+            const addresses = await getAddresses();
+            const factoryContract = new ethers.Contract(addresses.PredictionMarketFactory, PredictionMarketFactory.abi, provider);
+            const whitelisted = await factoryContract.whitelist(account);
+            setIsWhitelisted(whitelisted);
+        }
+    };
+
     updateBalance();
+    checkWhitelist();
   }, [account, provider, network]);
 
   return (
@@ -46,7 +61,14 @@ export default function Navbar() {
       <h1 style={{ color: 'lightblue', margin: 0 }}>YesNo</h1>
       <div style={{ display: 'flex', alignItems: 'center' }}>
         <VersionSwitcher />
+        <a href="/events" style={{ color: 'white', marginRight: '1rem' }}>Events</a>
         <NetworkSwitcher />
+        {isWhitelisted && (
+            <select value={mode} onChange={(e) => setMode(e.target.value)} style={{ marginLeft: '10px', border: '1px solid #ccc', padding: '5px', borderRadius: '5px' }}>
+                <option value="developer">Developer</option>
+                <option value="user">User</option>
+            </select>
+        )}
         {account ? (
           <div>
             <span style={{ color: 'white', marginRight: '1rem' }}>USDC: {usdcBalance}</span>

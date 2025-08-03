@@ -30,16 +30,58 @@ export default function Test8ContractFixedModel() {
         return MintableERC20;
     };
 
+    const [betQuestion, setBetQuestion] = useState('');
+    const [category, setCategory] = useState('Sports');
+    const [isGenerating, setIsGenerating] = useState(false);
+
+    const generateBet = async () => {
+        setIsGenerating(true);
+        try {
+            const response = await fetch('/api/run-agent-sequence', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ category }),
+            });
+
+            if (!response.ok) {
+                const errorData = await response.json();
+                throw new Error(errorData.error || 'API request failed');
+            }
+
+            const agentData = await response.json();
+            if (agentData.enhancement && agentData.enhancement.length > 0) {
+                setBetQuestion(agentData.enhancement[0].bet);
+            } else {
+                alert('The agent did not return any enhancement data.');
+            }
+        } catch (error) {
+            console.error('Error generating bet:', error);
+            alert('Failed to generate bet. Please try again.');
+        } finally {
+            setIsGenerating(false);
+        }
+    };
+
     const deployMarket = async () => {
-        if (account && provider) {
+        if (account && provider && betQuestion) {
             const addresses = await getAddresses();
             const signer = await provider.getSigner();
             const factoryContract = new ethers.Contract(addresses.PredictionMarketFactoryFixedModel, FACTORY_ABI, signer);
 
+            const categoryIndex = {
+                "Sports": 1,
+                "Crypto": 2,
+                "Politics": 0,
+                "Entertainment": 3,
+                "Misc": 4
+            };
+
             try {
                 const tx = await factoryContract.createMarket(
-                    "Will the price of BTC be above $70,000 on Dec 31, 2024?",
-                    2, // CRYPTO
+                    betQuestion,
+                    categoryIndex[category],
                     account, // Oracle
                     addresses.USDC
                 );
@@ -56,7 +98,7 @@ export default function Test8ContractFixedModel() {
                     const parsedLog = factoryContract.interface.parseLog(marketCreatedEvent);
                     const deployedAddress = parsedLog.args.marketAddress;
                     setMarketAddress(deployedAddress);
-                    setIsMarketDeployed(true);
+                    setBetQuestion('');
                 }
             } catch (error) {
                 console.error("Error deploying market", error);
@@ -99,10 +141,28 @@ export default function Test8ContractFixedModel() {
                 <div>
                     <p>Connected account: {account}</p>
                     <p>USDC Balance: {usdcBalance}</p>
-                    <button onClick={deployMarket} disabled={isMarketDeployed} className="border border-gray-400 rounded p-2 mt-2">
-                        {isMarketDeployed ? "Market Deployed" : "Deploy Market"}
+                    <div style={{ marginTop: '10px' }}>
+                        <label>
+                            Category:
+                            <select value={category} onChange={(e) => setCategory(e.target.value)} style={{ marginLeft: '10px', border: '1px solid #ccc', padding: '5px', borderRadius: '5px' }}>
+                                <option value="Sports">Sports</option>
+                                <option value="Crypto">Crypto</option>
+                                <option value="Politics">Politics</option>
+                                <option value="Entertainment">Entertainment</option>
+                                <option value="Misc">Misc</option>
+                            </select>
+                        </label>
+                        <button onClick={generateBet} disabled={isGenerating} className="border border-gray-400 rounded p-2 mt-2" style={{ marginLeft: '10px' }}>
+                            {isGenerating ? "Generating..." : "Generate Bet"}
+                        </button>
+                    </div>
+                    <div style={{ marginTop: '10px' }}>
+                        <input type="text" value={betQuestion} readOnly style={{ width: '500px', border: '1px solid #ccc', padding: '5px', borderRadius: '5px' }} />
+                    </div>
+                    <button onClick={deployMarket} className="border border-gray-400 rounded p-2 mt-2">
+                        Deploy Market
                     </button>
-                    {marketAddress && <p>Market Address: {marketAddress}</p>}
+                    {marketAddress && <p>New Market Address: {marketAddress}</p>}
                 </div>
             ) : (
                 <p>Please connect your wallet using the button in the sidebar.</p>

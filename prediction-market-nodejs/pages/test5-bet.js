@@ -94,12 +94,16 @@ export default function Test5Bet() {
         }
     };
 
+    const [allMarkets, setAllMarkets] = useState([]);
+    const [currentMarketIndex, setCurrentMarketIndex] = useState(0);
+
     useEffect(() => {
         const fetchData = async () => {
             if (account && provider) {
                 const addresses = await getAddresses();
                 const factoryContract = new ethers.Contract(addresses.PredictionMarketFactoryNWay, FACTORY_ABI, provider);
                 const markets = await factoryContract.getAllMarkets();
+                setAllMarkets(markets);
                 if (markets.length > 0) {
                     setMarketAddress(markets[0]);
                 }
@@ -114,6 +118,22 @@ export default function Test5Bet() {
         }
     }, [marketAddress, account, provider]);
 
+    const goToNextMarket = () => {
+        if (currentMarketIndex < allMarkets.length - 1) {
+            const nextIndex = currentMarketIndex + 1;
+            setCurrentMarketIndex(nextIndex);
+            setMarketAddress(allMarkets[nextIndex]);
+        }
+    };
+
+    const goToPreviousMarket = () => {
+        if (currentMarketIndex > 0) {
+            const prevIndex = currentMarketIndex - 1;
+            setCurrentMarketIndex(prevIndex);
+            setMarketAddress(allMarkets[prevIndex]);
+        }
+    };
+
     return (
         <div>
             <h1>Test 5: Place a Bet (N-Way)</h1>
@@ -125,12 +145,16 @@ export default function Test5Bet() {
                     <br />
                     <div>
                         {outcomeTokens.map((token, index) => (
-                            <div key={index}>
+                            <div key={index} style={{ marginBottom: '10px' }}>
                                 <p>{token.symbol} Balance: {token.balance}</p>
                                 <p>Probability: {probabilities[index] || 0}%</p>
                                 <Button onClick={() => placeBet(index)} className="mr-2">Bet on {token.symbol}</Button>
                             </div>
                         ))}
+                    </div>
+                    <div style={{ marginTop: '10px' }}>
+                        <Button onClick={goToPreviousMarket} disabled={currentMarketIndex === 0} className="mr-2">Previous Market</Button>
+                        <Button onClick={goToNextMarket} disabled={currentMarketIndex === allMarkets.length - 1}>Next Market</Button>
                     </div>
                 </div>
             ) : (

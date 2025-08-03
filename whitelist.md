@@ -1,0 +1,4 @@
+# Whitelisted Addresses
+
+- 0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266
+- 0xd0a8e9C09e24D24596EdF8828FE732efd1A0dF16
