@@ -30,7 +30,7 @@ module.exports = async ({ getNamedAccounts, deployments }) => {
     }
 
     const fs = require("fs");
-    const addresses = fs.readFileSync("../../whitelist.md", "utf8").split("\n").slice(2);
+    const addresses = fs.readFileSync("../whitelist.md", "utf8").split("\n").slice(2);
     const predictionMarketFactoryContract = await ethers.getContract("PredictionMarketFactory");
     for (const address of addresses) {
         if (address) {

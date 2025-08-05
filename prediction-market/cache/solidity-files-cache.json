@@ -500,8 +500,8 @@
       ]
     },
     "/home/oleg/Documents/blockworks-hackathon/prediction-market/contracts/PredictionMarketFactory.sol": {
-      "lastModificationDate": 1753972517421,
-      "contentHash": "9e8ba65719368de498803290f4e5e9e4",
+      "lastModificationDate": 1754413984499,
+      "contentHash": "500a57fcd7bba33ab275813fa39471b1",
       "sourceName": "contracts/PredictionMarketFactory.sol",
       "solcConfig": {
         "version": "0.8.24",
@@ -535,6 +535,7 @@
         }
       },
       "imports": [
+        "@openzeppelin/contracts/access/Ownable.sol",
         "./PredictionMarket.sol",
         "./MintableERC20.sol"
       ],
