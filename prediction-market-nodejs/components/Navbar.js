@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { ethers } from 'ethers';
 import { useWeb3 } from '../context/Web3Context';
 import NetworkSwitcher from './NetworkSwitcher';
-import VersionSwitcher from './VersionSwitcher';
+
 import Button from './Button';
 import MintableERC20 from '../abi/MintableERC20.json';
 import OfficialUSDC from '../abi/OfficialUSDC.json';
@@ -45,7 +45,7 @@ export default function Navbar() {
     <nav style={{ padding: '1rem', borderBottom: '2px solid #444', background: '#222', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
       <h1 style={{ color: 'lightblue', margin: 0 }}>YesNo</h1>
       <div style={{ display: 'flex', alignItems: 'center' }}>
-        <VersionSwitcher />
+        
         <NetworkSwitcher />
         {account ? (
           <div>
