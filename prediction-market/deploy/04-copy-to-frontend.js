@@ -13,7 +13,8 @@ module.exports = async ({ deployments, getNamedAccounts, network }) => {
         try {
             const deployment = await deployments.get(contractName);
             return { address: deployment.address, abi: deployment.abi };
-        } catch (error) {
+        } catch (error)
+{
             console.log(`Deployment for ${contractName} not found on network ${network.name}.`);
             return null;
         }
@@ -23,10 +24,12 @@ module.exports = async ({ deployments, getNamedAccounts, network }) => {
     const predictionMarketFactory = await getDeploymentData("PredictionMarketFactory");
     const predictionMarketNWay = await getDeploymentData("PredictionMarketNWay");
     const predictionMarketFactoryNWay = await getDeploymentData("PredictionMarketFactoryNWay");
+    const predictionMarketFactoryFixedModel = await getDeploymentData("PredictionMarketFactoryFixedModel");
+    const predictionMarketFactoryNWayFixedModel = await getDeploymentData("PredictionMarketFactoryNWayFixedModel");
     let usdcContractData;
 
     if (network.name === "sepolia") {
-        const erc20Abi = JSON.parse(fs.readFileSync(path.resolve(__dirname, "../node_modules/@openzeppelin/contracts/build/contracts/ERC20.json"), "utf8")).abi;
+        const erc20Abi = JSON.parse(fs.readFileSync(path.resolve(__dirname, "../abi/ERC20.json"), "utf8"));
         usdcContractData = {
             address: SEPOLIA_USDC_ADDRESS,
             abi: erc20Abi,
@@ -35,7 +38,7 @@ module.exports = async ({ deployments, getNamedAccounts, network }) => {
         usdcContractData = await getDeploymentData("MintableERC20");
     }
 
-    const frontendAbiDir = path.resolve(__dirname, `../../prediction-market-nodejs/abi/${network.name}`);
+    const frontendAbiDir = path.resolve(__dirname, `../../prediction-market-nodejs/abi`);
 
     if (!fs.existsSync(frontendAbiDir)) {
         fs.mkdirSync(frontendAbiDir, { recursive: true });
@@ -54,29 +57,50 @@ module.exports = async ({ deployments, getNamedAccounts, network }) => {
     writeAbiFile("PredictionMarketFactory", predictionMarketFactory);
     writeAbiFile("PredictionMarketNWay", predictionMarketNWay);
     writeAbiFile("PredictionMarketFactoryNWay", predictionMarketFactoryNWay);
-    // Rename to MintableERC20 for consistency in the frontend
+    writeAbiFile("PredictionMarketFactoryFixedModel", predictionMarketFactoryFixedModel);
+    writeAbiFile("PredictionMarketFactoryNWayFixedModel", predictionMarketFactoryNWayFixedModel);
     if (usdcContractData) {
+        const usdcAbiPath = network.name === "sepolia" ? "OfficialUSDC.json" : "MintableERC20.json";
         fs.writeFileSync(
-            path.join(frontendAbiDir, `MintableERC20.json`),
+            path.join(frontendAbiDir, usdcAbiPath),
             JSON.stringify(usdcContractData.abi, null, 2)
         );
     }
 
 
-    const contractAddresses = {
+    const contractAddressesPath = path.join(frontendAbiDir, "contract-addresses.json");
+    let contractAddresses = {};
+    if (fs.existsSync(contractAddressesPath)) {
+        contractAddresses = JSON.parse(fs.readFileSync(contractAddressesPath, "utf8"));
+    }
+
+    const networkName = network.name === "hardhat" ? "localhost" : network.name;
+
+    contractAddresses[networkName] = {
         PredictionMarket: predictionMarket ? predictionMarket.address : null,
         PredictionMarketFactory: predictionMarketFactory ? predictionMarketFactory.address : null,
         PredictionMarketNWay: predictionMarketNWay ? predictionMarketNWay.address : null,
         PredictionMarketFactoryNWay: predictionMarketFactoryNWay ? predictionMarketFactoryNWay.address : null,
-        MintableERC20: usdcContractData ? usdcContractData.address : null,
+        PredictionMarketFactoryFixedModel: predictionMarketFactoryFixedModel ? predictionMarketFactoryFixedModel.address : null,
+        PredictionMarketFactoryNWayFixedModel: predictionMarketFactoryNWayFixedModel ? predictionMarketFactoryNWayFixedModel.address : null,
+        USDC: usdcContractData ? usdcContractData.address : null,
     };
 
+    if (network.name === "hardhat" || network.name === "localhost") {
+        const mintableERC20 = await getDeploymentData("MintableERC20");
+        if (mintableERC20) {
+            contractAddresses[networkName].MintableERC20 = mintableERC20.address;
+            // Also ensure USDC is set to the MintableERC20 address for local development
+            contractAddresses[networkName].USDC = mintableERC20.address;
+        }
+    }
+
     fs.writeFileSync(
-        path.join(frontendAbiDir, "contract-addresses.json"),
+        contractAddressesPath,
         JSON.stringify(contractAddresses, null, 2)
     );
 
-    console.log(`Front end written for ${network.name}!`);
+    console.log(`Front end written for ${networkName}!`);
 };
 
 module.exports.tags = ["all", "frontend"];

@@ -1,14 +1,13 @@
 {
   "localhost": {
-    "PredictionMarket": "0xC6c0E14c02C2dBd4f116230f01D03836620167B9",
-    "PredictionMarketFactory": "0xf0014CBe67b3aB638bdaA2e2Cb1B531935829E50",
-    "PredictionMarketNWay": "0x96e74d78A9EC0dB11C8c9fF2FD93bC98D8895B5A",
-    "PredictionMarketFactoryNWay": "0xD0725945859175dabd070855bC3F1c37a3aF605F",
-    "PredictionMarketFactoryFixedModel": "0x31De30e2621D5AECd951F2661e2D03CDA27e2e83",
-    "PredictionMarketFixedModel": "0xE3e7A4B35574Ce4b9Bc661cD93e8804Da548932a",
-    "PredictionMarketFactoryNWayFixedModel": "0xdb88CFC18875e3eD6797de31dfAae31F942231F2",
-    "PredictionMarketNWayFixedModel": "0xE1165C689C3e9642cA7606F5287e708d846206",
-    "USDC": "0xFEE2d383Ee292283eC43bdf0fa360296BE1e1149"
+    "PredictionMarket": "0xc2504cD8ca96723c248df5d696B921a3332f1d38",
+    "PredictionMarketFactory": "0x3c5eC7698538a74C15Ca01C6cbb5FD6cbbae43AC",
+    "PredictionMarketNWay": "0xB7757653FDe43C6c337743647a31bf14Bab7cF83",
+    "PredictionMarketFactoryNWay": "0x8f7E2D2Fbd0a00A54396143f1BF3dB9e604C5f8C",
+    "PredictionMarketFactoryFixedModel": "0xA36B5Fec0E93d24908fAA9966535567E9f888994",
+    "PredictionMarketFactoryNWayFixedModel": "0x10F71F4b08915cc5908429e4D1C3E396a74DaE8E",
+    "USDC": "0x78155E681c54Da4c25B6228753EcbfF5d8C2Def8",
+    "MintableERC20": "0x78155E681c54Da4c25B6228753EcbfF5d8C2Def8"
   },
   "sepolia": {
     "PredictionMarket": "0x47968FF4877be3729Abc2899c4653366E70927F3",
