@@ -12,15 +12,55 @@ const MultiAgentBettingGenerator = () => {
     const [betCards, setBetCards] = useState([]);
     const [loading, setLoading] = useState(false);
     const [activeAgent, setActiveAgent] = useState(null);
+    const [isKeyValid, setIsKeyValid] = useState(null);
+    const [keyValidationError, setKeyValidationError] = useState('');
+
+    useEffect(() => {
+        const validateApiKey = async () => {
+            try {
+                const response = await fetch('/api/validate-key', { method: 'POST' });
+                const data = await response.json();
+                setIsKeyValid(data.valid);
+                if (!data.valid) {
+                    setKeyValidationError(data.error || 'API Key validation failed.');
+                }
+            } catch (e) {
+                setIsKeyValid(false);
+                setKeyValidationError('Failed to connect to the validation service.');
+            }
+        };
+        validateApiKey();
+    }, []);
+
+    const getAgentName = (agentId) => {
+        const names = {
+            trendDiscovery: 'Trend Discovery Agent',
+            socialSentiment: 'Social Sentiment Agent',
+            betGeneration: 'Bet Generation Agent',
+            validation: 'Validation Agent',
+            enhancement: 'Enhancement Agent'
+        };
+        return names[agentId] || agentId;
+    };
 
     const agentSequence = ['trendDiscovery', 'socialSentiment', 'betGeneration', 'validation', 'enhancement'];
 
     const defaultPrompts = {
-        trendDiscovery: "You are a trend analysis specialist. Your job is to identify the top 3-5 trending topics in {CATEGORY} that would make compelling betting propositions. Focus on topics with:\n- Recent surge in interest\n- Upcoming events or deadlines  \n- Measurable outcomes\n- Broad public interest\nReturn an array of trending topics with estimated search volumes.",
-        socialSentiment: "You are a social media analyst. Analyze the sentiment and discussion volume around these trending topics: {TOPICS}\n\nFor each topic, determine:\n- Overall sentiment (positive/negative/neutral)\n- Discussion volume (high/medium/low)\n- Key talking points and controversies\n- Likelihood of continued engagement\n\nReturn sentiment analysis data for each topic.",
-        betGeneration: "You are an expert betting market maker. Using the trending topics and social sentiment data, create exactly 3 unique yes/no betting propositions.\n\nFor each bet, ensure:\n- Clear yes/no question format\n- Specific timeframe for resolution\n- Objective, measurable outcome\n- Appeals to current public interest\n\nReturn structured bet objects with question, timeframe, and category.",
-        validation: "You are a betting compliance specialist. Validate these betting propositions for:\n- Clear, unambiguous resolution criteria\n- Reliable data sources for outcome verification\n- Appropriate timeframes (not too short/long)\n- No insider information advantages\n- Regulatory compliance\n\nFor each bet, provide or suggest a specific data source URL that will determine the outcome.",
-        enhancement: "You are a content enhancement specialist. For each validated bet, add:\n- 2-3 sentences explaining why this bet is particularly interesting right now\n- 1-3 keywords suitable for Unsplash image search\n- Estimated engagement potential (High/Medium/Low)\n- Any additional context that makes the bet more compelling\n\nReturn the final enhanced betting propositions ready for display."
+        trendDiscovery: `You are a trend analysis specialist. Identify the top 3-5 trending topics in the '{CATEGORY}' category suitable for betting.
+
+IMPORTANT: Your response MUST be a valid JSON array of objects, and nothing else. Do not include any explanatory text, markdown, or any characters outside of the JSON array. Each object must have the following structure: { "topic": "<topic_name>", "searchVolume": "<estimated_search_volume>" }.`,
+        socialSentiment: `You are a social media analyst. Your task is to analyze the sentiment and discussion volume for the following topics: {TOPICS}. For each topic, provide the overall sentiment (positive, negative, or neutral) and the discussion volume (high, medium, or low).
+
+IMPORTANT: Your response MUST be a valid JSON array of objects, and nothing else. Do not include any explanatory text, markdown, or any characters outside of the JSON array. Each object in the array should represent a topic and have the following structure: { "topic": "<topic_name>", "sentiment": "<sentiment>", "discussionVolume": "<volume>" }.`,
+        betGeneration: `You are an expert betting market maker. Based on the provided trend and sentiment data, create exactly 3 unique yes/no betting propositions.
+
+IMPORTANT: Your response MUST be a valid JSON array of objects, and nothing else. Do not include any explanatory text, markdown, or any characters outside of the JSON array. Each object must have the following structure: { "category": "<category_name>", "bet": "<yes/no_question>", "why": "<brief_explanation>", "source_url": "<resolution_source_url>" }.`,
+        validation: `You are a betting compliance specialist. Validate the following betting propositions. For each bet, confirm it has clear resolution criteria and suggest a reliable data source URL for verification.
+
+IMPORTANT: Your response MUST be a valid JSON array of objects, and nothing else. Do not include any explanatory text, markdown, or any characters outside of the JSON array. Each object must be an enhanced version of the input bet with the following structure: { "category": "<category>", "bet": "<bet_question>", "why": "<why_text>", "source_url": "<original_or_improved_url>", "validated": true, "resolutionCriteria": "<brief_criteria_summary>" }.`,
+        enhancement: `You are a content enhancement specialist. For each validated bet, add engaging context, image keywords, and an engagement potential score.
+
+IMPORTANT: Your response MUST be a valid JSON array of objects, and nothing else. Do not include any explanatory text, markdown, or any characters outside of the JSON array. Each object must be the final, enhanced bet with the following structure: { "category": "<category>", "bet": "<bet_question>", "why": "<original_why>", "source_url": "<source_url>", "validated": true, "resolutionCriteria": "<criteria>", "enhancedWhy": "<new_engaging_text>", "imageKeywords": "<keyword1> <keyword2>", "engagementPotential": "<High/Medium/Low>" }.`
     };
 
     // Refs for DOM elements that don't need to trigger re-renders
@@ -57,7 +97,40 @@ const MultiAgentBettingGenerator = () => {
 
         debugLog('🚀 Starting multi-agent workflow...', 'agent-start');
 
-        let currentData = { category };
+        let agentData = { category };
+
+        const normalizeToArray = (data, agentName) => {
+            // Case 1: Data is already an array
+            if (Array.isArray(data)) {
+                return data;
+            }
+
+            // Case 2: Data is an object, and one of its properties is an array
+            if (typeof data === 'object' && data !== null) {
+                const arrayKey = Object.keys(data).find(key => Array.isArray(data[key]));
+                if (arrayKey) {
+                    return data[arrayKey];
+                }
+            }
+
+            // Case 3: Data is an object with a 'text' property that contains a JSON string
+            if (data && typeof data.text === 'string') {
+                try {
+                    const regex = /```json\n([\s\S]*?)\n```/;
+                    const match = data.text.match(regex);
+                    const jsonText = match ? match[1] : data.text;
+                    const parsedData = JSON.parse(jsonText);
+                    
+                    // After parsing, run it through this function again to find the array
+                    return normalizeToArray(parsedData, agentName);
+                } catch (e) {
+                    // Fall through to the final error if parsing fails
+                }
+            }
+
+            // If all else fails, throw the error
+            throw new Error(`Agent ${agentName} returned data in an unexpected format. Expected an array or an object containing an array. Received: ${JSON.stringify(data)}`);
+        };
 
         try {
             for (const agentId of agentSequence) {
@@ -65,179 +138,79 @@ const MultiAgentBettingGenerator = () => {
                 setAgentState(prev => ({ ...prev, [agentId]: 'processing' }));
                 debugLog(`🔄 Executing ${getAgentName(agentId)}...`, 'agent-start');
 
-                // Simulate API call
-                await new Promise(resolve => setTimeout(resolve, 1000 + Math.random() * 1500));
-
-                const result = executeAgent(agentId, currentData);
-                currentData = { ...currentData, ...result };
+                const result = await executeAgent(agentId, agentData);
+                
+                // Normalize the output of agents that are supposed to return arrays
+                const normalizedResult = normalizeToArray(result, getAgentName(agentId));
+                agentData[agentId] = normalizedResult;
 
                 setAgentState(prev => ({ ...prev, [agentId]: 'complete' }));
                 debugLog(`✅ ${getAgentName(agentId)} completed`, 'agent-complete');
             }
 
-            setBetCards(currentData.enhancement);
-            debugLog('🎯 Betting propositions rendered successfully', 'agent-complete');
+            if (agentData.enhancement) {
+                setBetCards(agentData.enhancement);
+                debugLog('🎯 Betting propositions rendered successfully', 'agent-complete');
+            }
 
         } catch (e) {
             console.error('Workflow error:', e);
-            debugLog(`❌ Workflow error: ${e.message}`, 'agent-error');
-            setError('Agent workflow failed. Showing sample data instead.');
-            setBetCards(getSampleBets(category));
+            let detailedError = 'Agent workflow failed. Please check the console for details.';
+            try {
+                const errorBodyString = e.message.substring(e.message.indexOf('{'));
+                const errorBody = JSON.parse(errorBodyString);
+                if (errorBody.details) {
+                    detailedError = `Agent workflow failed: ${errorBody.details}`;
+                } else if (errorBody.error) {
+                    detailedError = `Agent workflow failed: ${errorBody.error}`;
+                }
+            } catch (parseError) {
+                detailedError = e.message;
+            }
+            debugLog(`❌ Workflow error: ${detailedError}`, 'agent-error');
+            setError(detailedError);
         } finally {
             setLoading(false);
             setActiveAgent(null);
         }
     };
 
-    const getAgentName = (agentId) => {
-        const names = {
-            trendDiscovery: 'Trend Discovery Agent',
-            socialSentiment: 'Social Sentiment Agent',
-            betGeneration: 'Bet Generation Agent',
-            validation: 'Validation Agent',
-            enhancement: 'Enhancement Agent'
-        };
-        return names[agentId] || agentId;
-    };
+    const executeAgent = async (agentId, agentData) => {
+        let currentPrompt = prompts[agentId];
 
-    const executeAgent = (agentId, currentData) => {
-        switch (agentId) {
-            case 'trendDiscovery':
-                return { trendDiscovery: getSimulatedTrends(currentData.category) };
-            case 'socialSentiment':
-                return { socialSentiment: executeSocialSentimentAgent(currentData.trendDiscovery) };
-            case 'betGeneration':
-                return { betGeneration: generateSampleBets(currentData.category) };
-            case 'validation':
-                return { validation: executeValidationAgent(currentData.betGeneration) };
-            case 'enhancement':
-                return { enhancement: executeEnhancementAgent(currentData.validation) };
-            default:
-                throw new Error(`Unknown agent: ${agentId}`);
+        if (agentId === 'socialSentiment' && agentData.trendDiscovery) {
+            const topics = agentData.trendDiscovery.map(t => t.topic).join(', ');
+            currentPrompt = currentPrompt.replace('{TOPICS}', topics);
+        } else if (agentId === 'betGeneration' && agentData.socialSentiment) {
+            currentPrompt += `\n\nTRENDS AND SENTIMENT DATA:\n${JSON.stringify(agentData.socialSentiment, null, 2)}`;
+        } else if (agentId === 'validation' && agentData.betGeneration) {
+            currentPrompt += `\n\nBETS TO VALIDATE:\n${JSON.stringify(agentData.betGeneration, null, 2)}`;
+        } else if (agentId === 'enhancement' && agentData.validation) {
+            currentPrompt += `\n\nBETS TO ENHANCE:\n${JSON.stringify(agentData.validation, null, 2)}`;
         }
-    };
 
-    const getSimulatedTrends = (category) => {
-        const trendData = {
-            Sports: [
-                { topic: 'NFL Playoff Race', searchVolume: '2.3M', trend: '+45%' },
-                { topic: 'NBA Trade Deadline', searchVolume: '1.8M', trend: '+62%' },
-                { topic: 'Soccer World Cup Qualifiers', searchVolume: '3.1M', trend: '+38%' }
-            ],
-            Crypto: [
-                { topic: 'Bitcoin ETF Approval', searchVolume: '4.2M', trend: '+89%' },
-                { topic: 'Ethereum 2.0 Staking', searchVolume: '1.9M', trend: '+54%' },
-                { topic: 'DeFi Protocol Updates', searchVolume: '1.2M', trend: '+31%' }
-            ],
-            Politics: [
-                { topic: 'Election Polling Data', searchVolume: '3.5M', trend: '+71%' },
-                { topic: 'Climate Policy Voting', searchVolume: '2.1M', trend: '+43%' },
-                { topic: 'Congressional Approval', searchVolume: '1.6M', trend: '+28%' }
-            ],
-            Entertainment: [
-                { topic: 'Streaming Wars', searchVolume: '2.8M', trend: '+56%' },
-                { topic: 'AI-Generated Content', searchVolume: '3.4M', trend: '+92%' },
-                { topic: 'Virtual Concert Revenue', searchVolume: '1.4M', trend: '+34%' }
-            ],
-            Misc: [
-                { topic: 'Lab-Grown Meat', searchVolume: '1.7M', trend: '+48%' },
-                { topic: 'Mars Mission Timeline', searchVolume: '2.2M', trend: '+67%' },
-                { topic: 'Autonomous Vehicle Adoption', searchVolume: '2.9M', trend: '+73%' }
-            ]
-        };
-        return trendData[category] || trendData.Sports;
-    };
+        console.log(`--- [Agent: ${agentId}] ---`);
+        console.log(`[Agent] Sending prompt:`, currentPrompt);
 
-    const executeSocialSentimentAgent = (trends) => {
-        return trends.map(trend => ({
-            ...trend,
-            sentiment: ['positive', 'negative', 'neutral'][Math.floor(Math.random() * 3)],
-            discussionVolume: ['high', 'medium', 'low'][Math.floor(Math.random() * 3)],
-        }));
-    };
+        const response = await fetch('/api/agent-proxy', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ prompt: currentPrompt }),
+        });
 
-    const generateSampleBets = (category) => {
-        const betData = {
-            Sports: [
-                {
-                    category: "Sports",
-                    bet: "Will the Lakers make the NBA playoffs this season?",
-                    why: "The Lakers have made several key roster changes and LeBron James is entering his 22nd season. Their playoff chances depend heavily on team chemistry and injury management.",
-                    source_url: "https://www.nba.com/playoffs",
-                    image_keywords: "basketball court NBA"
-                },
-                {
-                    category: "Sports",
-                    bet: "Will Lionel Messi score 20+ goals in MLS this season?",
-                    why: "Messi's adaptation to MLS continues to be closely watched. His goal-scoring rate will indicate how well he's adjusting to the league's unique style and travel demands.",
-                    source_url: "https://www.mlssoccer.com/stats",
-                    image_keywords: "soccer football stadium"
-                },
-            ],
-            Crypto: [
-                {
-                    category: "Crypto",
-                    bet: "Will Bitcoin reach $100,000 by the end of 2025?",
-                    why: "Bitcoin has shown strong institutional adoption and ETF approval momentum. Market cycles and regulatory clarity could drive significant price movements in either direction.",
-                    source_url: "https://coinmarketcap.com/currencies/bitcoin/",
-                    image_keywords: "bitcoin cryptocurrency gold"
-                },
-            ],
-            Politics: [
-                {
-                    category: "Politics",
-                    bet: "Will voter turnout exceed 70% in the next presidential election?",
-                    why: "Recent elections have seen historically high turnout rates. Mail-in voting expansion and increased political engagement could drive participation even higher.",
-                    source_url: "https://www.census.gov/topics/public-sector/voting.html",
-                    image_keywords: "voting ballot democracy"
-                },
-            ],
-            Entertainment: [
-                {
-                    category: "Entertainment",
-                    bet: "Will a streaming service surpass Netflix in global subscribers by 2026?",
-                    why: "Disney+, Amazon Prime, and other platforms are investing heavily in content and international expansion. The streaming wars are intensifying with significant market shifts possible.",
-                    source_url: "https://variety.com/streaming/",
-                    image_keywords: "streaming television entertainment"
-                },
-            ],
-            Misc: [
-                {
-                    category: "Misc",
-                    bet: "Will lab-grown meat be sold in regular supermarkets by 2026?",
-                    why: "Regulatory approvals are progressing and production costs are dropping. Consumer acceptance and price parity with traditional meat are key hurdles being addressed.",
-                    source_url: "https://www.fda.gov/food/food-ingredients-packaging",
-                    image_keywords: "laboratory food science"
-                },
-            ]
-        };
-        return betData[category] || betData.Sports;
-    };
+        console.log(`[Agent] Raw response status:`, response.status);
 
-    const getSampleBets = (category) => {
-        return generateSampleBets(category).map(bet => ({
-            ...bet,
-            enhancedWhy: bet.why + " This presents a unique opportunity for informed betting.",
-            imageKeywords: bet.image_keywords || 'betting market',
-            engagementPotential: ['High', 'Medium', 'Low'][Math.floor(Math.random() * 3)],
-        }));
-    };
+        if (!response.ok) {
+            const errorBody = await response.text();
+            console.error(`[Agent] Error response body:`, errorBody);
+            throw new Error(`Agent ${agentId} failed: ${errorBody}`);
+        }
 
-    const executeValidationAgent = (bets) => {
-        return bets.map(bet => ({
-            ...bet,
-            validated: true,
-            dataSource: bet.source_url || 'https://example.com/resolution-source'
-        }));
-    };
-
-    const executeEnhancementAgent = (bets) => {
-        return bets.map(bet => ({
-            ...bet,
-            enhancedWhy: bet.why + " This presents a unique opportunity for informed betting based on current market dynamics and trending indicators.",
-            imageKeywords: bet.image_keywords || 'betting market analysis',
-            engagementPotential: ['High', 'Medium', 'Low'][Math.floor(Math.random() * 3)],
-        }));
+        const responseData = await response.json();
+        console.log(`[Agent] Parsed response data:`, responseData);
+        return responseData;
     };
 
     const handlePromptChange = (agentId, value) => {
@@ -289,6 +262,12 @@ const MultiAgentBettingGenerator = () => {
                     <p className="subtitle">Orchestrated AI agents to generate intelligent betting propositions</p>
                 </header>
 
+                {isKeyValid === false && (
+                    <div className="error-message" style={{ marginBottom: '24px', border: '1px solid red', padding: '16px', borderRadius: '8px', backgroundColor: '#fff5f5', color: '#c53030' }}>
+                        <strong>Configuration Error:</strong> {keyValidationError}
+                    </div>
+                )}
+
                 <section className="config-panel card">
                     <div className="config-header">
                         <h2>Agent Configuration</h2>
@@ -326,8 +305,8 @@ const MultiAgentBettingGenerator = () => {
                     </div>
 
                     <div className="generate-section">
-                        <button onClick={handleGenerateClick} className="btn btn--primary btn--lg btn--full-width" disabled={loading}>
-                            {loading ? 'Generating...' : 'Generate Bets'}
+                        <button onClick={handleGenerateClick} className="btn btn--primary btn--lg btn--full-width" disabled={loading || !isKeyValid}>
+                            {loading ? 'Generating...' : (isKeyValid === null ? 'Validating Key...' : 'Generate Bets')}
                         </button>
                     </div>
                 </section>
