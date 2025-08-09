@@ -22,6 +22,9 @@ export default function Layout({ children }) {
             <li>
               <Link href="/test6-agent">Agent</Link>
             </li>
+            <li>
+              <Link href="/test7-agent">Agent (Bare Bones)</Link>
+            </li>
             {version === 'amm' && (
               <>
                 <li>

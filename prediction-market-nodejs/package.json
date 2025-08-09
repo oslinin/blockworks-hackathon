@@ -19,6 +19,7 @@
     "next": "^15.4.1",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
+    "react-json-view": "^1.21.3",
     "sinon": "^21.0.0"
   },
   "devDependencies": {

@@ -5,6 +5,7 @@ node_modules
 /prompts
 prompt*
 gemini.md
+deployments
 /gemini
 *.lock*
 # Hardhat files
