@@ -1,23 +1,20 @@
 {
   "localhost": {
-    "PredictionMarket": "0xc2504cD8ca96723c248df5d696B921a3332f1d38",
-    "PredictionMarketFactory": "0x3c5eC7698538a74C15Ca01C6cbb5FD6cbbae43AC",
-    "PredictionMarketNWay": "0xB7757653FDe43C6c337743647a31bf14Bab7cF83",
-    "PredictionMarketFactoryNWay": "0x8f7E2D2Fbd0a00A54396143f1BF3dB9e604C5f8C",
-    "PredictionMarketFactoryFixedModel": "0xA36B5Fec0E93d24908fAA9966535567E9f888994",
-    "PredictionMarketFactoryNWayFixedModel": "0x10F71F4b08915cc5908429e4D1C3E396a74DaE8E",
-    "USDC": "0x78155E681c54Da4c25B6228753EcbfF5d8C2Def8",
-    "MintableERC20": "0x78155E681c54Da4c25B6228753EcbfF5d8C2Def8"
+    "PredictionMarket": "0x5f246ADDCF057E0f778CD422e20e413be70f9a0c",
+    "PredictionMarketFactory": "0xD56e6F296352B03C3c3386543185E9B8c2e5Fd0b",
+    "PredictionMarketNWay": "0xBe6Eb4ACB499f992ba2DaC7CAD59d56DA9e0D823",
+    "PredictionMarketFactoryNWay": "0x3C2BafebbB0c8c58f39A976e725cD20D611d01e9",
+    "PredictionMarketFactoryFixedModel": "0xaD82Ecf79e232B0391C5479C7f632aA1EA701Ed1",
+    "PredictionMarketFactoryNWayFixedModel": "0xEC7cb8C3EBE77BA6d284F13296bb1372A8522c5F",
+    "USDC": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48"
   },
   "sepolia": {
-    "PredictionMarket": "0x47968FF4877be3729Abc2899c4653366E70927F3",
-    "PredictionMarketFactory": "0x76ddB4cfc2C98f9cfb80F8a8BE606623754B81ec",
-    "PredictionMarketNWay": "0x08A8dB3d2645cec08DB5f77Fe9D239672d971EdD",
-    "PredictionMarketFactoryNWay": "0xd3C4280d300917DED210D810fb3E2d99A56A509a",
+    "PredictionMarket": "0x9aB83086c41e23cd3B2f2620C3d3A5Cdb3671936",
+    "PredictionMarketFactory": "0x9602C4D10A761F6090594c35eE9f44E4ffd96292",
+    "PredictionMarketNWay": "0x4e1127B77Ae728AF1e150a052692bd38a7b22c72",
+    "PredictionMarketFactoryNWay": "0x267C9073291eCd60B6b9A575A5f46F51F8aD645F",
     "PredictionMarketFactoryFixedModel": "0x9b61E083185b94DB262AA74F2A02dD527bE36186",
-    "PredictionMarketFixedModel": "0x7BDd3a6144d715f4Ac91e80E7Bf1183C50D2d880",
     "PredictionMarketFactoryNWayFixedModel": "0x2B385e43C4c6faB628e0d6FF520cc620D1ea7Ba3",
-    "PredictionMarketNWayFixedModel": "0x3C130Dbe57DcEa0b0082424D7C1AfE1Df6De0397",
     "USDC": "0x1c7D4B196Cb0C7B01d743Fbc6116a902379C7238"
   }
 }

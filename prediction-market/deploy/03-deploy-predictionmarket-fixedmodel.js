@@ -1,18 +1,29 @@
 const { network, ethers } = require("hardhat");
-const { developmentChains } = require("../helper-hardhat-config");
+const { developmentChains, networkConfig } = require("../helper-hardhat-config");
 const { verify } = require("../utils/verify");
 
 module.exports = async ({ getNamedAccounts, deployments }) => {
     const { deploy, log, get } = deployments;
     const { deployer } = await getNamedAccounts();
+    const chainId = network.config.chainId
 
     log("----------------------------------------------------");
-    const usdc = await get("MintableERC20");
+    let usdcAddress
+    if (chainId == 31337) {
+        if (network.name === "hardhat") {
+            usdcAddress = networkConfig[chainId].usdcAddress
+        } else {
+            const usdc = await deployments.get("MintableERC20")
+            usdcAddress = usdc.address
+        }
+    } else {
+        usdcAddress = networkConfig[chainId].usdcAddress
+    }
     const arguments = [
         "A sample fixed model question?",
         0, // ELECTION
         deployer,
-        usdc.address
+        usdcAddress
     ];
     const predictionMarketFixedModel = await deploy("PredictionMarketFixedModel", {
         from: deployer,

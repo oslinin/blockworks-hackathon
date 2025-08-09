@@ -14,12 +14,17 @@ module.exports = async ({ getNamedAccounts, deployments }) => {
         ? 1
         : VERIFICATION_BLOCK_CONFIRMATIONS;
 
-    let usdcAddress;
+    let usdcAddress
     if (chainId == 31337) {
-        const usdc = await deployments.get("MintableERC20");
-        usdcAddress = usdc.address;
+        if (network.name === "hardhat") {
+            usdcAddress = networkConfig[chainId].usdcAddress
+        } else {
+            // This is for the "localhost" network
+            const usdc = await deployments.get("MintableERC20")
+            usdcAddress = usdc.address
+        }
     } else {
-        usdcAddress = networkConfig[chainId].usdcAddress;
+        usdcAddress = networkConfig[chainId].usdcAddress
     }
 
     const factory = await get("PredictionMarketFactory");

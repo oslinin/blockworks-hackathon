@@ -6,6 +6,7 @@ require("solidity-coverage");
 require("hardhat-gas-reporter");
 require("hardhat-contract-sizer");
 require("dotenv").config();
+require("./tasks/mint-usdc");
 
 /**
  * @type import('hardhat/config').HardhatUserConfig
@@ -34,8 +35,10 @@ module.exports = {
         hardhat: {
             // // If you want to do some forking, uncomment this
             forking: {
-              url: MAINNET_RPC_URL
+              url: MAINNET_RPC_URL,
+              blockNumber: 19489680
             },
+            initialBaseFeePerGas: 0,
             chainId: 31337,
         },
         localhost: {

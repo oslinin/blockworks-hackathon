@@ -28,8 +28,14 @@ module.exports = async ({ deployments, getNamedAccounts, network }) => {
     const predictionMarketFactoryNWayFixedModel = await getDeploymentData("PredictionMarketFactoryNWayFixedModel");
     let usdcContractData;
 
-    if (network.name === "sepolia") {
-        const erc20Abi = JSON.parse(fs.readFileSync(path.resolve(__dirname, "../abi/ERC20.json"), "utf8"));
+    const erc20Abi = JSON.parse(fs.readFileSync(path.resolve(__dirname, "../abi/ERC20.json"), "utf8"));
+
+    if (network.name === "hardhat") {
+        usdcContractData = {
+            address: "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48", // Mainnet USDC
+            abi: erc20Abi,
+        };
+    } else if (network.name === "sepolia") {
         usdcContractData = {
             address: SEPOLIA_USDC_ADDRESS,
             abi: erc20Abi,
