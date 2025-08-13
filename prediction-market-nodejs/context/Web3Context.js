@@ -56,6 +56,20 @@ export function Web3Provider({ children }) {
         init();
     }, []);
 
+    useEffect(() => {
+        const setDefaultNetwork = async () => {
+            if (provider && network) {
+                const isMobile = /Mobi/i.test(window.navigator.userAgent);
+                const targetChainId = isMobile ? '11155111' : '31337';
+
+                if (network.chainId.toString() !== targetChainId) {
+                    await switchNetwork(targetChainId);
+                }
+            }
+        };
+        setDefaultNetwork();
+    }, [provider, network]);
+
     const connectWallet = async () => {
         if (window.ethereum) {
             try {
