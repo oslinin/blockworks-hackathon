@@ -1,0 +1,33 @@
+[submodule "foundry-10-erc20/lib/foundry-devops"]
+	path = foundry-10-erc20/lib/foundry-devops
+	url = https://github.com/cyfrin/foundry-devops
+[submodule "foundry-10-erc20/lib/forge-std"]
+	path = foundry-10-erc20/lib/forge-std
+	url = https://github.com/foundry-rs/forge-std
+[submodule "foundry-10-erc20/lib/openzeppelin-contracts"]
+	path = foundry-10-erc20/lib/openzeppelin-contracts
+	url = https://github.com/openzeppelin/openzeppelin-contracts
+[submodule "foundry-07-fundme/lib/foundry-devops"]
+	path = foundry-07-fundme/lib/foundry-devops
+	url = https://github.com/cyfrin/foundry-devops
+[submodule "foundry-07-fundme/lib/chainlink-brownie-contracts"]
+	path = foundry-07-fundme/lib/chainlink-brownie-contracts
+	url = https://github.com/smartcontractkit/chainlink-brownie-contracts
+[submodule "foundry-07-fundme/lib/forge-std"]
+	path = foundry-07-fundme/lib/forge-std
+	url = https://github.com/foundry-rs/forge-std
+[submodule "oleg-basics-foundry/lib/foundry-devops"]
+	path = oleg-basics-foundry/lib/foundry-devops
+	url = https://github.com/cyfrin/foundry-devops
+[submodule "oleg-basics-foundry/lib/forge-std"]
+	path = oleg-basics-foundry/lib/forge-std
+	url = https://github.com/foundry-rs/forge-std
+[submodule "oleg-basics-foundry/lib/openzeppelin-contracts"]
+	path = oleg-basics-foundry/lib/openzeppelin-contracts
+	url = https://github.com/openzeppelin/openzeppelin-contracts
+[submodule "oleg-basics/lib/forge-std"]
+	path = oleg-basics/lib/forge-std
+	url = https://github.com/foundry-rs/forge-std
+[submodule "oleg-basics/lib/foundry-devops"]
+	path = oleg-basics/lib/foundry-devops
+	url = https://github.com/cyfrin/foundry-devops

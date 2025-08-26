@@ -1,0 +1,8 @@
+venv
+.qodo
+ganache-2.7.1-linux-x86_64.AppImage
+speedrun
+*.AppImage
+*.zip
+freecodecamp.md
+solididty2b.md
