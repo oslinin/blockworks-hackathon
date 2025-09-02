@@ -1,0 +1,530 @@
+{
+  "../node_modules/.pnpm/@reown+appkit-ui@1.7.8_@types+react@18.3.24_bufferutil@4.0.9_encoding@0.1.13_react@18.3_681fbe97da8b8bb1b4b2a37e493edebd/node_modules/@reown/appkit-ui/dist/esm/src/components/wui-icon/index.js -> ../../assets/svg/add.js": {
+    "id": "../node_modules/.pnpm/@reown+appkit-ui@1.7.8_@types+react@18.3.24_bufferutil@4.0.9_encoding@0.1.13_react@18.3_681fbe97da8b8bb1b4b2a37e493edebd/node_modules/@reown/appkit-ui/dist/esm/src/components/wui-icon/index.js -> ../../assets/svg/add.js",
+    "files": [
+      "static/chunks/_app-pages-browser_node_modules_pnpm_reown_appkit-ui_1_7_8__types_react_18_3_24_bufferutil_4_-8fae65.js"
+    ]
+  },
+  "../node_modules/.pnpm/@reown+appkit-ui@1.7.8_@types+react@18.3.24_bufferutil@4.0.9_encoding@0.1.13_react@18.3_681fbe97da8b8bb1b4b2a37e493edebd/node_modules/@reown/appkit-ui/dist/esm/src/components/wui-icon/index.js -> ../../assets/svg/all-wallets.js": {
+    "id": "../node_modules/.pnpm/@reown+appkit-ui@1.7.8_@types+react@18.3.24_bufferutil@4.0.9_encoding@0.1.13_react@18.3_681fbe97da8b8bb1b4b2a37e493edebd/node_modules/@reown/appkit-ui/dist/esm/src/components/wui-icon/index.js -> ../../assets/svg/all-wallets.js",
+    "files": [
+      "static/chunks/_app-pages-browser_node_modules_pnpm_reown_appkit-ui_1_7_8__types_react_18_3_24_bufferutil_4_-2731c9.js"
+    ]
+  },
+  "../node_modules/.pnpm/@reown+appkit-ui@1.7.8_@types+react@18.3.24_bufferutil@4.0.9_encoding@0.1.13_react@18.3_681fbe97da8b8bb1b4b2a37e493edebd/node_modules/@reown/appkit-ui/dist/esm/src/components/wui-icon/index.js -> ../../assets/svg/app-store.js": {
+    "id": "../node_modules/.pnpm/@reown+appkit-ui@1.7.8_@types+react@18.3.24_bufferutil@4.0.9_encoding@0.1.13_react@18.3_681fbe97da8b8bb1b4b2a37e493edebd/node_modules/@reown/appkit-ui/dist/esm/src/components/wui-icon/index.js -> ../../assets/svg/app-store.js",
+    "files": [
+      "static/chunks/_app-pages-browser_node_modules_pnpm_reown_appkit-ui_1_7_8__types_react_18_3_24_bufferutil_4_-bd7396.js"
+    ]
+  },
+  "../node_modules/.pnpm/@reown+appkit-ui@1.7.8_@types+react@18.3.24_bufferutil@4.0.9_encoding@0.1.13_react@18.3_681fbe97da8b8bb1b4b2a37e493edebd/node_modules/@reown/appkit-ui/dist/esm/src/components/wui-icon/index.js -> ../../assets/svg/apple.js": {
+    "id": "../node_modules/.pnpm/@reown+appkit-ui@1.7.8_@types+react@18.3.24_bufferutil@4.0.9_encoding@0.1.13_react@18.3_681fbe97da8b8bb1b4b2a37e493edebd/node_modules/@reown/appkit-ui/dist/esm/src/components/wui-icon/index.js -> ../../assets/svg/apple.js",
+    "files": [
+      "static/chunks/_app-pages-browser_node_modules_pnpm_reown_appkit-ui_1_7_8__types_react_18_3_24_bufferutil_4_-56b6ca.js"
+    ]
+  },
+  "../node_modules/.pnpm/@reown+appkit-ui@1.7.8_@types+react@18.3.24_bufferutil@4.0.9_encoding@0.1.13_react@18.3_681fbe97da8b8bb1b4b2a37e493edebd/node_modules/@reown/appkit-ui/dist/esm/src/components/wui-icon/index.js -> ../../assets/svg/arrow-bottom-circle.js": {
+    "id": "../node_modules/.pnpm/@reown+appkit-ui@1.7.8_@types+react@18.3.24_bufferutil@4.0.9_encoding@0.1.13_react@18.3_681fbe97da8b8bb1b4b2a37e493edebd/node_modules/@reown/appkit-ui/dist/esm/src/components/wui-icon/index.js -> ../../assets/svg/arrow-bottom-circle.js",
+    "files": [
+      "static/chunks/_app-pages-browser_node_modules_pnpm_reown_appkit-ui_1_7_8__types_react_18_3_24_bufferutil_4_-cc6beb.js"
+    ]
+  },
+  "../node_modules/.pnpm/@reown+appkit-ui@1.7.8_@types+react@18.3.24_bufferutil@4.0.9_encoding@0.1.13_react@18.3_681fbe97da8b8bb1b4b2a37e493edebd/node_modules/@reown/appkit-ui/dist/esm/src/components/wui-icon/index.js -> ../../assets/svg/arrow-bottom.js": {
+    "id": "../node_modules/.pnpm/@reown+appkit-ui@1.7.8_@types+react@18.3.24_bufferutil@4.0.9_encoding@0.1.13_react@18.3_681fbe97da8b8bb1b4b2a37e493edebd/node_modules/@reown/appkit-ui/dist/esm/src/components/wui-icon/index.js -> ../../assets/svg/arrow-bottom.js",
+    "files": [
+      "static/chunks/_app-pages-browser_node_modules_pnpm_reown_appkit-ui_1_7_8__types_react_18_3_24_bufferutil_4_-b5db19.js"
+    ]
+  },
+  "../node_modules/.pnpm/@reown+appkit-ui@1.7.8_@types+react@18.3.24_bufferutil@4.0.9_encoding@0.1.13_react@18.3_681fbe97da8b8bb1b4b2a37e493edebd/node_modules/@reown/appkit-ui/dist/esm/src/components/wui-icon/index.js -> ../../assets/svg/arrow-left.js": {
+    "id": "../node_modules/.pnpm/@reown+appkit-ui@1.7.8_@types+react@18.3.24_bufferutil@4.0.9_encoding@0.1.13_react@18.3_681fbe97da8b8bb1b4b2a37e493edebd/node_modules/@reown/appkit-ui/dist/esm/src/components/wui-icon/index.js -> ../../assets/svg/arrow-left.js",
+    "files": [
+      "static/chunks/_app-pages-browser_node_modules_pnpm_reown_appkit-ui_1_7_8__types_react_18_3_24_bufferutil_4_-968590.js"
+    ]
+  },
+  "../node_modules/.pnpm/@reown+appkit-ui@1.7.8_@types+react@18.3.24_bufferutil@4.0.9_encoding@0.1.13_react@18.3_681fbe97da8b8bb1b4b2a37e493edebd/node_modules/@reown/appkit-ui/dist/esm/src/components/wui-icon/index.js -> ../../assets/svg/arrow-right.js": {
+    "id": "../node_modules/.pnpm/@reown+appkit-ui@1.7.8_@types+react@18.3.24_bufferutil@4.0.9_encoding@0.1.13_react@18.3_681fbe97da8b8bb1b4b2a37e493edebd/node_modules/@reown/appkit-ui/dist/esm/src/components/wui-icon/index.js -> ../../assets/svg/arrow-right.js",
+    "files": [
+      "static/chunks/_app-pages-browser_node_modules_pnpm_reown_appkit-ui_1_7_8__types_react_18_3_24_bufferutil_4_-02dc49.js"
+    ]
+  },
+  "../node_modules/.pnpm/@reown+appkit-ui@1.7.8_@types+react@18.3.24_bufferutil@4.0.9_encoding@0.1.13_react@18.3_681fbe97da8b8bb1b4b2a37e493edebd/node_modules/@reown/appkit-ui/dist/esm/src/components/wui-icon/index.js -> ../../assets/svg/arrow-top.js": {
+    "id": "../node_modules/.pnpm/@reown+appkit-ui@1.7.8_@types+react@18.3.24_bufferutil@4.0.9_encoding@0.1.13_react@18.3_681fbe97da8b8bb1b4b2a37e493edebd/node_modules/@reown/appkit-ui/dist/esm/src/components/wui-icon/index.js -> ../../assets/svg/arrow-top.js",
+    "files": [
+      "static/chunks/_app-pages-browser_node_modules_pnpm_reown_appkit-ui_1_7_8__types_react_18_3_24_bufferutil_4_-0350cc.js"
+    ]
+  },
+  "../node_modules/.pnpm/@reown+appkit-ui@1.7.8_@types+react@18.3.24_bufferutil@4.0.9_encoding@0.1.13_react@18.3_681fbe97da8b8bb1b4b2a37e493edebd/node_modules/@reown/appkit-ui/dist/esm/src/components/wui-icon/index.js -> ../../assets/svg/bank.js": {
+    "id": "../node_modules/.pnpm/@reown+appkit-ui@1.7.8_@types+react@18.3.24_bufferutil@4.0.9_encoding@0.1.13_react@18.3_681fbe97da8b8bb1b4b2a37e493edebd/node_modules/@reown/appkit-ui/dist/esm/src/components/wui-icon/index.js -> ../../assets/svg/bank.js",
+    "files": [
+      "static/chunks/_app-pages-browser_node_modules_pnpm_reown_appkit-ui_1_7_8__types_react_18_3_24_bufferutil_4_-47bce6.js"
+    ]
+  },
+  "../node_modules/.pnpm/@reown+appkit-ui@1.7.8_@types+react@18.3.24_bufferutil@4.0.9_encoding@0.1.13_react@18.3_681fbe97da8b8bb1b4b2a37e493edebd/node_modules/@reown/appkit-ui/dist/esm/src/components/wui-icon/index.js -> ../../assets/svg/browser.js": {
+    "id": "../node_modules/.pnpm/@reown+appkit-ui@1.7.8_@types+react@18.3.24_bufferutil@4.0.9_encoding@0.1.13_react@18.3_681fbe97da8b8bb1b4b2a37e493edebd/node_modules/@reown/appkit-ui/dist/esm/src/components/wui-icon/index.js -> ../../assets/svg/browser.js",
+    "files": [
+      "static/chunks/_app-pages-browser_node_modules_pnpm_reown_appkit-ui_1_7_8__types_react_18_3_24_bufferutil_4_-ae10fe.js"
+    ]
+  },
+  "../node_modules/.pnpm/@reown+appkit-ui@1.7.8_@types+react@18.3.24_bufferutil@4.0.9_encoding@0.1.13_react@18.3_681fbe97da8b8bb1b4b2a37e493edebd/node_modules/@reown/appkit-ui/dist/esm/src/components/wui-icon/index.js -> ../../assets/svg/card.js": {
+    "id": "../node_modules/.pnpm/@reown+appkit-ui@1.7.8_@types+react@18.3.24_bufferutil@4.0.9_encoding@0.1.13_react@18.3_681fbe97da8b8bb1b4b2a37e493edebd/node_modules/@reown/appkit-ui/dist/esm/src/components/wui-icon/index.js -> ../../assets/svg/card.js",
+    "files": [
+      "static/chunks/_app-pages-browser_node_modules_pnpm_reown_appkit-ui_1_7_8__types_react_18_3_24_bufferutil_4_-bca746.js"
+    ]
+  },
+  "../node_modules/.pnpm/@reown+appkit-ui@1.7.8_@types+react@18.3.24_bufferutil@4.0.9_encoding@0.1.13_react@18.3_681fbe97da8b8bb1b4b2a37e493edebd/node_modules/@reown/appkit-ui/dist/esm/src/components/wui-icon/index.js -> ../../assets/svg/checkmark-bold.js": {
+    "id": "../node_modules/.pnpm/@reown+appkit-ui@1.7.8_@types+react@18.3.24_bufferutil@4.0.9_encoding@0.1.13_react@18.3_681fbe97da8b8bb1b4b2a37e493edebd/node_modules/@reown/appkit-ui/dist/esm/src/components/wui-icon/index.js -> ../../assets/svg/checkmark-bold.js",
+    "files": [
+      "static/chunks/_app-pages-browser_node_modules_pnpm_reown_appkit-ui_1_7_8__types_react_18_3_24_bufferutil_4_-063656.js"
+    ]
+  },
+  "../node_modules/.pnpm/@reown+appkit-ui@1.7.8_@types+react@18.3.24_bufferutil@4.0.9_encoding@0.1.13_react@18.3_681fbe97da8b8bb1b4b2a37e493edebd/node_modules/@reown/appkit-ui/dist/esm/src/components/wui-icon/index.js -> ../../assets/svg/checkmark.js": {
+    "id": "../node_modules/.pnpm/@reown+appkit-ui@1.7.8_@types+react@18.3.24_bufferutil@4.0.9_encoding@0.1.13_react@18.3_681fbe97da8b8bb1b4b2a37e493edebd/node_modules/@reown/appkit-ui/dist/esm/src/components/wui-icon/index.js -> ../../assets/svg/checkmark.js",
+    "files": [
+      "static/chunks/_app-pages-browser_node_modules_pnpm_reown_appkit-ui_1_7_8__types_react_18_3_24_bufferutil_4_-af195f.js"
+    ]
+  },
+  "../node_modules/.pnpm/@reown+appkit-ui@1.7.8_@types+react@18.3.24_bufferutil@4.0.9_encoding@0.1.13_react@18.3_681fbe97da8b8bb1b4b2a37e493edebd/node_modules/@reown/appkit-ui/dist/esm/src/components/wui-icon/index.js -> ../../assets/svg/chevron-bottom.js": {
+    "id": "../node_modules/.pnpm/@reown+appkit-ui@1.7.8_@types+react@18.3.24_bufferutil@4.0.9_encoding@0.1.13_react@18.3_681fbe97da8b8bb1b4b2a37e493edebd/node_modules/@reown/appkit-ui/dist/esm/src/components/wui-icon/index.js -> ../../assets/svg/chevron-bottom.js",
+    "files": [
+      "static/chunks/_app-pages-browser_node_modules_pnpm_reown_appkit-ui_1_7_8__types_react_18_3_24_bufferutil_4_-c06c81.js"
+    ]
+  },
+  "../node_modules/.pnpm/@reown+appkit-ui@1.7.8_@types+react@18.3.24_bufferutil@4.0.9_encoding@0.1.13_react@18.3_681fbe97da8b8bb1b4b2a37e493edebd/node_modules/@reown/appkit-ui/dist/esm/src/components/wui-icon/index.js -> ../../assets/svg/chevron-left.js": {
+    "id": "../node_modules/.pnpm/@reown+appkit-ui@1.7.8_@types+react@18.3.24_bufferutil@4.0.9_encoding@0.1.13_react@18.3_681fbe97da8b8bb1b4b2a37e493edebd/node_modules/@reown/appkit-ui/dist/esm/src/components/wui-icon/index.js -> ../../assets/svg/chevron-left.js",
+    "files": [
+      "static/chunks/_app-pages-browser_node_modules_pnpm_reown_appkit-ui_1_7_8__types_react_18_3_24_bufferutil_4_-88107e.js"
+    ]
+  },
+  "../node_modules/.pnpm/@reown+appkit-ui@1.7.8_@types+react@18.3.24_bufferutil@4.0.9_encoding@0.1.13_react@18.3_681fbe97da8b8bb1b4b2a37e493edebd/node_modules/@reown/appkit-ui/dist/esm/src/components/wui-icon/index.js -> ../../assets/svg/chevron-right.js": {
+    "id": "../node_modules/.pnpm/@reown+appkit-ui@1.7.8_@types+react@18.3.24_bufferutil@4.0.9_encoding@0.1.13_react@18.3_681fbe97da8b8bb1b4b2a37e493edebd/node_modules/@reown/appkit-ui/dist/esm/src/components/wui-icon/index.js -> ../../assets/svg/chevron-right.js",
+    "files": [
+      "static/chunks/_app-pages-browser_node_modules_pnpm_reown_appkit-ui_1_7_8__types_react_18_3_24_bufferutil_4_-6c525f.js"
+    ]
+  },
+  "../node_modules/.pnpm/@reown+appkit-ui@1.7.8_@types+react@18.3.24_bufferutil@4.0.9_encoding@0.1.13_react@18.3_681fbe97da8b8bb1b4b2a37e493edebd/node_modules/@reown/appkit-ui/dist/esm/src/components/wui-icon/index.js -> ../../assets/svg/chevron-top.js": {
+    "id": "../node_modules/.pnpm/@reown+appkit-ui@1.7.8_@types+react@18.3.24_bufferutil@4.0.9_encoding@0.1.13_react@18.3_681fbe97da8b8bb1b4b2a37e493edebd/node_modules/@reown/appkit-ui/dist/esm/src/components/wui-icon/index.js -> ../../assets/svg/chevron-top.js",
+    "files": [
+      "static/chunks/_app-pages-browser_node_modules_pnpm_reown_appkit-ui_1_7_8__types_react_18_3_24_bufferutil_4_-9b1759.js"
+    ]
+  },
+  "../node_modules/.pnpm/@reown+appkit-ui@1.7.8_@types+react@18.3.24_bufferutil@4.0.9_encoding@0.1.13_react@18.3_681fbe97da8b8bb1b4b2a37e493edebd/node_modules/@reown/appkit-ui/dist/esm/src/components/wui-icon/index.js -> ../../assets/svg/chrome-store.js": {
+    "id": "../node_modules/.pnpm/@reown+appkit-ui@1.7.8_@types+react@18.3.24_bufferutil@4.0.9_encoding@0.1.13_react@18.3_681fbe97da8b8bb1b4b2a37e493edebd/node_modules/@reown/appkit-ui/dist/esm/src/components/wui-icon/index.js -> ../../assets/svg/chrome-store.js",
+    "files": [
+      "static/chunks/_app-pages-browser_node_modules_pnpm_reown_appkit-ui_1_7_8__types_react_18_3_24_bufferutil_4_-a81cd7.js"
+    ]
+  },
+  "../node_modules/.pnpm/@reown+appkit-ui@1.7.8_@types+react@18.3.24_bufferutil@4.0.9_encoding@0.1.13_react@18.3_681fbe97da8b8bb1b4b2a37e493edebd/node_modules/@reown/appkit-ui/dist/esm/src/components/wui-icon/index.js -> ../../assets/svg/clock.js": {
+    "id": "../node_modules/.pnpm/@reown+appkit-ui@1.7.8_@types+react@18.3.24_bufferutil@4.0.9_encoding@0.1.13_react@18.3_681fbe97da8b8bb1b4b2a37e493edebd/node_modules/@reown/appkit-ui/dist/esm/src/components/wui-icon/index.js -> ../../assets/svg/clock.js",
+    "files": [
+      "static/chunks/_app-pages-browser_node_modules_pnpm_reown_appkit-ui_1_7_8__types_react_18_3_24_bufferutil_4_-417729.js"
+    ]
+  },
+  "../node_modules/.pnpm/@reown+appkit-ui@1.7.8_@types+react@18.3.24_bufferutil@4.0.9_encoding@0.1.13_react@18.3_681fbe97da8b8bb1b4b2a37e493edebd/node_modules/@reown/appkit-ui/dist/esm/src/components/wui-icon/index.js -> ../../assets/svg/close.js": {
+    "id": "../node_modules/.pnpm/@reown+appkit-ui@1.7.8_@types+react@18.3.24_bufferutil@4.0.9_encoding@0.1.13_react@18.3_681fbe97da8b8bb1b4b2a37e493edebd/node_modules/@reown/appkit-ui/dist/esm/src/components/wui-icon/index.js -> ../../assets/svg/close.js",
+    "files": [
+      "static/chunks/_app-pages-browser_node_modules_pnpm_reown_appkit-ui_1_7_8__types_react_18_3_24_bufferutil_4_-5a79c1.js"
+    ]
+  },
+  "../node_modules/.pnpm/@reown+appkit-ui@1.7.8_@types+react@18.3.24_bufferutil@4.0.9_encoding@0.1.13_react@18.3_681fbe97da8b8bb1b4b2a37e493edebd/node_modules/@reown/appkit-ui/dist/esm/src/components/wui-icon/index.js -> ../../assets/svg/coinPlaceholder.js": {
+    "id": "../node_modules/.pnpm/@reown+appkit-ui@1.7.8_@types+react@18.3.24_bufferutil@4.0.9_encoding@0.1.13_react@18.3_681fbe97da8b8bb1b4b2a37e493edebd/node_modules/@reown/appkit-ui/dist/esm/src/components/wui-icon/index.js -> ../../assets/svg/coinPlaceholder.js",
+    "files": [
+      "static/chunks/_app-pages-browser_node_modules_pnpm_reown_appkit-ui_1_7_8__types_react_18_3_24_bufferutil_4_-4eab2e.js"
+    ]
+  },
+  "../node_modules/.pnpm/@reown+appkit-ui@1.7.8_@types+react@18.3.24_bufferutil@4.0.9_encoding@0.1.13_react@18.3_681fbe97da8b8bb1b4b2a37e493edebd/node_modules/@reown/appkit-ui/dist/esm/src/components/wui-icon/index.js -> ../../assets/svg/compass.js": {
+    "id": "../node_modules/.pnpm/@reown+appkit-ui@1.7.8_@types+react@18.3.24_bufferutil@4.0.9_encoding@0.1.13_react@18.3_681fbe97da8b8bb1b4b2a37e493edebd/node_modules/@reown/appkit-ui/dist/esm/src/components/wui-icon/index.js -> ../../assets/svg/compass.js",
+    "files": [
+      "static/chunks/_app-pages-browser_node_modules_pnpm_reown_appkit-ui_1_7_8__types_react_18_3_24_bufferutil_4_-47ace7.js"
+    ]
+  },
+  "../node_modules/.pnpm/@reown+appkit-ui@1.7.8_@types+react@18.3.24_bufferutil@4.0.9_encoding@0.1.13_react@18.3_681fbe97da8b8bb1b4b2a37e493edebd/node_modules/@reown/appkit-ui/dist/esm/src/components/wui-icon/index.js -> ../../assets/svg/copy.js": {
+    "id": "../node_modules/.pnpm/@reown+appkit-ui@1.7.8_@types+react@18.3.24_bufferutil@4.0.9_encoding@0.1.13_react@18.3_681fbe97da8b8bb1b4b2a37e493edebd/node_modules/@reown/appkit-ui/dist/esm/src/components/wui-icon/index.js -> ../../assets/svg/copy.js",
+    "files": [
+      "static/chunks/_app-pages-browser_node_modules_pnpm_reown_appkit-ui_1_7_8__types_react_18_3_24_bufferutil_4_-18fd23.js"
+    ]
+  },
+  "../node_modules/.pnpm/@reown+appkit-ui@1.7.8_@types+react@18.3.24_bufferutil@4.0.9_encoding@0.1.13_react@18.3_681fbe97da8b8bb1b4b2a37e493edebd/node_modules/@reown/appkit-ui/dist/esm/src/components/wui-icon/index.js -> ../../assets/svg/cursor-transparent.js": {
+    "id": "../node_modules/.pnpm/@reown+appkit-ui@1.7.8_@types+react@18.3.24_bufferutil@4.0.9_encoding@0.1.13_react@18.3_681fbe97da8b8bb1b4b2a37e493edebd/node_modules/@reown/appkit-ui/dist/esm/src/components/wui-icon/index.js -> ../../assets/svg/cursor-transparent.js",
+    "files": [
+      "static/chunks/_app-pages-browser_node_modules_pnpm_reown_appkit-ui_1_7_8__types_react_18_3_24_bufferutil_4_-236489.js"
+    ]
+  },
+  "../node_modules/.pnpm/@reown+appkit-ui@1.7.8_@types+react@18.3.24_bufferutil@4.0.9_encoding@0.1.13_react@18.3_681fbe97da8b8bb1b4b2a37e493edebd/node_modules/@reown/appkit-ui/dist/esm/src/components/wui-icon/index.js -> ../../assets/svg/cursor.js": {
+    "id": "../node_modules/.pnpm/@reown+appkit-ui@1.7.8_@types+react@18.3.24_bufferutil@4.0.9_encoding@0.1.13_react@18.3_681fbe97da8b8bb1b4b2a37e493edebd/node_modules/@reown/appkit-ui/dist/esm/src/components/wui-icon/index.js -> ../../assets/svg/cursor.js",
+    "files": [
+      "static/chunks/_app-pages-browser_node_modules_pnpm_reown_appkit-ui_1_7_8__types_react_18_3_24_bufferutil_4_-0b396c.js"
+    ]
+  },
+  "../node_modules/.pnpm/@reown+appkit-ui@1.7.8_@types+react@18.3.24_bufferutil@4.0.9_encoding@0.1.13_react@18.3_681fbe97da8b8bb1b4b2a37e493edebd/node_modules/@reown/appkit-ui/dist/esm/src/components/wui-icon/index.js -> ../../assets/svg/desktop.js": {
+    "id": "../node_modules/.pnpm/@reown+appkit-ui@1.7.8_@types+react@18.3.24_bufferutil@4.0.9_encoding@0.1.13_react@18.3_681fbe97da8b8bb1b4b2a37e493edebd/node_modules/@reown/appkit-ui/dist/esm/src/components/wui-icon/index.js -> ../../assets/svg/desktop.js",
+    "files": [
+      "static/chunks/_app-pages-browser_node_modules_pnpm_reown_appkit-ui_1_7_8__types_react_18_3_24_bufferutil_4_-1346e5.js"
+    ]
+  },
+  "../node_modules/.pnpm/@reown+appkit-ui@1.7.8_@types+react@18.3.24_bufferutil@4.0.9_encoding@0.1.13_react@18.3_681fbe97da8b8bb1b4b2a37e493edebd/node_modules/@reown/appkit-ui/dist/esm/src/components/wui-icon/index.js -> ../../assets/svg/disconnect.js": {
+    "id": "../node_modules/.pnpm/@reown+appkit-ui@1.7.8_@types+react@18.3.24_bufferutil@4.0.9_encoding@0.1.13_react@18.3_681fbe97da8b8bb1b4b2a37e493edebd/node_modules/@reown/appkit-ui/dist/esm/src/components/wui-icon/index.js -> ../../assets/svg/disconnect.js",
+    "files": [
+      "static/chunks/_app-pages-browser_node_modules_pnpm_reown_appkit-ui_1_7_8__types_react_18_3_24_bufferutil_4_-d923de.js"
+    ]
+  },
+  "../node_modules/.pnpm/@reown+appkit-ui@1.7.8_@types+react@18.3.24_bufferutil@4.0.9_encoding@0.1.13_react@18.3_681fbe97da8b8bb1b4b2a37e493edebd/node_modules/@reown/appkit-ui/dist/esm/src/components/wui-icon/index.js -> ../../assets/svg/discord.js": {
+    "id": "../node_modules/.pnpm/@reown+appkit-ui@1.7.8_@types+react@18.3.24_bufferutil@4.0.9_encoding@0.1.13_react@18.3_681fbe97da8b8bb1b4b2a37e493edebd/node_modules/@reown/appkit-ui/dist/esm/src/components/wui-icon/index.js -> ../../assets/svg/discord.js",
+    "files": [
+      "static/chunks/_app-pages-browser_node_modules_pnpm_reown_appkit-ui_1_7_8__types_react_18_3_24_bufferutil_4_-035031.js"
+    ]
+  },
+  "../node_modules/.pnpm/@reown+appkit-ui@1.7.8_@types+react@18.3.24_bufferutil@4.0.9_encoding@0.1.13_react@18.3_681fbe97da8b8bb1b4b2a37e493edebd/node_modules/@reown/appkit-ui/dist/esm/src/components/wui-icon/index.js -> ../../assets/svg/etherscan.js": {
+    "id": "../node_modules/.pnpm/@reown+appkit-ui@1.7.8_@types+react@18.3.24_bufferutil@4.0.9_encoding@0.1.13_react@18.3_681fbe97da8b8bb1b4b2a37e493edebd/node_modules/@reown/appkit-ui/dist/esm/src/components/wui-icon/index.js -> ../../assets/svg/etherscan.js",
+    "files": [
+      "static/chunks/_app-pages-browser_node_modules_pnpm_reown_appkit-ui_1_7_8__types_react_18_3_24_bufferutil_4_-e7ed34.js"
+    ]
+  },
+  "../node_modules/.pnpm/@reown+appkit-ui@1.7.8_@types+react@18.3.24_bufferutil@4.0.9_encoding@0.1.13_react@18.3_681fbe97da8b8bb1b4b2a37e493edebd/node_modules/@reown/appkit-ui/dist/esm/src/components/wui-icon/index.js -> ../../assets/svg/exclamation-triangle.js": {
+    "id": "../node_modules/.pnpm/@reown+appkit-ui@1.7.8_@types+react@18.3.24_bufferutil@4.0.9_encoding@0.1.13_react@18.3_681fbe97da8b8bb1b4b2a37e493edebd/node_modules/@reown/appkit-ui/dist/esm/src/components/wui-icon/index.js -> ../../assets/svg/exclamation-triangle.js",
+    "files": [
+      "static/chunks/_app-pages-browser_node_modules_pnpm_reown_appkit-ui_1_7_8__types_react_18_3_24_bufferutil_4_-46fd1b.js"
+    ]
+  },
+  "../node_modules/.pnpm/@reown+appkit-ui@1.7.8_@types+react@18.3.24_bufferutil@4.0.9_encoding@0.1.13_react@18.3_681fbe97da8b8bb1b4b2a37e493edebd/node_modules/@reown/appkit-ui/dist/esm/src/components/wui-icon/index.js -> ../../assets/svg/extension.js": {
+    "id": "../node_modules/.pnpm/@reown+appkit-ui@1.7.8_@types+react@18.3.24_bufferutil@4.0.9_encoding@0.1.13_react@18.3_681fbe97da8b8bb1b4b2a37e493edebd/node_modules/@reown/appkit-ui/dist/esm/src/components/wui-icon/index.js -> ../../assets/svg/extension.js",
+    "files": [
+      "static/chunks/_app-pages-browser_node_modules_pnpm_reown_appkit-ui_1_7_8__types_react_18_3_24_bufferutil_4_-47b75f.js"
+    ]
+  },
+  "../node_modules/.pnpm/@reown+appkit-ui@1.7.8_@types+react@18.3.24_bufferutil@4.0.9_encoding@0.1.13_react@18.3_681fbe97da8b8bb1b4b2a37e493edebd/node_modules/@reown/appkit-ui/dist/esm/src/components/wui-icon/index.js -> ../../assets/svg/external-link.js": {
+    "id": "../node_modules/.pnpm/@reown+appkit-ui@1.7.8_@types+react@18.3.24_bufferutil@4.0.9_encoding@0.1.13_react@18.3_681fbe97da8b8bb1b4b2a37e493edebd/node_modules/@reown/appkit-ui/dist/esm/src/components/wui-icon/index.js -> ../../assets/svg/external-link.js",
+    "files": [
+      "static/chunks/_app-pages-browser_node_modules_pnpm_reown_appkit-ui_1_7_8__types_react_18_3_24_bufferutil_4_-05096b.js"
+    ]
+  },
+  "../node_modules/.pnpm/@reown+appkit-ui@1.7.8_@types+react@18.3.24_bufferutil@4.0.9_encoding@0.1.13_react@18.3_681fbe97da8b8bb1b4b2a37e493edebd/node_modules/@reown/appkit-ui/dist/esm/src/components/wui-icon/index.js -> ../../assets/svg/facebook.js": {
+    "id": "../node_modules/.pnpm/@reown+appkit-ui@1.7.8_@types+react@18.3.24_bufferutil@4.0.9_encoding@0.1.13_react@18.3_681fbe97da8b8bb1b4b2a37e493edebd/node_modules/@reown/appkit-ui/dist/esm/src/components/wui-icon/index.js -> ../../assets/svg/facebook.js",
+    "files": [
+      "static/chunks/_app-pages-browser_node_modules_pnpm_reown_appkit-ui_1_7_8__types_react_18_3_24_bufferutil_4_-63c481.js"
+    ]
+  },
+  "../node_modules/.pnpm/@reown+appkit-ui@1.7.8_@types+react@18.3.24_bufferutil@4.0.9_encoding@0.1.13_react@18.3_681fbe97da8b8bb1b4b2a37e493edebd/node_modules/@reown/appkit-ui/dist/esm/src/components/wui-icon/index.js -> ../../assets/svg/farcaster.js": {
+    "id": "../node_modules/.pnpm/@reown+appkit-ui@1.7.8_@types+react@18.3.24_bufferutil@4.0.9_encoding@0.1.13_react@18.3_681fbe97da8b8bb1b4b2a37e493edebd/node_modules/@reown/appkit-ui/dist/esm/src/components/wui-icon/index.js -> ../../assets/svg/farcaster.js",
+    "files": [
+      "static/chunks/_app-pages-browser_node_modules_pnpm_reown_appkit-ui_1_7_8__types_react_18_3_24_bufferutil_4_-64e291.js"
+    ]
+  },
+  "../node_modules/.pnpm/@reown+appkit-ui@1.7.8_@types+react@18.3.24_bufferutil@4.0.9_encoding@0.1.13_react@18.3_681fbe97da8b8bb1b4b2a37e493edebd/node_modules/@reown/appkit-ui/dist/esm/src/components/wui-icon/index.js -> ../../assets/svg/filters.js": {
+    "id": "../node_modules/.pnpm/@reown+appkit-ui@1.7.8_@types+react@18.3.24_bufferutil@4.0.9_encoding@0.1.13_react@18.3_681fbe97da8b8bb1b4b2a37e493edebd/node_modules/@reown/appkit-ui/dist/esm/src/components/wui-icon/index.js -> ../../assets/svg/filters.js",
+    "files": [
+      "static/chunks/_app-pages-browser_node_modules_pnpm_reown_appkit-ui_1_7_8__types_react_18_3_24_bufferutil_4_-43c2c4.js"
+    ]
+  },
+  "../node_modules/.pnpm/@reown+appkit-ui@1.7.8_@types+react@18.3.24_bufferutil@4.0.9_encoding@0.1.13_react@18.3_681fbe97da8b8bb1b4b2a37e493edebd/node_modules/@reown/appkit-ui/dist/esm/src/components/wui-icon/index.js -> ../../assets/svg/github.js": {
+    "id": "../node_modules/.pnpm/@reown+appkit-ui@1.7.8_@types+react@18.3.24_bufferutil@4.0.9_encoding@0.1.13_react@18.3_681fbe97da8b8bb1b4b2a37e493edebd/node_modules/@reown/appkit-ui/dist/esm/src/components/wui-icon/index.js -> ../../assets/svg/github.js",
+    "files": [
+      "static/chunks/_app-pages-browser_node_modules_pnpm_reown_appkit-ui_1_7_8__types_react_18_3_24_bufferutil_4_-b20205.js"
+    ]
+  },
+  "../node_modules/.pnpm/@reown+appkit-ui@1.7.8_@types+react@18.3.24_bufferutil@4.0.9_encoding@0.1.13_react@18.3_681fbe97da8b8bb1b4b2a37e493edebd/node_modules/@reown/appkit-ui/dist/esm/src/components/wui-icon/index.js -> ../../assets/svg/google.js": {
+    "id": "../node_modules/.pnpm/@reown+appkit-ui@1.7.8_@types+react@18.3.24_bufferutil@4.0.9_encoding@0.1.13_react@18.3_681fbe97da8b8bb1b4b2a37e493edebd/node_modules/@reown/appkit-ui/dist/esm/src/components/wui-icon/index.js -> ../../assets/svg/google.js",
+    "files": [
+      "static/chunks/_app-pages-browser_node_modules_pnpm_reown_appkit-ui_1_7_8__types_react_18_3_24_bufferutil_4_-54ebc2.js"
+    ]
+  },
+  "../node_modules/.pnpm/@reown+appkit-ui@1.7.8_@types+react@18.3.24_bufferutil@4.0.9_encoding@0.1.13_react@18.3_681fbe97da8b8bb1b4b2a37e493edebd/node_modules/@reown/appkit-ui/dist/esm/src/components/wui-icon/index.js -> ../../assets/svg/help-circle.js": {
+    "id": "../node_modules/.pnpm/@reown+appkit-ui@1.7.8_@types+react@18.3.24_bufferutil@4.0.9_encoding@0.1.13_react@18.3_681fbe97da8b8bb1b4b2a37e493edebd/node_modules/@reown/appkit-ui/dist/esm/src/components/wui-icon/index.js -> ../../assets/svg/help-circle.js",
+    "files": [
+      "static/chunks/_app-pages-browser_node_modules_pnpm_reown_appkit-ui_1_7_8__types_react_18_3_24_bufferutil_4_-00d962.js"
+    ]
+  },
+  "../node_modules/.pnpm/@reown+appkit-ui@1.7.8_@types+react@18.3.24_bufferutil@4.0.9_encoding@0.1.13_react@18.3_681fbe97da8b8bb1b4b2a37e493edebd/node_modules/@reown/appkit-ui/dist/esm/src/components/wui-icon/index.js -> ../../assets/svg/id.js": {
+    "id": "../node_modules/.pnpm/@reown+appkit-ui@1.7.8_@types+react@18.3.24_bufferutil@4.0.9_encoding@0.1.13_react@18.3_681fbe97da8b8bb1b4b2a37e493edebd/node_modules/@reown/appkit-ui/dist/esm/src/components/wui-icon/index.js -> ../../assets/svg/id.js",
+    "files": [
+      "static/chunks/_app-pages-browser_node_modules_pnpm_reown_appkit-ui_1_7_8__types_react_18_3_24_bufferutil_4_-06fc81.js"
+    ]
+  },
+  "../node_modules/.pnpm/@reown+appkit-ui@1.7.8_@types+react@18.3.24_bufferutil@4.0.9_encoding@0.1.13_react@18.3_681fbe97da8b8bb1b4b2a37e493edebd/node_modules/@reown/appkit-ui/dist/esm/src/components/wui-icon/index.js -> ../../assets/svg/image.js": {
+    "id": "../node_modules/.pnpm/@reown+appkit-ui@1.7.8_@types+react@18.3.24_bufferutil@4.0.9_encoding@0.1.13_react@18.3_681fbe97da8b8bb1b4b2a37e493edebd/node_modules/@reown/appkit-ui/dist/esm/src/components/wui-icon/index.js -> ../../assets/svg/image.js",
+    "files": [
+      "static/chunks/_app-pages-browser_node_modules_pnpm_reown_appkit-ui_1_7_8__types_react_18_3_24_bufferutil_4_-3b0821.js"
+    ]
+  },
+  "../node_modules/.pnpm/@reown+appkit-ui@1.7.8_@types+react@18.3.24_bufferutil@4.0.9_encoding@0.1.13_react@18.3_681fbe97da8b8bb1b4b2a37e493edebd/node_modules/@reown/appkit-ui/dist/esm/src/components/wui-icon/index.js -> ../../assets/svg/info-circle.js": {
+    "id": "../node_modules/.pnpm/@reown+appkit-ui@1.7.8_@types+react@18.3.24_bufferutil@4.0.9_encoding@0.1.13_react@18.3_681fbe97da8b8bb1b4b2a37e493edebd/node_modules/@reown/appkit-ui/dist/esm/src/components/wui-icon/index.js -> ../../assets/svg/info-circle.js",
+    "files": [
+      "static/chunks/_app-pages-browser_node_modules_pnpm_reown_appkit-ui_1_7_8__types_react_18_3_24_bufferutil_4_-557b1d.js"
+    ]
+  },
+  "../node_modules/.pnpm/@reown+appkit-ui@1.7.8_@types+react@18.3.24_bufferutil@4.0.9_encoding@0.1.13_react@18.3_681fbe97da8b8bb1b4b2a37e493edebd/node_modules/@reown/appkit-ui/dist/esm/src/components/wui-icon/index.js -> ../../assets/svg/info.js": {
+    "id": "../node_modules/.pnpm/@reown+appkit-ui@1.7.8_@types+react@18.3.24_bufferutil@4.0.9_encoding@0.1.13_react@18.3_681fbe97da8b8bb1b4b2a37e493edebd/node_modules/@reown/appkit-ui/dist/esm/src/components/wui-icon/index.js -> ../../assets/svg/info.js",
+    "files": [
+      "static/chunks/_app-pages-browser_node_modules_pnpm_reown_appkit-ui_1_7_8__types_react_18_3_24_bufferutil_4_-eaf0c2.js"
+    ]
+  },
+  "../node_modules/.pnpm/@reown+appkit-ui@1.7.8_@types+react@18.3.24_bufferutil@4.0.9_encoding@0.1.13_react@18.3_681fbe97da8b8bb1b4b2a37e493edebd/node_modules/@reown/appkit-ui/dist/esm/src/components/wui-icon/index.js -> ../../assets/svg/lightbulb.js": {
+    "id": "../node_modules/.pnpm/@reown+appkit-ui@1.7.8_@types+react@18.3.24_bufferutil@4.0.9_encoding@0.1.13_react@18.3_681fbe97da8b8bb1b4b2a37e493edebd/node_modules/@reown/appkit-ui/dist/esm/src/components/wui-icon/index.js -> ../../assets/svg/lightbulb.js",
+    "files": [
+      "static/chunks/_app-pages-browser_node_modules_pnpm_reown_appkit-ui_1_7_8__types_react_18_3_24_bufferutil_4_-4204e3.js"
+    ]
+  },
+  "../node_modules/.pnpm/@reown+appkit-ui@1.7.8_@types+react@18.3.24_bufferutil@4.0.9_encoding@0.1.13_react@18.3_681fbe97da8b8bb1b4b2a37e493edebd/node_modules/@reown/appkit-ui/dist/esm/src/components/wui-icon/index.js -> ../../assets/svg/mail.js": {
+    "id": "../node_modules/.pnpm/@reown+appkit-ui@1.7.8_@types+react@18.3.24_bufferutil@4.0.9_encoding@0.1.13_react@18.3_681fbe97da8b8bb1b4b2a37e493edebd/node_modules/@reown/appkit-ui/dist/esm/src/components/wui-icon/index.js -> ../../assets/svg/mail.js",
+    "files": [
+      "static/chunks/_app-pages-browser_node_modules_pnpm_reown_appkit-ui_1_7_8__types_react_18_3_24_bufferutil_4_-4f6173.js"
+    ]
+  },
+  "../node_modules/.pnpm/@reown+appkit-ui@1.7.8_@types+react@18.3.24_bufferutil@4.0.9_encoding@0.1.13_react@18.3_681fbe97da8b8bb1b4b2a37e493edebd/node_modules/@reown/appkit-ui/dist/esm/src/components/wui-icon/index.js -> ../../assets/svg/mobile.js": {
+    "id": "../node_modules/.pnpm/@reown+appkit-ui@1.7.8_@types+react@18.3.24_bufferutil@4.0.9_encoding@0.1.13_react@18.3_681fbe97da8b8bb1b4b2a37e493edebd/node_modules/@reown/appkit-ui/dist/esm/src/components/wui-icon/index.js -> ../../assets/svg/mobile.js",
+    "files": [
+      "static/chunks/_app-pages-browser_node_modules_pnpm_reown_appkit-ui_1_7_8__types_react_18_3_24_bufferutil_4_-debdd6.js"
+    ]
+  },
+  "../node_modules/.pnpm/@reown+appkit-ui@1.7.8_@types+react@18.3.24_bufferutil@4.0.9_encoding@0.1.13_react@18.3_681fbe97da8b8bb1b4b2a37e493edebd/node_modules/@reown/appkit-ui/dist/esm/src/components/wui-icon/index.js -> ../../assets/svg/more.js": {
+    "id": "../node_modules/.pnpm/@reown+appkit-ui@1.7.8_@types+react@18.3.24_bufferutil@4.0.9_encoding@0.1.13_react@18.3_681fbe97da8b8bb1b4b2a37e493edebd/node_modules/@reown/appkit-ui/dist/esm/src/components/wui-icon/index.js -> ../../assets/svg/more.js",
+    "files": [
+      "static/chunks/_app-pages-browser_node_modules_pnpm_reown_appkit-ui_1_7_8__types_react_18_3_24_bufferutil_4_-fced4e.js"
+    ]
+  },
+  "../node_modules/.pnpm/@reown+appkit-ui@1.7.8_@types+react@18.3.24_bufferutil@4.0.9_encoding@0.1.13_react@18.3_681fbe97da8b8bb1b4b2a37e493edebd/node_modules/@reown/appkit-ui/dist/esm/src/components/wui-icon/index.js -> ../../assets/svg/network-placeholder.js": {
+    "id": "../node_modules/.pnpm/@reown+appkit-ui@1.7.8_@types+react@18.3.24_bufferutil@4.0.9_encoding@0.1.13_react@18.3_681fbe97da8b8bb1b4b2a37e493edebd/node_modules/@reown/appkit-ui/dist/esm/src/components/wui-icon/index.js -> ../../assets/svg/network-placeholder.js",
+    "files": [
+      "static/chunks/_app-pages-browser_node_modules_pnpm_reown_appkit-ui_1_7_8__types_react_18_3_24_bufferutil_4_-3c1c9d.js"
+    ]
+  },
+  "../node_modules/.pnpm/@reown+appkit-ui@1.7.8_@types+react@18.3.24_bufferutil@4.0.9_encoding@0.1.13_react@18.3_681fbe97da8b8bb1b4b2a37e493edebd/node_modules/@reown/appkit-ui/dist/esm/src/components/wui-icon/index.js -> ../../assets/svg/nftPlaceholder.js": {
+    "id": "../node_modules/.pnpm/@reown+appkit-ui@1.7.8_@types+react@18.3.24_bufferutil@4.0.9_encoding@0.1.13_react@18.3_681fbe97da8b8bb1b4b2a37e493edebd/node_modules/@reown/appkit-ui/dist/esm/src/components/wui-icon/index.js -> ../../assets/svg/nftPlaceholder.js",
+    "files": [
+      "static/chunks/_app-pages-browser_node_modules_pnpm_reown_appkit-ui_1_7_8__types_react_18_3_24_bufferutil_4_-5ee48c.js"
+    ]
+  },
+  "../node_modules/.pnpm/@reown+appkit-ui@1.7.8_@types+react@18.3.24_bufferutil@4.0.9_encoding@0.1.13_react@18.3_681fbe97da8b8bb1b4b2a37e493edebd/node_modules/@reown/appkit-ui/dist/esm/src/components/wui-icon/index.js -> ../../assets/svg/off.js": {
+    "id": "../node_modules/.pnpm/@reown+appkit-ui@1.7.8_@types+react@18.3.24_bufferutil@4.0.9_encoding@0.1.13_react@18.3_681fbe97da8b8bb1b4b2a37e493edebd/node_modules/@reown/appkit-ui/dist/esm/src/components/wui-icon/index.js -> ../../assets/svg/off.js",
+    "files": [
+      "static/chunks/_app-pages-browser_node_modules_pnpm_reown_appkit-ui_1_7_8__types_react_18_3_24_bufferutil_4_-a4dff1.js"
+    ]
+  },
+  "../node_modules/.pnpm/@reown+appkit-ui@1.7.8_@types+react@18.3.24_bufferutil@4.0.9_encoding@0.1.13_react@18.3_681fbe97da8b8bb1b4b2a37e493edebd/node_modules/@reown/appkit-ui/dist/esm/src/components/wui-icon/index.js -> ../../assets/svg/play-store.js": {
+    "id": "../node_modules/.pnpm/@reown+appkit-ui@1.7.8_@types+react@18.3.24_bufferutil@4.0.9_encoding@0.1.13_react@18.3_681fbe97da8b8bb1b4b2a37e493edebd/node_modules/@reown/appkit-ui/dist/esm/src/components/wui-icon/index.js -> ../../assets/svg/play-store.js",
+    "files": [
+      "static/chunks/_app-pages-browser_node_modules_pnpm_reown_appkit-ui_1_7_8__types_react_18_3_24_bufferutil_4_-09d6d3.js"
+    ]
+  },
+  "../node_modules/.pnpm/@reown+appkit-ui@1.7.8_@types+react@18.3.24_bufferutil@4.0.9_encoding@0.1.13_react@18.3_681fbe97da8b8bb1b4b2a37e493edebd/node_modules/@reown/appkit-ui/dist/esm/src/components/wui-icon/index.js -> ../../assets/svg/plus.js": {
+    "id": "../node_modules/.pnpm/@reown+appkit-ui@1.7.8_@types+react@18.3.24_bufferutil@4.0.9_encoding@0.1.13_react@18.3_681fbe97da8b8bb1b4b2a37e493edebd/node_modules/@reown/appkit-ui/dist/esm/src/components/wui-icon/index.js -> ../../assets/svg/plus.js",
+    "files": [
+      "static/chunks/_app-pages-browser_node_modules_pnpm_reown_appkit-ui_1_7_8__types_react_18_3_24_bufferutil_4_-509bb0.js"
+    ]
+  },
+  "../node_modules/.pnpm/@reown+appkit-ui@1.7.8_@types+react@18.3.24_bufferutil@4.0.9_encoding@0.1.13_react@18.3_681fbe97da8b8bb1b4b2a37e493edebd/node_modules/@reown/appkit-ui/dist/esm/src/components/wui-icon/index.js -> ../../assets/svg/qr-code.js": {
+    "id": "../node_modules/.pnpm/@reown+appkit-ui@1.7.8_@types+react@18.3.24_bufferutil@4.0.9_encoding@0.1.13_react@18.3_681fbe97da8b8bb1b4b2a37e493edebd/node_modules/@reown/appkit-ui/dist/esm/src/components/wui-icon/index.js -> ../../assets/svg/qr-code.js",
+    "files": [
+      "static/chunks/_app-pages-browser_node_modules_pnpm_reown_appkit-ui_1_7_8__types_react_18_3_24_bufferutil_4_-18178c.js"
+    ]
+  },
+  "../node_modules/.pnpm/@reown+appkit-ui@1.7.8_@types+react@18.3.24_bufferutil@4.0.9_encoding@0.1.13_react@18.3_681fbe97da8b8bb1b4b2a37e493edebd/node_modules/@reown/appkit-ui/dist/esm/src/components/wui-icon/index.js -> ../../assets/svg/recycle-horizontal.js": {
+    "id": "../node_modules/.pnpm/@reown+appkit-ui@1.7.8_@types+react@18.3.24_bufferutil@4.0.9_encoding@0.1.13_react@18.3_681fbe97da8b8bb1b4b2a37e493edebd/node_modules/@reown/appkit-ui/dist/esm/src/components/wui-icon/index.js -> ../../assets/svg/recycle-horizontal.js",
+    "files": [
+      "static/chunks/_app-pages-browser_node_modules_pnpm_reown_appkit-ui_1_7_8__types_react_18_3_24_bufferutil_4_-efb6a1.js"
+    ]
+  },
+  "../node_modules/.pnpm/@reown+appkit-ui@1.7.8_@types+react@18.3.24_bufferutil@4.0.9_encoding@0.1.13_react@18.3_681fbe97da8b8bb1b4b2a37e493edebd/node_modules/@reown/appkit-ui/dist/esm/src/components/wui-icon/index.js -> ../../assets/svg/refresh.js": {
+    "id": "../node_modules/.pnpm/@reown+appkit-ui@1.7.8_@types+react@18.3.24_bufferutil@4.0.9_encoding@0.1.13_react@18.3_681fbe97da8b8bb1b4b2a37e493edebd/node_modules/@reown/appkit-ui/dist/esm/src/components/wui-icon/index.js -> ../../assets/svg/refresh.js",
+    "files": [
+      "static/chunks/_app-pages-browser_node_modules_pnpm_reown_appkit-ui_1_7_8__types_react_18_3_24_bufferutil_4_-5c4154.js"
+    ]
+  },
+  "../node_modules/.pnpm/@reown+appkit-ui@1.7.8_@types+react@18.3.24_bufferutil@4.0.9_encoding@0.1.13_react@18.3_681fbe97da8b8bb1b4b2a37e493edebd/node_modules/@reown/appkit-ui/dist/esm/src/components/wui-icon/index.js -> ../../assets/svg/reown-logo.js": {
+    "id": "../node_modules/.pnpm/@reown+appkit-ui@1.7.8_@types+react@18.3.24_bufferutil@4.0.9_encoding@0.1.13_react@18.3_681fbe97da8b8bb1b4b2a37e493edebd/node_modules/@reown/appkit-ui/dist/esm/src/components/wui-icon/index.js -> ../../assets/svg/reown-logo.js",
+    "files": [
+      "static/chunks/_app-pages-browser_node_modules_pnpm_reown_appkit-ui_1_7_8__types_react_18_3_24_bufferutil_4_-766b21.js"
+    ]
+  },
+  "../node_modules/.pnpm/@reown+appkit-ui@1.7.8_@types+react@18.3.24_bufferutil@4.0.9_encoding@0.1.13_react@18.3_681fbe97da8b8bb1b4b2a37e493edebd/node_modules/@reown/appkit-ui/dist/esm/src/components/wui-icon/index.js -> ../../assets/svg/search.js": {
+    "id": "../node_modules/.pnpm/@reown+appkit-ui@1.7.8_@types+react@18.3.24_bufferutil@4.0.9_encoding@0.1.13_react@18.3_681fbe97da8b8bb1b4b2a37e493edebd/node_modules/@reown/appkit-ui/dist/esm/src/components/wui-icon/index.js -> ../../assets/svg/search.js",
+    "files": [
+      "static/chunks/_app-pages-browser_node_modules_pnpm_reown_appkit-ui_1_7_8__types_react_18_3_24_bufferutil_4_-7223af.js"
+    ]
+  },
+  "../node_modules/.pnpm/@reown+appkit-ui@1.7.8_@types+react@18.3.24_bufferutil@4.0.9_encoding@0.1.13_react@18.3_681fbe97da8b8bb1b4b2a37e493edebd/node_modules/@reown/appkit-ui/dist/esm/src/components/wui-icon/index.js -> ../../assets/svg/send.js": {
+    "id": "../node_modules/.pnpm/@reown+appkit-ui@1.7.8_@types+react@18.3.24_bufferutil@4.0.9_encoding@0.1.13_react@18.3_681fbe97da8b8bb1b4b2a37e493edebd/node_modules/@reown/appkit-ui/dist/esm/src/components/wui-icon/index.js -> ../../assets/svg/send.js",
+    "files": [
+      "static/chunks/_app-pages-browser_node_modules_pnpm_reown_appkit-ui_1_7_8__types_react_18_3_24_bufferutil_4_-bed01a.js"
+    ]
+  },
+  "../node_modules/.pnpm/@reown+appkit-ui@1.7.8_@types+react@18.3.24_bufferutil@4.0.9_encoding@0.1.13_react@18.3_681fbe97da8b8bb1b4b2a37e493edebd/node_modules/@reown/appkit-ui/dist/esm/src/components/wui-icon/index.js -> ../../assets/svg/swapHorizontal.js": {
+    "id": "../node_modules/.pnpm/@reown+appkit-ui@1.7.8_@types+react@18.3.24_bufferutil@4.0.9_encoding@0.1.13_react@18.3_681fbe97da8b8bb1b4b2a37e493edebd/node_modules/@reown/appkit-ui/dist/esm/src/components/wui-icon/index.js -> ../../assets/svg/swapHorizontal.js",
+    "files": [
+      "static/chunks/_app-pages-browser_node_modules_pnpm_reown_appkit-ui_1_7_8__types_react_18_3_24_bufferutil_4_-c58675.js"
+    ]
+  },
+  "../node_modules/.pnpm/@reown+appkit-ui@1.7.8_@types+react@18.3.24_bufferutil@4.0.9_encoding@0.1.13_react@18.3_681fbe97da8b8bb1b4b2a37e493edebd/node_modules/@reown/appkit-ui/dist/esm/src/components/wui-icon/index.js -> ../../assets/svg/swapHorizontalBold.js": {
+    "id": "../node_modules/.pnpm/@reown+appkit-ui@1.7.8_@types+react@18.3.24_bufferutil@4.0.9_encoding@0.1.13_react@18.3_681fbe97da8b8bb1b4b2a37e493edebd/node_modules/@reown/appkit-ui/dist/esm/src/components/wui-icon/index.js -> ../../assets/svg/swapHorizontalBold.js",
+    "files": [
+      "static/chunks/_app-pages-browser_node_modules_pnpm_reown_appkit-ui_1_7_8__types_react_18_3_24_bufferutil_4_-c0b92b.js"
+    ]
+  },
+  "../node_modules/.pnpm/@reown+appkit-ui@1.7.8_@types+react@18.3.24_bufferutil@4.0.9_encoding@0.1.13_react@18.3_681fbe97da8b8bb1b4b2a37e493edebd/node_modules/@reown/appkit-ui/dist/esm/src/components/wui-icon/index.js -> ../../assets/svg/swapHorizontalMedium.js": {
+    "id": "../node_modules/.pnpm/@reown+appkit-ui@1.7.8_@types+react@18.3.24_bufferutil@4.0.9_encoding@0.1.13_react@18.3_681fbe97da8b8bb1b4b2a37e493edebd/node_modules/@reown/appkit-ui/dist/esm/src/components/wui-icon/index.js -> ../../assets/svg/swapHorizontalMedium.js",
+    "files": [
+      "static/chunks/_app-pages-browser_node_modules_pnpm_reown_appkit-ui_1_7_8__types_react_18_3_24_bufferutil_4_-8c2f3d.js"
+    ]
+  },
+  "../node_modules/.pnpm/@reown+appkit-ui@1.7.8_@types+react@18.3.24_bufferutil@4.0.9_encoding@0.1.13_react@18.3_681fbe97da8b8bb1b4b2a37e493edebd/node_modules/@reown/appkit-ui/dist/esm/src/components/wui-icon/index.js -> ../../assets/svg/swapHorizontalRoundedBold.js": {
+    "id": "../node_modules/.pnpm/@reown+appkit-ui@1.7.8_@types+react@18.3.24_bufferutil@4.0.9_encoding@0.1.13_react@18.3_681fbe97da8b8bb1b4b2a37e493edebd/node_modules/@reown/appkit-ui/dist/esm/src/components/wui-icon/index.js -> ../../assets/svg/swapHorizontalRoundedBold.js",
+    "files": [
+      "static/chunks/_app-pages-browser_node_modules_pnpm_reown_appkit-ui_1_7_8__types_react_18_3_24_bufferutil_4_-f82e7f.js"
+    ]
+  },
+  "../node_modules/.pnpm/@reown+appkit-ui@1.7.8_@types+react@18.3.24_bufferutil@4.0.9_encoding@0.1.13_react@18.3_681fbe97da8b8bb1b4b2a37e493edebd/node_modules/@reown/appkit-ui/dist/esm/src/components/wui-icon/index.js -> ../../assets/svg/swapVertical.js": {
+    "id": "../node_modules/.pnpm/@reown+appkit-ui@1.7.8_@types+react@18.3.24_bufferutil@4.0.9_encoding@0.1.13_react@18.3_681fbe97da8b8bb1b4b2a37e493edebd/node_modules/@reown/appkit-ui/dist/esm/src/components/wui-icon/index.js -> ../../assets/svg/swapVertical.js",
+    "files": [
+      "static/chunks/_app-pages-browser_node_modules_pnpm_reown_appkit-ui_1_7_8__types_react_18_3_24_bufferutil_4_-2360dc.js"
+    ]
+  },
+  "../node_modules/.pnpm/@reown+appkit-ui@1.7.8_@types+react@18.3.24_bufferutil@4.0.9_encoding@0.1.13_react@18.3_681fbe97da8b8bb1b4b2a37e493edebd/node_modules/@reown/appkit-ui/dist/esm/src/components/wui-icon/index.js -> ../../assets/svg/telegram.js": {
+    "id": "../node_modules/.pnpm/@reown+appkit-ui@1.7.8_@types+react@18.3.24_bufferutil@4.0.9_encoding@0.1.13_react@18.3_681fbe97da8b8bb1b4b2a37e493edebd/node_modules/@reown/appkit-ui/dist/esm/src/components/wui-icon/index.js -> ../../assets/svg/telegram.js",
+    "files": [
+      "static/chunks/_app-pages-browser_node_modules_pnpm_reown_appkit-ui_1_7_8__types_react_18_3_24_bufferutil_4_-bdac26.js"
+    ]
+  },
+  "../node_modules/.pnpm/@reown+appkit-ui@1.7.8_@types+react@18.3.24_bufferutil@4.0.9_encoding@0.1.13_react@18.3_681fbe97da8b8bb1b4b2a37e493edebd/node_modules/@reown/appkit-ui/dist/esm/src/components/wui-icon/index.js -> ../../assets/svg/three-dots.js": {
+    "id": "../node_modules/.pnpm/@reown+appkit-ui@1.7.8_@types+react@18.3.24_bufferutil@4.0.9_encoding@0.1.13_react@18.3_681fbe97da8b8bb1b4b2a37e493edebd/node_modules/@reown/appkit-ui/dist/esm/src/components/wui-icon/index.js -> ../../assets/svg/three-dots.js",
+    "files": [
+      "static/chunks/_app-pages-browser_node_modules_pnpm_reown_appkit-ui_1_7_8__types_react_18_3_24_bufferutil_4_-df6c9a.js"
+    ]
+  },
+  "../node_modules/.pnpm/@reown+appkit-ui@1.7.8_@types+react@18.3.24_bufferutil@4.0.9_encoding@0.1.13_react@18.3_681fbe97da8b8bb1b4b2a37e493edebd/node_modules/@reown/appkit-ui/dist/esm/src/components/wui-icon/index.js -> ../../assets/svg/twitch.js": {
+    "id": "../node_modules/.pnpm/@reown+appkit-ui@1.7.8_@types+react@18.3.24_bufferutil@4.0.9_encoding@0.1.13_react@18.3_681fbe97da8b8bb1b4b2a37e493edebd/node_modules/@reown/appkit-ui/dist/esm/src/components/wui-icon/index.js -> ../../assets/svg/twitch.js",
+    "files": [
+      "static/chunks/_app-pages-browser_node_modules_pnpm_reown_appkit-ui_1_7_8__types_react_18_3_24_bufferutil_4_-3384d7.js"
+    ]
+  },
+  "../node_modules/.pnpm/@reown+appkit-ui@1.7.8_@types+react@18.3.24_bufferutil@4.0.9_encoding@0.1.13_react@18.3_681fbe97da8b8bb1b4b2a37e493edebd/node_modules/@reown/appkit-ui/dist/esm/src/components/wui-icon/index.js -> ../../assets/svg/twitterIcon.js": {
+    "id": "../node_modules/.pnpm/@reown+appkit-ui@1.7.8_@types+react@18.3.24_bufferutil@4.0.9_encoding@0.1.13_react@18.3_681fbe97da8b8bb1b4b2a37e493edebd/node_modules/@reown/appkit-ui/dist/esm/src/components/wui-icon/index.js -> ../../assets/svg/twitterIcon.js",
+    "files": [
+      "static/chunks/_app-pages-browser_node_modules_pnpm_reown_appkit-ui_1_7_8__types_react_18_3_24_bufferutil_4_-68be03.js"
+    ]
+  },
+  "../node_modules/.pnpm/@reown+appkit-ui@1.7.8_@types+react@18.3.24_bufferutil@4.0.9_encoding@0.1.13_react@18.3_681fbe97da8b8bb1b4b2a37e493edebd/node_modules/@reown/appkit-ui/dist/esm/src/components/wui-icon/index.js -> ../../assets/svg/verify-filled.js": {
+    "id": "../node_modules/.pnpm/@reown+appkit-ui@1.7.8_@types+react@18.3.24_bufferutil@4.0.9_encoding@0.1.13_react@18.3_681fbe97da8b8bb1b4b2a37e493edebd/node_modules/@reown/appkit-ui/dist/esm/src/components/wui-icon/index.js -> ../../assets/svg/verify-filled.js",
+    "files": [
+      "static/chunks/_app-pages-browser_node_modules_pnpm_reown_appkit-ui_1_7_8__types_react_18_3_24_bufferutil_4_-19f6e2.js"
+    ]
+  },
+  "../node_modules/.pnpm/@reown+appkit-ui@1.7.8_@types+react@18.3.24_bufferutil@4.0.9_encoding@0.1.13_react@18.3_681fbe97da8b8bb1b4b2a37e493edebd/node_modules/@reown/appkit-ui/dist/esm/src/components/wui-icon/index.js -> ../../assets/svg/verify.js": {
+    "id": "../node_modules/.pnpm/@reown+appkit-ui@1.7.8_@types+react@18.3.24_bufferutil@4.0.9_encoding@0.1.13_react@18.3_681fbe97da8b8bb1b4b2a37e493edebd/node_modules/@reown/appkit-ui/dist/esm/src/components/wui-icon/index.js -> ../../assets/svg/verify.js",
+    "files": [
+      "static/chunks/_app-pages-browser_node_modules_pnpm_reown_appkit-ui_1_7_8__types_react_18_3_24_bufferutil_4_-44566f.js"
+    ]
+  },
+  "../node_modules/.pnpm/@reown+appkit-ui@1.7.8_@types+react@18.3.24_bufferutil@4.0.9_encoding@0.1.13_react@18.3_681fbe97da8b8bb1b4b2a37e493edebd/node_modules/@reown/appkit-ui/dist/esm/src/components/wui-icon/index.js -> ../../assets/svg/wallet-placeholder.js": {
+    "id": "../node_modules/.pnpm/@reown+appkit-ui@1.7.8_@types+react@18.3.24_bufferutil@4.0.9_encoding@0.1.13_react@18.3_681fbe97da8b8bb1b4b2a37e493edebd/node_modules/@reown/appkit-ui/dist/esm/src/components/wui-icon/index.js -> ../../assets/svg/wallet-placeholder.js",
+    "files": [
+      "static/chunks/_app-pages-browser_node_modules_pnpm_reown_appkit-ui_1_7_8__types_react_18_3_24_bufferutil_4_-23e41d.js"
+    ]
+  },
+  "../node_modules/.pnpm/@reown+appkit-ui@1.7.8_@types+react@18.3.24_bufferutil@4.0.9_encoding@0.1.13_react@18.3_681fbe97da8b8bb1b4b2a37e493edebd/node_modules/@reown/appkit-ui/dist/esm/src/components/wui-icon/index.js -> ../../assets/svg/wallet.js": {
+    "id": "../node_modules/.pnpm/@reown+appkit-ui@1.7.8_@types+react@18.3.24_bufferutil@4.0.9_encoding@0.1.13_react@18.3_681fbe97da8b8bb1b4b2a37e493edebd/node_modules/@reown/appkit-ui/dist/esm/src/components/wui-icon/index.js -> ../../assets/svg/wallet.js",
+    "files": [
+      "static/chunks/_app-pages-browser_node_modules_pnpm_reown_appkit-ui_1_7_8__types_react_18_3_24_bufferutil_4_-bb7ff1.js"
+    ]
+  },
+  "../node_modules/.pnpm/@reown+appkit-ui@1.7.8_@types+react@18.3.24_bufferutil@4.0.9_encoding@0.1.13_react@18.3_681fbe97da8b8bb1b4b2a37e493edebd/node_modules/@reown/appkit-ui/dist/esm/src/components/wui-icon/index.js -> ../../assets/svg/walletconnect.js": {
+    "id": "../node_modules/.pnpm/@reown+appkit-ui@1.7.8_@types+react@18.3.24_bufferutil@4.0.9_encoding@0.1.13_react@18.3_681fbe97da8b8bb1b4b2a37e493edebd/node_modules/@reown/appkit-ui/dist/esm/src/components/wui-icon/index.js -> ../../assets/svg/walletconnect.js",
+    "files": [
+      "static/chunks/_app-pages-browser_node_modules_pnpm_reown_appkit-ui_1_7_8__types_react_18_3_24_bufferutil_4_-e69c14.js"
+    ]
+  },
+  "../node_modules/.pnpm/@reown+appkit-ui@1.7.8_@types+react@18.3.24_bufferutil@4.0.9_encoding@0.1.13_react@18.3_681fbe97da8b8bb1b4b2a37e493edebd/node_modules/@reown/appkit-ui/dist/esm/src/components/wui-icon/index.js -> ../../assets/svg/warning-circle.js": {
+    "id": "../node_modules/.pnpm/@reown+appkit-ui@1.7.8_@types+react@18.3.24_bufferutil@4.0.9_encoding@0.1.13_react@18.3_681fbe97da8b8bb1b4b2a37e493edebd/node_modules/@reown/appkit-ui/dist/esm/src/components/wui-icon/index.js -> ../../assets/svg/warning-circle.js",
+    "files": [
+      "static/chunks/_app-pages-browser_node_modules_pnpm_reown_appkit-ui_1_7_8__types_react_18_3_24_bufferutil_4_-ec2b32.js"
+    ]
+  },
+  "../node_modules/.pnpm/@reown+appkit-ui@1.7.8_@types+react@18.3.24_bufferutil@4.0.9_encoding@0.1.13_react@18.3_681fbe97da8b8bb1b4b2a37e493edebd/node_modules/@reown/appkit-ui/dist/esm/src/components/wui-icon/index.js -> ../../assets/svg/x.js": {
+    "id": "../node_modules/.pnpm/@reown+appkit-ui@1.7.8_@types+react@18.3.24_bufferutil@4.0.9_encoding@0.1.13_react@18.3_681fbe97da8b8bb1b4b2a37e493edebd/node_modules/@reown/appkit-ui/dist/esm/src/components/wui-icon/index.js -> ../../assets/svg/x.js",
+    "files": [
+      "static/chunks/_app-pages-browser_node_modules_pnpm_reown_appkit-ui_1_7_8__types_react_18_3_24_bufferutil_4_-f6b53c.js"
+    ]
+  },
+  "../node_modules/.pnpm/@reown+appkit@1.7.8_@types+react@18.3.24_bufferutil@4.0.9_encoding@0.1.13_react@18.3.1__7ed0c4421465ec4192ef83595d5e864c/node_modules/@reown/appkit/dist/esm/src/client/appkit-core.js -> @reown/appkit-scaffold-ui/basic": {
+    "id": "../node_modules/.pnpm/@reown+appkit@1.7.8_@types+react@18.3.24_bufferutil@4.0.9_encoding@0.1.13_react@18.3.1__7ed0c4421465ec4192ef83595d5e864c/node_modules/@reown/appkit/dist/esm/src/client/appkit-core.js -> @reown/appkit-scaffold-ui/basic",
+    "files": [
+      "static/chunks/_app-pages-browser_node_modules_pnpm_reown_appkit-scaffold-ui_1_7_8__types_react_18_3_24_buff-fb3e0f.js"
+    ]
+  },
+  "../node_modules/.pnpm/@reown+appkit@1.7.8_@types+react@18.3.24_bufferutil@4.0.9_encoding@0.1.13_react@18.3.1__7ed0c4421465ec4192ef83595d5e864c/node_modules/@reown/appkit/dist/esm/src/client/appkit-core.js -> @reown/appkit-scaffold-ui/w3m-modal": {
+    "id": "../node_modules/.pnpm/@reown+appkit@1.7.8_@types+react@18.3.24_bufferutil@4.0.9_encoding@0.1.13_react@18.3.1__7ed0c4421465ec4192ef83595d5e864c/node_modules/@reown/appkit/dist/esm/src/client/appkit-core.js -> @reown/appkit-scaffold-ui/w3m-modal",
+    "files": [
+      "static/chunks/_app-pages-browser_node_modules_pnpm_reown_appkit-scaffold-ui_1_7_8__types_react_18_3_24_buff-6fe070.js"
+    ]
+  },
+  "../node_modules/.pnpm/@wagmi+connectors@5.9.9_@types+react@18.3.24_@wagmi+core@2.20.3_@tanstack+query-core@5._35fce7ad198cdf3c75687408b1dd3a0b/node_modules/@wagmi/connectors/dist/esm/baseAccount.js -> @base-org/account": {
+    "id": "../node_modules/.pnpm/@wagmi+connectors@5.9.9_@types+react@18.3.24_@wagmi+core@2.20.3_@tanstack+query-core@5._35fce7ad198cdf3c75687408b1dd3a0b/node_modules/@wagmi/connectors/dist/esm/baseAccount.js -> @base-org/account",
+    "files": []
+  },
+  "../node_modules/.pnpm/@wagmi+connectors@5.9.9_@types+react@18.3.24_@wagmi+core@2.20.3_@tanstack+query-core@5._35fce7ad198cdf3c75687408b1dd3a0b/node_modules/@wagmi/connectors/dist/esm/coinbaseWallet.js -> @coinbase/wallet-sdk": {
+    "id": "../node_modules/.pnpm/@wagmi+connectors@5.9.9_@types+react@18.3.24_@wagmi+core@2.20.3_@tanstack+query-core@5._35fce7ad198cdf3c75687408b1dd3a0b/node_modules/@wagmi/connectors/dist/esm/coinbaseWallet.js -> @coinbase/wallet-sdk",
+    "files": []
+  },
+  "../node_modules/.pnpm/@wagmi+connectors@5.9.9_@types+react@18.3.24_@wagmi+core@2.20.3_@tanstack+query-core@5._35fce7ad198cdf3c75687408b1dd3a0b/node_modules/@wagmi/connectors/dist/esm/coinbaseWallet.js -> cbw-sdk": {
+    "id": "../node_modules/.pnpm/@wagmi+connectors@5.9.9_@types+react@18.3.24_@wagmi+core@2.20.3_@tanstack+query-core@5._35fce7ad198cdf3c75687408b1dd3a0b/node_modules/@wagmi/connectors/dist/esm/coinbaseWallet.js -> cbw-sdk",
+    "files": []
+  },
+  "../node_modules/.pnpm/@wagmi+connectors@5.9.9_@types+react@18.3.24_@wagmi+core@2.20.3_@tanstack+query-core@5._35fce7ad198cdf3c75687408b1dd3a0b/node_modules/@wagmi/connectors/dist/esm/metaMask.js -> @metamask/sdk": {
+    "id": "../node_modules/.pnpm/@wagmi+connectors@5.9.9_@types+react@18.3.24_@wagmi+core@2.20.3_@tanstack+query-core@5._35fce7ad198cdf3c75687408b1dd3a0b/node_modules/@wagmi/connectors/dist/esm/metaMask.js -> @metamask/sdk",
+    "files": []
+  },
+  "../node_modules/.pnpm/@wagmi+connectors@5.9.9_@types+react@18.3.24_@wagmi+core@2.20.3_@tanstack+query-core@5._35fce7ad198cdf3c75687408b1dd3a0b/node_modules/@wagmi/connectors/dist/esm/safe.js -> @safe-global/safe-apps-provider": {
+    "id": "../node_modules/.pnpm/@wagmi+connectors@5.9.9_@types+react@18.3.24_@wagmi+core@2.20.3_@tanstack+query-core@5._35fce7ad198cdf3c75687408b1dd3a0b/node_modules/@wagmi/connectors/dist/esm/safe.js -> @safe-global/safe-apps-provider",
+    "files": []
+  },
+  "../node_modules/.pnpm/@wagmi+connectors@5.9.9_@types+react@18.3.24_@wagmi+core@2.20.3_@tanstack+query-core@5._35fce7ad198cdf3c75687408b1dd3a0b/node_modules/@wagmi/connectors/dist/esm/safe.js -> @safe-global/safe-apps-sdk": {
+    "id": "../node_modules/.pnpm/@wagmi+connectors@5.9.9_@types+react@18.3.24_@wagmi+core@2.20.3_@tanstack+query-core@5._35fce7ad198cdf3c75687408b1dd3a0b/node_modules/@wagmi/connectors/dist/esm/safe.js -> @safe-global/safe-apps-sdk",
+    "files": []
+  },
+  "../node_modules/.pnpm/@wagmi+connectors@5.9.9_@types+react@18.3.24_@wagmi+core@2.20.3_@tanstack+query-core@5._35fce7ad198cdf3c75687408b1dd3a0b/node_modules/@wagmi/connectors/dist/esm/walletConnect.js -> @walletconnect/ethereum-provider": {
+    "id": "../node_modules/.pnpm/@wagmi+connectors@5.9.9_@types+react@18.3.24_@wagmi+core@2.20.3_@tanstack+query-core@5._35fce7ad198cdf3c75687408b1dd3a0b/node_modules/@wagmi/connectors/dist/esm/walletConnect.js -> @walletconnect/ethereum-provider",
+    "files": [
+      "static/chunks/_app-pages-browser_node_modules_pnpm_walletconnect_ethereum-provider_2_21_1__types_react_18_3-7c3c87.js"
+    ]
+  },
+  "../node_modules/.pnpm/@walletconnect+ethereum-provider@2.21.1_@types+react@18.3.24_bufferutil@4.0.9_encoding@_eaf870b40dc6f843b276f644046853e4/node_modules/@walletconnect/ethereum-provider/dist/index.es.js -> @reown/appkit/core": {
+    "id": "../node_modules/.pnpm/@walletconnect+ethereum-provider@2.21.1_@types+react@18.3.24_bufferutil@4.0.9_encoding@_eaf870b40dc6f843b276f644046853e4/node_modules/@walletconnect/ethereum-provider/dist/index.es.js -> @reown/appkit/core",
+    "files": [
+      "static/chunks/_app-pages-browser_node_modules_pnpm_reown_appkit_1_7_8__types_react_18_3_24_bufferutil_4_0_9-696d0d.js"
+    ]
+  },
+  "../node_modules/.pnpm/viem@2.23.2_bufferutil@4.0.9_typescript@5.9.2_utf-8-validate@5.0.10_zod@3.25.76/node_modules/viem/_esm/actions/public/call.js -> ../../utils/ccip.js": {
+    "id": "../node_modules/.pnpm/viem@2.23.2_bufferutil@4.0.9_typescript@5.9.2_utf-8-validate@5.0.10_zod@3.25.76/node_modules/viem/_esm/actions/public/call.js -> ../../utils/ccip.js",
+    "files": []
+  },
+  "../node_modules/.pnpm/viem@2.23.2_bufferutil@4.0.9_typescript@5.9.2_utf-8-validate@5.0.10_zod@3.25.76/node_modules/viem/_esm/utils/rpc/webSocket.js -> isows": {
+    "id": "../node_modules/.pnpm/viem@2.23.2_bufferutil@4.0.9_typescript@5.9.2_utf-8-validate@5.0.10_zod@3.25.76/node_modules/viem/_esm/utils/rpc/webSocket.js -> isows",
+    "files": []
+  },
+  "../node_modules/.pnpm/viem@2.23.2_bufferutil@4.0.9_typescript@5.9.2_utf-8-validate@5.0.10_zod@3.25.76/node_modules/viem/_esm/utils/signature/recoverPublicKey.js -> @noble/curves/secp256k1": {
+    "id": "../node_modules/.pnpm/viem@2.23.2_bufferutil@4.0.9_typescript@5.9.2_utf-8-validate@5.0.10_zod@3.25.76/node_modules/viem/_esm/utils/signature/recoverPublicKey.js -> @noble/curves/secp256k1",
+    "files": [
+      "static/chunks/_app-pages-browser_node_modules_pnpm_noble_curves_1_8_1_node_modules_noble_curves_esm_secp256k1_js.js"
+    ]
+  },
+  "../node_modules/.pnpm/viem@2.36.1_bufferutil@4.0.9_typescript@5.9.2_utf-8-validate@5.0.10_zod@3.25.76/node_modules/viem/_esm/actions/public/call.js -> ../../utils/ccip.js": {
+    "id": "../node_modules/.pnpm/viem@2.36.1_bufferutil@4.0.9_typescript@5.9.2_utf-8-validate@5.0.10_zod@3.25.76/node_modules/viem/_esm/actions/public/call.js -> ../../utils/ccip.js",
+    "files": [
+      "static/chunks/_app-pages-browser_node_modules_pnpm_viem_2_36_1_bufferutil_4_0_9_typescript_5_9_2_utf-8-vali-ce821e.js"
+    ]
+  },
+  "../node_modules/.pnpm/viem@2.36.1_bufferutil@4.0.9_typescript@5.9.2_utf-8-validate@5.0.10_zod@3.25.76/node_modules/viem/_esm/utils/rpc/webSocket.js -> isows": {
+    "id": "../node_modules/.pnpm/viem@2.36.1_bufferutil@4.0.9_typescript@5.9.2_utf-8-validate@5.0.10_zod@3.25.76/node_modules/viem/_esm/utils/rpc/webSocket.js -> isows",
+    "files": []
+  },
+  "../node_modules/.pnpm/viem@2.36.1_bufferutil@4.0.9_typescript@5.9.2_utf-8-validate@5.0.10_zod@3.25.76/node_modules/viem/_esm/utils/signature/recoverPublicKey.js -> @noble/curves/secp256k1": {
+    "id": "../node_modules/.pnpm/viem@2.36.1_bufferutil@4.0.9_typescript@5.9.2_utf-8-validate@5.0.10_zod@3.25.76/node_modules/viem/_esm/utils/signature/recoverPublicKey.js -> @noble/curves/secp256k1",
+    "files": [
+      "static/chunks/_app-pages-browser_node_modules_pnpm_noble_curves_1_9_1_node_modules_noble_curves_esm_secp256k1_js.js"
+    ]
+  },
+  "app/page.tsx -> @/components/HomeContent": {
+    "id": "app/page.tsx -> @/components/HomeContent",
+    "files": [
+      "static/chunks/_app-pages-browser_src_components_HomeContent_tsx.js"
+    ]
+  }
+}
