@@ -4,7 +4,6 @@ import MintableERC20 from '../abi/MintableERC20.json';
 import OfficialUSDC from '../abi/OfficialUSDC.json';
 import contractAddresses from '../abi/contract-addresses.json';
 import { useWeb3 } from '../context/Web3Context';
-import Button from '../components/Button';
 
 export default function Test1USDC() {
     const { account, provider, network } = useWeb3();
@@ -14,18 +13,9 @@ export default function Test1USDC() {
     const getAddresses = async () => {
         if (provider) {
             const net = await provider.getNetwork();
-            const chainId = net.chainId.toString();
-            const addresses = chainId === '31337' ? contractAddresses.localhost : contractAddresses.sepolia;
-            if (chainId === '31337' && addresses.MintableERC20) {
-                addresses.USDC = addresses.MintableERC20;
-            }
-            return addresses;
+            return net.chainId.toString() === '31337' ? contractAddresses.localhost : contractAddresses.sepolia;
         }
-        const addresses = contractAddresses.localhost;
-        if (addresses.MintableERC20) {
-            addresses.USDC = addresses.MintableERC20;
-        }
-        return addresses;
+        return contractAddresses.localhost;
     };
 
     const getUsdcAbi = async () => {
@@ -34,22 +24,6 @@ export default function Test1USDC() {
             return net.chainId.toString() === '31337' ? MintableERC20 : OfficialUSDC;
         }
         return MintableERC20;
-    };
-
-    const mintUsdc = async () => {
-        if (account && provider) {
-            const addresses = await getAddresses();
-            const USDC_ABI = await getUsdcAbi();
-            const signer = await provider.getSigner();
-            const usdcContract = new ethers.Contract(addresses.USDC, USDC_ABI, signer);
-            try {
-                const tx = await usdcContract.mint(account, ethers.parseUnits("1000", 6));
-                await tx.wait();
-                updateBalance();
-            } catch (error) {
-                console.error("Error minting USDC", error);
-            }
-        }
     };
 
     const updateBalance = async () => {
@@ -91,7 +65,7 @@ export default function Test1USDC() {
                             </a>
                         </div>
                     ) : (
-                        <Button onClick={mintUsdc}>Mint 1000 USDC (Localhost only)</Button>
+                        <p>USDC is funded automatically on local fork.</p>
                     )}
                     {network && network.chainId.toString() === '11155111' && (
                         <div>

@@ -13,12 +13,15 @@ module.exports = async ({ getNamedAccounts, deployments }) => {
         : VERIFICATION_BLOCK_CONFIRMATIONS;
 
     const args = [];
-    const predictionMarketFactory = await deploy("PredictionMarketFactory", {
-        from: deployer,
-        args: args,
-        log: true,
-        waitConfirmations: waitBlockConfirmations,
-    });
+    const predictionMarketFactoryNWay = await deploy(
+        "PredictionMarketFactoryNWay",
+        {
+            from: deployer,
+            args: args,
+            log: true,
+            waitConfirmations: waitBlockConfirmations,
+        }
+    );
 
     // Verify the deployment
     if (
@@ -26,11 +29,11 @@ module.exports = async ({ getNamedAccounts, deployments }) => {
         process.env.ETHERSCAN_API_KEY
     ) {
         log("Verifying...");
-        await verify(predictionMarketFactory.address, args);
+        await verify(predictionMarketFactoryNWay.address, args);
     }
 };
 
-module.exports.tags = ["all", "factory"];
+module.exports.tags = ["all", "factoryNWay"];
 
 
-module.exports.tags = ["all", "factory"];
+module.exports.tags = ["all", "factoryNWay"];

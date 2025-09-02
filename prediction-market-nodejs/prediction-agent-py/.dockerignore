@@ -1,0 +1,20 @@
+# Ignore virtualenv
+.venv
+venv
+
+# Ignore Python cache
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+
+# Ignore OS-specific files
+.DS_Store
+Thumbs.db
+
+# Ignore local development files
+.env
+*.db
+.idea
+.vscode
+*.swp
