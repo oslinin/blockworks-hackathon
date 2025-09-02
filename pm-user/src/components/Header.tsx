@@ -1,6 +1,6 @@
 "use client"
 
-import { ConnectButton } from "@rainbow-me/rainbowkit"
+import { ConnectButton } from "./ConnectButton"
 import { FaGithub } from "react-icons/fa"
 import Image from "next/image"
 
