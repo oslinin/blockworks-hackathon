@@ -39,3 +39,5 @@ ignition/
 .bash_history
 .local/
 .qodo/
+.next/
+lib/
