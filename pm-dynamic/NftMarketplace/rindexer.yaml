@@ -1,9 +1,9 @@
-name: NftMarketplace
+name: PredictionMarket
 project_type: no-code
 config: {}
 timestamps: null
 networks:
-- name: anvil
+- name: anvil-hardhat
   chain_id: 31337
   rpc: http://127.0.0.1:8545
 storage:
@@ -15,13 +15,11 @@ storage:
 native_transfers:
   enabled: false
 contracts:
-- name: NftMarketplace
+- name: PredictionMarketFactoryFixedModel
   details:
-  - network: anvil
-    address: 0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512
+  - network: anvil-hardhat
+    address: '0x36c02da8a0983159322a80ffe9f24b1acff8b570'
     start_block: '0'
-  abi: ./abis/NftMarketplace.abi.json
+  abi: ./abis/PredictionMarketFactoryFixedModel.json
   include_events:
-  - name: ItemListed
-  - name: ItemBought
-  - name: ItemCanceled
+  - name: PredictionMarketFactoryFixedModel__MarketCreatedFixedModel

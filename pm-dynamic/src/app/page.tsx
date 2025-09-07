@@ -1,7 +1,7 @@
 "use client"
 
 import { useAccount } from "wagmi"
-import RecentlyListedNFTs from "@/components/RecentlyListed"
+import RecentPredictionMarkets from "@/components/RecentPredictionMarkets"
 
 export default function Home() {
     const { isConnected } = useAccount()
@@ -14,7 +14,7 @@ export default function Home() {
                 </div>
             ) : (
                 <div className="flex items-center justify-center p-4 md:p-6 xl:p-8">
-                    <RecentlyListedNFTs />
+                    <RecentPredictionMarkets />
                 </div>
             )}
         </main>

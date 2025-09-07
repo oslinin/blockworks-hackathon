@@ -1,0 +1,1 @@
+make solidity contract event names start with <contractname>__

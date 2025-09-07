@@ -1,6 +1,5 @@
 {
   "name": "prediction-market",
-  "packageManager": "yarn@1.22.22",
   "devDependencies": {
     "@nomicfoundation/hardhat-chai-matchers": "^2.0.0",
     "@nomicfoundation/hardhat-ethers": "^3.0.0",
@@ -32,9 +31,9 @@
     "node": "hh node",
     "deploy:localhost": "hh deploy --network localhost",
     "deploy:sepolia": "hh deploy --network sepolia",
-    "test": "hh test",
     "test": "hh test --network hardhat",
     "test:unit": "hh test tests/unit",
     "test:staging": "hh test tests/staging"
-  }
+  },
+  "packageManager": "pnpm@10.15.1+sha256.8c53af02ae3ec1fb0ae75377f8d4d6217c2d7cbe6f03c16350cabf7493de6eff"
 }
