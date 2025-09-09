@@ -27,9 +27,9 @@ contract NftMarketplace is ReentrancyGuard {
         address seller;
     }
 
-    event ItemListed(address indexed seller, address indexed nftAddress, uint256 indexed tokenId, uint256 price);
-    event ItemCanceled(address indexed seller, address indexed nftAddress, uint256 indexed tokenId);
-    event ItemBought(address indexed buyer, address indexed nftAddress, uint256 indexed tokenId, uint256 price);
+    event NftMarketplace__ItemListed(address indexed seller, address indexed nftAddress, uint256 indexed tokenId, uint256 price);
+    event NftMarketplace__ItemCanceled(address indexed seller, address indexed nftAddress, uint256 indexed tokenId);
+    event NftMarketplace__ItemBought(address indexed buyer, address indexed nftAddress, uint256 indexed tokenId, uint256 price);
 
     /*//////////////////////////////////////////////////////////////
                             STATE VARIABLES
@@ -92,7 +92,7 @@ contract NftMarketplace is ReentrancyGuard {
         if (nft.getApproved(tokenId) != address(this)) {
             revert NotApprovedForMarketplace();
         }
-        emit ItemListed(msg.sender, nftAddress, tokenId, price);
+        emit NftMarketplace__ItemListed(msg.sender, nftAddress, tokenId, price);
         s_listings[nftAddress][tokenId] = Listing(price, msg.sender);
     }
 
@@ -106,7 +106,7 @@ contract NftMarketplace is ReentrancyGuard {
         isOwner(nftAddress, tokenId, msg.sender)
         isListed(nftAddress, tokenId)
     {
-        emit ItemCanceled(msg.sender, nftAddress, tokenId);
+        emit NftMarketplace__ItemCanceled(msg.sender, nftAddress, tokenId);
         delete (s_listings[nftAddress][tokenId]);
     }
 
@@ -123,7 +123,7 @@ contract NftMarketplace is ReentrancyGuard {
         s_proceeds[listedItem.seller] += listedItem.price;
         // Could just send them the money...
         // https://fravoll.github.io/solidity-patterns/pull_over_push.html
-        emit ItemBought(msg.sender, nftAddress, tokenId, listedItem.price);
+        emit NftMarketplace__ItemBought(msg.sender, nftAddress, tokenId, listedItem.price);
         delete (s_listings[nftAddress][tokenId]);
 
         s_paymentToken.safeTransferFrom(msg.sender, address(this), listedItem.price);
@@ -146,7 +146,7 @@ contract NftMarketplace is ReentrancyGuard {
             revert PriceMustBeAboveZero();
         }
         s_listings[nftAddress][tokenId].price = newPrice;
-        emit ItemListed(msg.sender, nftAddress, tokenId, newPrice);
+        emit NftMarketplace__ItemListed(msg.sender, nftAddress, tokenId, newPrice);
     }
 
     /*

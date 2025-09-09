@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# ./pm-dynamic/foundry/script/copy-prediction-market-artifacts.sh
+
 # Exit on error
 set -e
 
@@ -7,7 +9,7 @@ set -e
 cd "$(dirname "$0")"/..
 
 # Define paths relative to the foundry root
-BROADCAST_PATH="broadcast/DeployPredictionMarketFactory.s.sol/31337/run-latest.json"
+BROADCAST_PATH="broadcast/SetupAnvilFixedModel.s.sol/31337/run-latest.json"
 ABI_PATH="out/PredictionMarketFactoryFixedModel.sol/PredictionMarketFactoryFixedModel.json"
 OUTPUT_DIR="../NftMarketplace/abis"
 OUTPUT_FILE="$OUTPUT_DIR/PredictionMarketFactoryFixedModel.json"

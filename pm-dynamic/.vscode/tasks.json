@@ -1,0 +1,80 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "anvil",
+            "type": "shell",
+            "command": "pnpm anvil",
+            "isBackground": true,
+            "problemMatcher": {
+                "owner": "anvil",
+                "pattern": { "regexp": ".*" },
+                "background": {
+                    "activeOnStart": true,
+                    "beginsPattern": ".*",
+                    "endsPattern": "Listening on (?:127\\.0\\.0\\.1|0\\.0\\.0\\.0).*:8545"
+                }
+            },
+            "presentation": { "reveal": "always", "panel": "dedicated", "group": "anvil" }
+        },
+
+        {
+            "label": "deploy contracts",
+            "type": "shell",
+            "command": "make setup",
+            "options": { "cwd": "${workspaceFolder}/foundry" },
+            "problemMatcher": [],
+            "presentation": { "reveal": "always", "panel": "new", "group": "deploy" }
+        },
+
+        {
+            "label": "rindexer",
+            "type": "shell",
+            "command": "rindexer start all",
+            "options": { "cwd": "${workspaceFolder}/NftMarketplace" },
+            "isBackground": true,
+            "problemMatcher": {
+                "owner": "rindexer",
+                "pattern": { "regexp": ".*" },
+                "background": {
+                    "activeOnStart": true,
+                    "beginsPattern": ".*",
+                    "endsPattern": ".*"
+                }
+            },
+            "presentation": { "reveal": "always", "panel": "new", "group": "rindexer" }
+        },
+
+        {
+            "label": "dev frontend",
+            "type": "shell",
+            "command": "pnpm dev",
+            "isBackground": true,
+            "problemMatcher": {
+                "owner": "nextjs",
+                "pattern": { "regexp": ".*" },
+                "background": {
+                    "activeOnStart": true,
+                    "beginsPattern": ".*",
+                    "endsPattern": "Network:\\s+http://.*:3000"
+                }
+            },
+            "presentation": { "reveal": "always", "panel": "new", "group": "frontend" }
+        },
+
+        {
+            "label": "synpress",
+            "type": "shell",
+            "command": "pnpm exec playwright test --ui",
+            "options": { "cwd": "${workspaceFolder}/test" },
+            "problemMatcher": [],
+            "presentation": { "reveal": "always", "panel": "new", "group": "deploy" }
+        },
+
+        {
+            "label": "Launch All Terminals",
+            "dependsOn": ["anvil", "deploy contracts", "rindexer", "dev frontend"],
+            "dependsOrder": "sequence"
+        }
+    ]
+}

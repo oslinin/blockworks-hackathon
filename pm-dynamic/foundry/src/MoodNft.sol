@@ -20,7 +20,7 @@ contract MoodNft is ERC721, Ownable {
 
     mapping(uint256 => NFTState) private s_tokenIdToState;
 
-    event CreatedNFT(uint256 indexed tokenId);
+    event MoodNft__CreatedNFT(uint256 indexed tokenId);
 
     constructor(string memory sadSvgUri, string memory happySvgUri) ERC721("Mood NFT", "MN") Ownable(msg.sender) {
         s_tokenCounter = 0;
@@ -32,14 +32,14 @@ contract MoodNft is ERC721, Ownable {
         uint256 tokenCounter = s_tokenCounter;
         _safeMint(msg.sender, tokenCounter);
         s_tokenCounter = s_tokenCounter + 1;
-        emit CreatedNFT(tokenCounter);
+        emit MoodNft__CreatedNFT(tokenCounter);
     }
 
     function mintNftTo(address to) public {
         uint256 tokenCounter = s_tokenCounter;
         _safeMint(to, tokenCounter);
         s_tokenCounter = s_tokenCounter + 1;
-        emit CreatedNFT(tokenCounter);
+        emit MoodNft__CreatedNFT(tokenCounter);
     }
 
     function flipMood(uint256 tokenId) public {

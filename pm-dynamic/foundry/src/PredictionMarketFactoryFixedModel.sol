@@ -1,10 +1,11 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-import { PredictionMarketFixedModel } from "./PredictionMarketFixedModel.sol";
+import {PredictionMarketFixedModel} from "./PredictionMarketFixedModel.sol";
 
 contract PredictionMarketFactoryFixedModel {
-    mapping(uint256 => PredictionMarketFixedModel) public predictionMarketsFixedModel;
+    mapping(uint256 => PredictionMarketFixedModel)
+        public predictionMarketsFixedModel;
     uint256 public marketCount;
 
     event PredictionMarketFactoryFixedModel__MarketCreatedFixedModel(
@@ -29,7 +30,7 @@ contract PredictionMarketFactoryFixedModel {
             _oracle,
             _usdcToken
         );
-        
+
         newMarket.transferOwnership(msg.sender);
 
         predictionMarketsFixedModel[marketCount] = newMarket;
@@ -46,8 +47,13 @@ contract PredictionMarketFactoryFixedModel {
         return address(newMarket);
     }
 
-    function getAllFixedModelMarkets() public view returns (PredictionMarketFixedModel[] memory) {
-        PredictionMarketFixedModel[] memory allMarkets = new PredictionMarketFixedModel[](marketCount);
+    function getAllFixedModelMarkets()
+        public
+        view
+        returns (PredictionMarketFixedModel[] memory)
+    {
+        PredictionMarketFixedModel[]
+            memory allMarkets = new PredictionMarketFixedModel[](marketCount);
         for (uint256 i = 0; i < marketCount; i++) {
             allMarkets[i] = predictionMarketsFixedModel[i];
         }

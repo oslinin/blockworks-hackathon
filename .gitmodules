@@ -4,3 +4,9 @@
 [submodule "nft-marketplace/foundry/lib/openzeppelin-contracts"]
 	path = nft-marketplace/foundry/lib/openzeppelin-contracts
 	url = https://github.com/OpenZeppelin/openzeppelin-contracts
+[submodule "pm-dynamic/foundry/lib/openzeppelin-contracts"]
+	path = pm-dynamic/foundry/lib/openzeppelin-contracts
+	url = https://github.com/OpenZeppelin/openzeppelin-contracts
+[submodule "pm-dynamic/foundry/lib/forge-std"]
+	path = pm-dynamic/foundry/lib/forge-std
+	url = https://github.com/foundry-rs/forge-std

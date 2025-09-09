@@ -21,9 +21,9 @@ contract PredictionMarketFixedModel is Ownable {
     bool public resolved;
     bool public outcome; // true for YES, false for NO
 
-    event Bet(address indexed user, bool onYes);
-    event Resolved(bool outcome);
-    event Claimed(address indexed user, uint256 amount);
+    event PredictionMarketFixedModel__Bet(address indexed user, bool onYes);
+    event PredictionMarketFixedModel__Resolved(bool outcome);
+    event PredictionMarketFixedModel__Claimed(address indexed user, uint256 amount);
 
     constructor(
         string memory _question,
@@ -53,7 +53,7 @@ contract PredictionMarketFixedModel is Ownable {
             totalNoBets++;
         }
 
-        emit Bet(msg.sender, onYes);
+        emit PredictionMarketFixedModel__Bet(msg.sender, onYes);
     }
 
     function resolve(bool _outcome) public {
@@ -62,7 +62,7 @@ contract PredictionMarketFixedModel is Ownable {
 
         resolved = true;
         outcome = _outcome;
-        emit Resolved(_outcome);
+        emit PredictionMarketFixedModel__Resolved(_outcome);
     }
 
     function claim() public {
@@ -93,6 +93,6 @@ contract PredictionMarketFixedModel is Ownable {
         
         require(winnings > 0, "Winnings must be greater than zero");
         usdcToken.transfer(msg.sender, winnings);
-        emit Claimed(msg.sender, winnings);
+        emit PredictionMarketFixedModel__Claimed(msg.sender, winnings);
     }
 }

@@ -33,15 +33,15 @@
     "wagmi": "^2.14.15"
   },
   "devDependencies": {
-    "@synthetixio/synpress": "^4.0.10",
+    "@playwright/test": "^1.55.0",
+    "@synthetixio/synpress": "^4.1.1",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "prettier": "^3.5.3",
     "tailwindcss": "^4",
-    "typescript": "^5",
-    "vitest": "^3.0.9"
+    "typescript": "^5"
   },
   "packageManager": "pnpm@10.15.1+sha256.8c53af02ae3ec1fb0ae75377f8d4d6217c2d7cbe6f03c16350cabf7493de6eff"
 }

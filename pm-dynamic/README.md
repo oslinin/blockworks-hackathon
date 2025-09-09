@@ -1,39 +1,78 @@
-# NFT Marketplace 
+# run all
+
+.vsocde/tasks.json
+// Open Command Palette: Ctrl+Shift+P (Linux/Windows) or Cmd+Shift+P (Mac).
+// Search for “Run Task”.
+// Select “Launch All Terminals”.
+
+# Frontend tests
+
+ttps://updraft.cyfrin.io/courses/full-stack-web3-development-crash-course/ts-tsender-ui/e2e-playwright
+
+pnpm add -D @synthetixio/synpress
+pnpm create playwright@latest
+Configure Playwright (playwright.config.ts
+configre test/example.spec.ts
+pnpm exec playwright install
+pnpm next build
+pnpm exec playwright test
+pnpm exec playwright test --ui
+
+playwright/synthetix:synpress for clickthoughs
+sudo apt install -y chromium fonts-liberation fonts-unifont libenchant-2-2 libhyphen0 libharfbuzz-icu0 libffi8 libpcre2-8-0 ffmpeg
+
+pnpm create playwright@latest
+
+pnpm add -D @synthetixio/synpress@latest
+pnpm add -D @playwright/test
+pnpm exec playwright install # Installs necessary browser binaries
+
+playwright.config.ts: Setting fullyParallel: false and workers: 1 prevents potential race conditions or interference between tests when dealing with a single MetaMask instance locally.
+pnpm add -D @synthetixio/synpress
+pnpm synpress
+pnpm exec playwright test
+pnpm exec playwright test --headed
+pnpm exec playwright test
+pnpm test:e2e
+
+# NFT Marketplace
 
 The final project for the Cyfrin Web3 Full Stack crash course, where we introduce:
 
 1. Indexing (rindexer)
 2. Fleek CLI
-4. Compliance Engine
-5. USDC payment
-6. Gashawk
+3. Compliance Engine
+4. USDC payment
+5. Gashawk
 
 A full-stack NFT marketplace with listing, buying, and compliance features built with Next.js, TypeScript, and Wagmi.
 
 # STARTING CODEBASE!
 
 We will need to implement:
+
 - Update the home page
-  - Add all recently listed NFTs
-  - Indexer
+    - Add all recently listed NFTs
+    - Indexer
 - Compliance Engine
 
 If you wish to see what the final product looks like, head over to the `main` branch!
 
-
 # Table of Contents
 
+- [run all](#run-all)
+- [Frontend tests](#frontend-tests)
 - [NFT Marketplace](#nft-marketplace)
 - [STARTING CODEBASE!](#starting-codebase)
 - [Table of Contents](#table-of-contents)
 - [Getting Started](#getting-started)
-  - [Requirements](#requirements)
-    - [Environment Variables](#environment-variables)
-  - [Setup](#setup)
-    - [Add Anvil to your metamask](#add-anvil-to-your-metamask)
-    - [Add Anvil accounts to your Metamask](#add-anvil-accounts-to-your-metamask)
-    - [Docker .env](#docker-env)
-  - [Running the Application](#running-the-application)
+    - [Requirements](#requirements)
+        - [Environment Variables](#environment-variables)
+    - [Setup](#setup)
+        - [Add Anvil to your metamask](#add-anvil-to-your-metamask)
+        - [Add Anvil accounts to your Metamask](#add-anvil-accounts-to-your-metamask)
+        - [Docker .env](#docker-env)
+    - [Running the Application](#running-the-application)
 - [Database Reset](#database-reset)
 - [Features](#features)
 - [Addresses for testing](#addresses-for-testing)
@@ -82,6 +121,7 @@ pnpm install
 ### Add Anvil to your metamask
 
 Add the following network to your metamask:
+
 - Name: Anvil
 - RPC URL: http://127.0.0.1:8545
 - Chain ID: 31337
@@ -97,7 +137,7 @@ Private Keys
 (9) 0x2a871d0798f97d79848a013d4936a73bf4cc922c825d33c1cf7073dff6d409c6 # This one
 ```
 
-Add private keys `0` and `9` to your Metamask, these will have NFTs already loaded when you run `pnpm anvil` later. 
+Add private keys `0` and `9` to your Metamask, these will have NFTs already loaded when you run `pnpm anvil` later.
 
 ### Docker .env
 
@@ -133,6 +173,7 @@ In your Metamask now, select account 0 which you imported from the step above, a
 You should see the NFT in your metamask. Note: This will only work while `pnpm anvil` is running!
 
 # Database Reset
+
 If you need to reset the indexer database:
 
 ```bash

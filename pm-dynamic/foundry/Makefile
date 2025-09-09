@@ -1,19 +1,32 @@
 include .env
 export
 
+# prediction market
+
+build:
+	forge install OpenZeppelin/openzeppelin-contracts foundry-rs/forge-std
+	forge build --via-ir
+
+setup: 
+	forge script script/SetupAnvilFixedModel.s.sol --rpc-url http://127.0.0.1:8545 --private-key ${ANVIL_KEY} --via-ir --broadcast -vvv --chain-id 31337
+	./script/copy-prediction-market-artifacts.sh
+
+test: 
+	forge test --match-test test.predictionmarket-factory-fixedmodel.t.sol
+
+
+
 # THIS IS AN ANVIL GLOBALLY KNOWN PRIVATE KEY!!
 setup-anvil:
 	forge script script/SetupAnvil.s.sol --rpc-url http://127.0.0.1:8545 --private-key ${ANVIL_KEY} --via-ir --broadcast -vvv
 
-setup-anvil-fixed-model:
-	forge script script/SetupAnvilFixedModel.s.sol --rpc-url http://127.0.0.1:8545 --private-key ${ANVIL_KEY} --via-ir --broadcast -vvv --chain-id 31337
-	./script/copy-fixed-model-artifacts.sh
+mint-usdc:
+	forge script script/MintUSDC.s.sol --rpc-url http://127.0.0.1:8545 --private-key ${ANVIL_KEY} --via-ir --broadcast -vvv
+
 
 anvil: 
 	anvil --dump-state marketplace-anvil.json
 
-mint-usdc:
-	forge script script/MintUSDC.s.sol --rpc-url http://127.0.0.1:8545 --private-key ${ANVIL_KEY} --via-ir --broadcast -vvv
 
 deploy-prediction-market:
 	forge script script/DeployPredictionMarketFactory.s.sol --rpc-url http://127.0.0.1:8545 --private-key ${ANVIL_KEY} --via-ir --broadcast -vvv

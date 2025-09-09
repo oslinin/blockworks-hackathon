@@ -72,7 +72,7 @@ contract CakeNft is ERC721, Ownable {
     uint256 private s_tokenCounter;
     mapping(uint256 tokenId => string imageUri) private s_tokenIdToImageUri;
 
-    event CreatedNFT(uint256 indexed tokenId);
+    event CakeNft__CreatedNFT(uint256 indexed tokenId);
 
     /*//////////////////////////////////////////////////////////////
                                FUNCTIONS
@@ -90,7 +90,7 @@ contract CakeNft is ERC721, Ownable {
         _safeMint(msg.sender, tokenCounter);
 
         s_tokenIdToImageUri[tokenCounter] = imageUri;
-        emit CreatedNFT(tokenCounter);
+        emit CakeNft__CreatedNFT(tokenCounter);
         s_tokenCounter = s_tokenCounter + 1;
         return tokenCounter;
     }
