@@ -22,6 +22,16 @@ Configure Playwright (playwright.config.ts): Modify the generated playwright.con
 
 pnpm synpress
 
+this will run, and print an address:
+
+Triggering cache creation for: 532f685e346606c2a803
+
+then run
+
 pnpm exec playwright test
-or
+
+this will fail. Rename .cache-synpress/address with the address above and retry. it will succeed
+
+for a GUI:
+
 pnpm exec playwright test --ui
