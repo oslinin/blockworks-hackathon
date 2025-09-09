@@ -1,13 +1,17 @@
 # run all
 
 pnpm install
+
 cd foundry && make build
+
 rindexer: follow readme in NftMarketplace/
 
 .vsocde/tasks.json
 // Open Command Palette: Ctrl+Shift+P (Linux/Windows) or Cmd+Shift+P (Mac).
 // Search for “Run Task”.
 // Select “Launch All Terminals”.
+
+playwright/synpress: fllow the readme in tests/
 
 # Frontend tests
 
