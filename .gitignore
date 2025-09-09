@@ -30,7 +30,7 @@ ignition/deployments/chain-31337
 
 artifacts/
 cache/
-.cache/
+.cache*/
 #deployments/
 typechain-types/
 ignition/
