@@ -79,7 +79,7 @@
 
         {
             "label": "Launch All Terminals",
-            "dependsOn": ["anvil", "deploy contracts", "rindexer", "dev frontend", "synpress"],
+            "dependsOn": ["anvil", "deploy contracts", "rindexer", "dev frontend"],
             "dependsOrder": "sequence"
         }
     ]

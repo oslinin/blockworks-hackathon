@@ -1,5 +1,9 @@
 # run all
 
+pnpm install
+cd foundry && make build
+rindexer: follow readme in NftMarketplace/
+
 .vsocde/tasks.json
 // Open Command Palette: Ctrl+Shift+P (Linux/Windows) or Cmd+Shift+P (Mac).
 // Search for “Run Task”.
@@ -7,7 +11,7 @@
 
 # Frontend tests
 
-ttps://updraft.cyfrin.io/courses/full-stack-web3-development-crash-course/ts-tsender-ui/e2e-playwright
+https://updraft.cyfrin.io/courses/full-stack-web3-development-crash-course/ts-tsender-ui/e2e-playwright
 
 pnpm add -D @synthetixio/synpress
 pnpm create playwright@latest
