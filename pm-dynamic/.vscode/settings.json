@@ -1,0 +1,11 @@
+{
+  // Default formatter for JSON/JSONC files
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  // Format on save
+  "editor.formatOnSave": true
+}

@@ -1,9 +1,15 @@
 {
     "version": "2.0.0",
+    "options": {
+        "env": {
+            "PATH": "/home/oleg/.bun/bin:/home/oleg/.local/share/pnpm:/home/oleg/.nvm/versions/node/v20.19.4/bin:/usr/lib/jgmenu:/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games:/home/oleg/.foundry/bin:/home/oleg/.rindexer/bin"
+        }
+    },
     "tasks": [
         {
             "label": "anvil",
             "type": "shell",
+            // "command": "anvil --block-time 5",
             "command": "pnpm anvil",
             "isBackground": true,
             "problemMatcher": {
@@ -30,7 +36,7 @@
         {
             "label": "rindexer",
             "type": "shell",
-            "command": "rindexer start all",
+            "command": "pnpm indexer",
             "options": { "cwd": "${workspaceFolder}/NftMarketplace" },
             "isBackground": true,
             "problemMatcher": {
@@ -73,7 +79,7 @@
 
         {
             "label": "Launch All Terminals",
-            "dependsOn": ["anvil", "deploy contracts", "rindexer", "dev frontend"],
+            "dependsOn": ["anvil", "deploy contracts", "rindexer", "dev frontend", "synpress"],
             "dependsOrder": "sequence"
         }
     ]
