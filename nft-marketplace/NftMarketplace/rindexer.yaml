@@ -1,0 +1,25 @@
+name: PredictionMarket
+project_type: no-code
+config: {}
+timestamps: null
+networks:
+- name: anvil
+  chain_id: 31337
+  rpc: http://127.0.0.1:8545
+storage:
+  postgres:
+    enabled: true
+  csv:
+    enabled: true
+    path: ./generated_csv
+native_transfers:
+  enabled: false
+contracts:
+- name: PredictionMarketFactoryFixedModel
+  details:
+  - network: anvil
+    address: '0x82e01223d51eb87e16a03e24687edf0f294da6f1'
+    start_block: '0'
+  abi: ./abis/PredictionMarketFactoryFixedModel.json
+  include_events:
+  - name: PredictionMarketFactoryFixedModel__MarketCreatedFixedModel

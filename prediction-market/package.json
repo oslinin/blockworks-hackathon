@@ -14,7 +14,6 @@
     "ethers": "^6.0.0",
     "hardhat": "^2.25.0",
     "hardhat-deploy": "^1.0.4",
-    "hardhat-gas-reporter": "^2.3.0",
     "solidity-coverage": "^0.8.0",
     "typechain": "^8.3.0"
   },
@@ -31,9 +30,9 @@
     "node": "hh node",
     "deploy:localhost": "hh deploy --network localhost",
     "deploy:sepolia": "hh deploy --network sepolia",
+    "test": "hh test",
     "test": "hh test --network hardhat",
     "test:unit": "hh test tests/unit",
     "test:staging": "hh test tests/staging"
-  },
-  "packageManager": "pnpm@10.15.1+sha256.8c53af02ae3ec1fb0ae75377f8d4d6217c2d7cbe6f03c16350cabf7493de6eff"
+  }
 }
