@@ -9,7 +9,7 @@ build:
 
 setup: 
 	forge script script/SetupAnvilFixedModel.s.sol --rpc-url http://127.0.0.1:8545 --private-key ${ANVIL_KEY} --via-ir --broadcast -vvv --chain-id 31337
-	./script/copy-prediction-market-artifacts.sh
+	./script/copy-artifacts.sh
 
 test: 
 	forge test --match-test test.predictionmarket-factory-fixedmodel.t.sol
@@ -30,10 +30,10 @@ anvil:
 
 deploy-prediction-market:
 	forge script script/DeployPredictionMarketFactory.s.sol --rpc-url http://127.0.0.1:8545 --private-key ${ANVIL_KEY} --via-ir --broadcast -vvv
-	./script/copy-prediction-market-artifacts.sh
+	./script/copy-artifacts.sh
 
 copy-artifacts:
-	./script/copy-prediction-market-artifacts.sh
+	./script/copy-artifacts.sh
 
 all: setup-anvil mint-usdc deploy-prediction-market
 
