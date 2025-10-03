@@ -1,9 +1,21 @@
 based on
 https://github.com/Cyfrin/ts-tsender-ui-cu
+https://updraft.cyfrin.io/courses/full-stack-web3-development-crash-course/welcome-to-the-course/intro
 
+```bash
 pnpm add -D @synthetixio/synpress
-
+#create project
 pnpm create playwright@latest
+```
+
+Where to put your end-to-end tests? ‣ test
+Add a GitHub Actions workflow? (Y/n) · n
+intall playwright
+
+```bash
+pnpm exec playwright test
+pnpm exec playwright test --ui
+```
 
 This will prompt you for configuration choices:
 Tests Location: Change the default tests directory to test. Synpress typically expects tests to reside in a test directory by default.

@@ -41,7 +41,8 @@ interface NFTData {
     price: string
 }
 
-// GraphQL query as a string
+// GraphQL query as a string from /foundry/src/PredictionMarketFixedModel.sol
+// get question, market_id, contract_address
 const GET_RECENT_NFTS = `
   query GetRecentlyListedNFTs {
     allItemListeds(
@@ -59,20 +60,7 @@ const GET_RECENT_NFTS = `
         txHash
       }
     }
-    
-    allItemBoughts {
-      nodes {
-        nftAddress
-        tokenId
-      }
-    }
-    
-    allItemCanceleds {
-      nodes {
-        nftAddress
-        tokenId
-      }
-    }
+   
   }
 `
 

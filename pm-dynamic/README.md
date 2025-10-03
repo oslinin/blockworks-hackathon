@@ -2,16 +2,92 @@
 
 pnpm install
 
+run ./launch_terminals.sh
+to launch pnpm anvil, pnpm deploy, pnpm frontend, findexer, firefox
+
 cd foundry && make build
 
 rindexer: follow readme in NftMarketplace/
+playwright/synpress: follow the readme in test/
 
 .vsocde/tasks.json
 // Open Command Palette: Ctrl+Shift+P (Linux/Windows) or Cmd+Shift+P (Mac).
 // Search for “Run Task”.
 // Select “Launch All Terminals”.
 
-playwright/synpress: fllow the readme in tests/
+# Files
+
+<!-- prettier-ignore-start -->
+/foundry
+    /src
+        PredictionMarketFactoryFixedModel.sol
+            createMarket
+            getAllFixedModelMarkets
+            getMarketCount
+        PredictionMarketFixedModel.sol
+            mapping(address->int) yesBets
+            mapping(address->int) noBets
+            bet {yesBets[sender]++}
+            claim
+            resolve
+    /script
+        copy-artifacts.sh
+        SetupAnvilFixedModel.s.sol
+    Makefile
+        build:
+            forge install OpenZeppelin/openzeppelin-contracts foundry-rs/forge-std
+            forge build --via-ir
+        setup: 
+            forge script script/SetupAnvilFixedModel.s.sol
+            ./script/copy-artifacts.sh
+        test: 
+            forge test --match-test test.predictionmarket-factory-fixedmodel.t.sol
+
+/NftMarketplace    
+    rindexer.yaml
+    README
+    /abis
+        MockUSDC.json
+        NftMarketplace.abi.json
+        PredictionMarketFactoryFixedModel.json
+        PredictionMarektFixedModel.json
+        /generated_csv/PredictionMarketFactoryFixedModel
+            question
+            market_id
+            contract_address
+            creator
+            category
+            oracle
+            usdc_token
+            tx_hash
+            block_number
+            block_hash
+            network
+            tx_index
+            log_index
+
+/src
+    /app
+        # providers.tsx
+        # page.tsx
+        # layout.tsx
+    /components
+        # NFTBox.tsx
+        # RecentPredictionMarkets.tsx #read graphql from rindexer
+            NFT
+                rindexerId
+                seller
+                nftAddress
+                tokenId
+                price
+                contractAddress
+                blockNumber
+                txHash
+    /buy-nft
+        # page.tsx
+    /list-nft
+        # page
+<!-- prettier-ignore-end -->
 
 # Frontend tests
 

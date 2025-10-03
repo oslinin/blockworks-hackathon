@@ -2,9 +2,13 @@ https://updraft.cyfrin.io/courses/full-stack-web3-development-crash-course/ts-nf
 https://github.com/joshstevens19/rindexer
 sudo apt update
 sudo apt install docker-compose
-docker-compose up -d
+docker compose up -d
+rindexerdown
 
 curl -L https://rindexer.xyz/install.sh | bash
+curl -L https://rindexer.xyz/install.sh | bash -s -- --version 0.25.2
+rindexerup
+rindexerup --version 0.25.2
 rindexer --help
 rindexer new no-code
 project: nftMarketplace

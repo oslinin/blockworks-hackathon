@@ -9,8 +9,8 @@
         {
             "label": "anvil",
             "type": "shell",
-            // "command": "anvil --block-time 5",
-            "command": "pnpm anvil",
+            "command": "anvil --block-time 5",
+            // "command": "pnpm anvil",
             "isBackground": true,
             "problemMatcher": {
                 "owner": "anvil",
